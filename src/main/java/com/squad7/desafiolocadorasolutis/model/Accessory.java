@@ -22,4 +22,14 @@ public class Accessory {
     @JsonIgnore
     @ManyToMany(mappedBy = "accessories")
     private List<Car> cars;
+
+    public Accessory(UUID id, String name, String description) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+    }
+
+    protected Accessory() {
+
+    }
 }

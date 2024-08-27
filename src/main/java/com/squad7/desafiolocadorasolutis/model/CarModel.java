@@ -24,4 +24,16 @@ public class CarModel {
     @ManyToOne
     @JoinColumn(name = "manufacturer_id")
     private Manufacturer manufacturer;
+
+    public CarModel() {
+
+    }
+
+
+    public CarModel(UUID id, String description, Category category, Manufacturer manufacturer) {
+        this.id = id;
+        this.description = description;
+        this.category = category;
+        this.manufacturer = manufacturer;
+    }
 }
