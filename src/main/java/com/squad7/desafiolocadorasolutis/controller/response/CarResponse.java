@@ -1,18 +1,12 @@
 package com.squad7.desafiolocadorasolutis.controller.response;
 
+import com.squad7.desafiolocadorasolutis.dto.AccessoryResponseDto;
+import com.squad7.desafiolocadorasolutis.dto.CarModelDto;
+import lombok.*;
+
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
-
-import com.squad7.desafiolocadorasolutis.dto.AccessoryRequestDTO;
-import com.squad7.desafiolocadorasolutis.dto.AccessoryResponseDto;
-import com.squad7.desafiolocadorasolutis.dto.CarModelDto;
-
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Getter
 @Setter

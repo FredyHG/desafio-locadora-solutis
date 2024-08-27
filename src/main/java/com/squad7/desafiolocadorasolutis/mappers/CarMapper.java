@@ -3,7 +3,6 @@ package com.squad7.desafiolocadorasolutis.mappers;
 import com.squad7.desafiolocadorasolutis.controller.request.CarPostRequest;
 import com.squad7.desafiolocadorasolutis.controller.response.CarResponse;
 import com.squad7.desafiolocadorasolutis.model.Car;
-
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;

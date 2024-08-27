@@ -3,8 +3,8 @@ package com.squad7.desafiolocadorasolutis.config;
 import com.squad7.desafiolocadorasolutis.enums.Category;
 import com.squad7.desafiolocadorasolutis.model.*;
 import com.squad7.desafiolocadorasolutis.repository.*;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -15,15 +15,15 @@ import java.util.UUID;
 
 @Slf4j
 @Component
+@RequiredArgsConstructor
 public class DataInitializer implements CommandLineRunner {
 
-    @Autowired
-    CarRepository carRepository;
-    ManufacturerRepository manufacturerRepository;
-    CarModelRepository carModelRepository;
-    AccessoryRepository accessoryRepository;
-    DriverRepository driverRepository;
-    EmployeeRepository employeeRepository;
+    private final CarRepository carRepository;
+    private final ManufacturerRepository manufacturerRepository;
+    private final CarModelRepository carModelRepository;
+    private final AccessoryRepository accessoryRepository;
+    private final DriverRepository driverRepository;
+    private final EmployeeRepository employeeRepository;
 
     @Override
     public void run(String... args) throws Exception {
@@ -132,8 +132,8 @@ public class DataInitializer implements CommandLineRunner {
             carRepository.save(
                     new Car(UUID.fromString("b6a060f0-9959-4c2e-963e-4c461c51f380"),
                             new BigDecimal("89.99"),
-                            "1v8 A8Me9G Xy wg1762",
-                            "IZQ1018",
+                            "1v8 A8Me9G Xy wg1769",
+                            "IZQ1019",
                             sportyZ,
                             List.of(alloyWheels, sunRoof, blueToothStereo, gps, letherSeats))
             );
