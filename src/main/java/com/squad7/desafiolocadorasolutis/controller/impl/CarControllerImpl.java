@@ -8,6 +8,7 @@ import com.squad7.desafiolocadorasolutis.enums.Category;
 import com.squad7.desafiolocadorasolutis.mappers.CarMapper;
 import com.squad7.desafiolocadorasolutis.model.Car;
 import com.squad7.desafiolocadorasolutis.service.CarService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -28,7 +29,7 @@ public class CarControllerImpl implements CarController {
 
     @PostMapping
     @Override
-    public ResponseEntity<ResponseMessage> registerCar(@RequestBody CarPostRequest car) {
+    public ResponseEntity<ResponseMessage> registerCar(@RequestBody @Valid CarPostRequest car) {
 
         log.info("Receive request to register new car with chassis: {}", car.getChassis());
 
