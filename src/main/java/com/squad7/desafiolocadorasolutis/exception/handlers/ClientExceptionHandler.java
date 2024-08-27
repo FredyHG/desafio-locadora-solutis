@@ -1,4 +1,4 @@
-package com.squad7.desafiolocadorasolutis.exception;
+package com.squad7.desafiolocadorasolutis.exception.handlers;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +14,9 @@ public class ClientExceptionHandler {
     private static final Map<String, HttpStatus> statusTable = new HashMap<>();
 
     static {
+        // Adiciona mapeamentos de exceção para o status HTTP correspondente
         statusTable.put(ClientAlreadyExistsException.class.getSimpleName(), HttpStatus.CONFLICT);
+        // Adicione outros mapeamentos de exceção aqui, se necessário
     }
 
     @ExceptionHandler(ClientException.class)
