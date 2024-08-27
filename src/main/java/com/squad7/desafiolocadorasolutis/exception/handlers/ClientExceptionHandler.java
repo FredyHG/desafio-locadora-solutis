@@ -1,38 +1,34 @@
-package com.squad7.desafiolocadorasolutis.handler;
+package com.squad7.desafiolocadorasolutis.exception;
 
-import com.squad7.desafiolocadorasolutis.controller.response.ResponseMessage;
-import com.squad7.desafiolocadorasolutis.exception.ClientAlreadyExistsException;
-import com.squad7.desafiolocadorasolutis.exception.ClientException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import lombok.extern.slf4j.Slf4j;
+import java.util.HashMap;
+import java.util.Map;
 
-@Slf4j
 @RestControllerAdvice
 public class ClientExceptionHandler {
 
-    @ExceptionHandler(ClientAlreadyExistsException.class)
-    public ResponseEntity<ResponseMessage> handleClientAlreadyExistsException(ClientAlreadyExistsException ex) {
-        log.error("Client already exists: {}", ex.getMessage());
-        return ResponseEntity.status(HttpStatus.CONFLICT).body(
+    private static final Map<String, HttpStatus> statusTable = new HashMap<>();
+
+    static {
+        statusTable.put(ClientAlreadyExistsException.class.getSimpleName(), HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler(ClientException.class)
+    public ResponseEntity<ResponseMessage> handleClientException(ClientException ex) {
+        HttpStatus status = mapStatus(ex);
+        return ResponseEntity.status(status).body(
                 ResponseMessage.builder()
-                        .code(HttpStatus.CONFLICT.value())
+                        .code(status.value())
                         .message(ex.getMessage())
                         .build()
         );
     }
 
-    @ExceptionHandler(ClientException.class)
-    public ResponseEntity<ResponseMessage> handleClientException(ClientException ex) {
-        log.error("Client error: {}", ex.getMessage());
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
-                ResponseMessage.builder()
-                        .code(HttpStatus.BAD_REQUEST.value())
-                        .message(ex.getMessage())
-                        .build()
-        );
+    private HttpStatus mapStatus(ClientException ex) {
+        return statusTable.getOrDefault(ex.getClass().getSimpleName(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
