@@ -13,6 +13,7 @@ import java.util.UUID;
 public interface CarRepository extends JpaRepository<Car, UUID> {
 
     Optional<Car> findByChassis(String chassis);
+
     @Query("SELECT DISTINCT c FROM Car c " +
             "JOIN c.carModel cm " +
             "JOIN cm.manufacturer m " +
