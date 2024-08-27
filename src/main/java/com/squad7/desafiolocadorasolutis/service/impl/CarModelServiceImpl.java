@@ -16,6 +16,6 @@ public class CarModelServiceImpl implements CarModelService {
 
     @Override
     public CarModel findById(UUID id) {
-        return carModelRepository.findById(id).orElseThrow(() -> new RuntimeException("Car Model not found")); // Criar exception personalizada
+        return carModelRepository.findById(id).orElseThrow(() -> new RuntimeException("Car Model not found"));
     }
 }

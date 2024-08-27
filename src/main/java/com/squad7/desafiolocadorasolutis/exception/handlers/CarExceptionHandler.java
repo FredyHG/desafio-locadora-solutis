@@ -3,6 +3,8 @@ package com.squad7.desafiolocadorasolutis.exception.handlers;
 import com.squad7.desafiolocadorasolutis.controller.response.ErrorResponse;
 import com.squad7.desafiolocadorasolutis.exception.CarAlreadyRegisteredException;
 import com.squad7.desafiolocadorasolutis.exception.CarException;
+import com.squad7.desafiolocadorasolutis.exception.CarNotFoundException;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,5 +41,6 @@ public class CarExceptionHandler {
 
     static {
         statusTable.put(CarAlreadyRegisteredException.class.getSimpleName(), HttpStatus.CONFLICT);
+        statusTable.put(CarNotFoundException.class.getSimpleName(), HttpStatus.NOT_FOUND);
     }
 }
