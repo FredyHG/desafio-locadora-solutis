@@ -1,6 +1,6 @@
 package com.squad7.desafiolocadorasolutis.controller.request;
 
-import com.squad7.desafiolocadorasolutis.dto.AccessoryDTO;
+import com.squad7.desafiolocadorasolutis.dto.AccessoryRequestDTO;
 import lombok.Getter;
 
 import java.math.BigDecimal;
@@ -11,6 +11,6 @@ public class CarPostRequest {
     private String licensePlate;
     private String chassis;
     private BigDecimal pricePerDay;
-    private List<AccessoryDTO> accessoriesIds;
+    private List<AccessoryRequestDTO> accessoriesIds;
     private String carModelId;
 }

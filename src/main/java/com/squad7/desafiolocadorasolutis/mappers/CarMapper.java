@@ -1,16 +1,23 @@
 package com.squad7.desafiolocadorasolutis.mappers;
 
 import com.squad7.desafiolocadorasolutis.controller.request.CarPostRequest;
-import com.squad7.desafiolocadorasolutis.model.Accessory;
+import com.squad7.desafiolocadorasolutis.controller.response.CarResponse;
 import com.squad7.desafiolocadorasolutis.model.Car;
-import com.squad7.desafiolocadorasolutis.model.CarModel;
 
-import java.util.List;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.factory.Mappers;
 
-public class CarMapper {
+@Mapper
+public interface CarMapper {
 
-    public static Car requestToModel(CarPostRequest car, List<Accessory> accessory, CarModel carModel) {
-        return new Car(car.getPricePerDay(), car.getChassis(), car.getLicensePlate(), carModel, accessory);
-    }
+    CarMapper INSTANCE = Mappers.getMapper(CarMapper.class);
 
+    @Mapping(target = "accessories", ignore = true)
+    @Mapping(target = "carModel", ignore = true)
+    @Mapping(target = "id", ignore = true)
+    Car requestToModel(CarPostRequest car);
+
+    @Mapping(target = "accessories", source = "accessories")
+    CarResponse modelToResponse(Car car);
 }

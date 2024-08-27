@@ -2,7 +2,6 @@ package com.squad7.desafiolocadorasolutis.controller;
 
 import com.squad7.desafiolocadorasolutis.controller.request.ClientPostRequest;
 import com.squad7.desafiolocadorasolutis.controller.response.ResponseMessage;
-import com.squad7.desafiolocadorasolutis.model.Client;
 import com.squad7.desafiolocadorasolutis.service.impl.ClientServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

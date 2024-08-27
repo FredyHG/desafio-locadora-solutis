@@ -2,12 +2,16 @@ package com.squad7.desafiolocadorasolutis.controller.impl;
 
 import com.squad7.desafiolocadorasolutis.controller.CarController;
 import com.squad7.desafiolocadorasolutis.controller.request.CarPostRequest;
+import com.squad7.desafiolocadorasolutis.controller.response.CarResponse;
 import com.squad7.desafiolocadorasolutis.controller.response.ResponseMessage;
 import com.squad7.desafiolocadorasolutis.enums.Category;
+import com.squad7.desafiolocadorasolutis.mappers.CarMapper;
 import com.squad7.desafiolocadorasolutis.model.Car;
 import com.squad7.desafiolocadorasolutis.service.CarService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
+import java.util.UUID;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -31,15 +35,24 @@ public class CarControllerImpl implements CarController {
         carService.registerCar(car);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(ResponseMessage
-                        .builder()
-                        .code(HttpStatus.CREATED.value())
-                        .message("Car registered successfully")
-                        .build());
+                .builder()
+                .code(HttpStatus.CREATED.value())
+                .message("Car registered successfully")
+                .build());
     }
 
     @GetMapping
     public ResponseEntity<List<Car>> getAllCars(@RequestParam(required = false) Category category,
-                                                @RequestParam(required = false) List<String> accessoryIds) {
+            @RequestParam(required = false) List<String> accessoryIds) {
         return ResponseEntity.status(HttpStatus.OK).body(carService.getAllCarsFiltered(category, accessoryIds));
+    }
+
+    @GetMapping(value = "/{carId}/details")
+    @Override
+    public ResponseEntity<CarResponse> getCarByUuid(@PathVariable(name = "carId", required = true) UUID carId) {
+
+        CarResponse response = carService.getCarByUuid(carId);
+
+        return ResponseEntity.ok().body(response);
     }
 }
