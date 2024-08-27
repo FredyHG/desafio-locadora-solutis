@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
@@ -16,4 +17,18 @@ public class Employee extends Person {
     private UUID id;
 
     private String registration;
+
+    public Employee(String nome, LocalDate birthDate, String cpf, String email, UUID id, String registration) {
+        super(nome, birthDate,cpf, email);
+        this.id = id;
+        this.registration = registration;
+
+    }
+
+
+    public Employee() {
+        super();
+        this.id = null;
+        this.registration = null;
+    }
 }

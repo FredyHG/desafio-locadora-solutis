@@ -14,4 +14,18 @@ public abstract class Person {
     private LocalDate birthDate;
     private String cpf;
     private String email;
+
+    public Person(String nome, LocalDate birthDate, String cpf, String email) {
+        this.name = nome;
+        this.birthDate = birthDate;
+        this.cpf = cpf;
+        this.email = email;
+    }
+
+    public Person(){
+        this.name = null;
+        this.birthDate = null;
+        this.cpf = null;
+        this.email = null;
+    }
 }

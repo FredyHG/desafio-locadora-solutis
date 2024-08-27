@@ -3,7 +3,6 @@ package com.squad7.desafiolocadorasolutis.model;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.validator.constraints.br.CPF;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -43,7 +42,8 @@ public class Car {
     protected Car() {
     }
 
-    public Car(BigDecimal pricePerDay, String chassis, String licensePlate, CarModel carModel, List<Accessory> accessories) {
+    public Car(UUID id, BigDecimal pricePerDay, String chassis, String licensePlate, CarModel carModel, List<Accessory> accessories) {
+        this.id = id;
         this.pricePerDay = pricePerDay;
         this.chassis = chassis;
         this.licensePlate = licensePlate;
