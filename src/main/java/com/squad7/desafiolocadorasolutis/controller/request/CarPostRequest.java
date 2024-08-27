@@ -1,6 +1,6 @@
 package com.squad7.desafiolocadorasolutis.controller.request;
 
-import com.squad7.desafiolocadorasolutis.dto.AccessoryDTO;
+import com.squad7.desafiolocadorasolutis.dto.AccessoryRequestDTO;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -26,7 +26,7 @@ public class CarPostRequest {
     private BigDecimal pricePerDay;
 
     @NotNull(message = "Accessories list cannot be null.")
-    private List<AccessoryDTO> accessoriesIds;
+    private List<AccessoryRequestDTO> accessoriesIds;
 
     @NotBlank(message = "Car model ID cannot be blank.")
     private String carModelId;
