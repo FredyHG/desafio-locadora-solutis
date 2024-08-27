@@ -14,7 +14,7 @@ public class DriverServiceImpl implements DriverService{
 
     private final DriverRepository driverRepository;
 
-    private void checkIfEmailAlreadyRegistred(String email) {
+    private void ensureEmailAlreadyRegistered(String email) {
        driverRepository.findByEmail(email).ifPresent(driver -> {
         throw new PersonException("Driver already registered with email: " + email);
        });
