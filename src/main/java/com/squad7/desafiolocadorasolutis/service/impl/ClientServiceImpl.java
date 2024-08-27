@@ -20,7 +20,7 @@ public class ClientServiceImpl {
         ensureClientNotRegisteredByCpf(clientPostRequest.getCpf());
         ensureClientNotRegisteredByEmail(clientPostRequest.getEmail());
 
-        Client clientToBeSaved = ClientMapper.requestToModel(clientPostRequest);
+        Client clientToBeSaved = ClientMapper.INSTANCE.requestToModel(clientPostRequest);
 
         clientRepository.save(clientToBeSaved);
     }
