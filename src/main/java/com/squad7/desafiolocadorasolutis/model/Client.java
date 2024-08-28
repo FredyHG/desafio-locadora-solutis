@@ -1,17 +1,17 @@
 package com.squad7.desafiolocadorasolutis.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.squad7.desafiolocadorasolutis.enums.AccountEmailStatusEnum;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.time.LocalDate;
 
 @Getter
 @Setter
 @Entity
+@ToString
 public class Client {
 
     @Id
@@ -23,13 +23,18 @@ public class Client {
     private String email;
     private String cnhNumber;
 
+    @Enumerated(EnumType.STRING)
+    private AccountEmailStatusEnum accountEmailStatusEnum;
+
     protected Client() {}
 
-    public Client(String cnhNumber, String email, String cpf, LocalDate birthDate, String name) {
-        this.cnhNumber = cnhNumber;
-        this.email = email;
-        this.cpf = cpf;
-        this.birthDate = birthDate;
+    public Client(Long id, String name, LocalDate birthDate, String cpf, String email, String cnhNumber, AccountEmailStatusEnum accountEmailStatusEnum) {
+        this.id = id;
         this.name = name;
+        this.birthDate = birthDate;
+        this.cpf = cpf;
+        this.email = email;
+        this.cnhNumber = cnhNumber;
+        this.accountEmailStatusEnum = accountEmailStatusEnum;
     }
 }
