@@ -18,9 +18,8 @@ public class Employee extends Person {
 
     private String registration;
 
-    public Employee(String nome, LocalDate birthDate, String cpf, String email, UUID id, String registration) {
+    public Employee(String nome, LocalDate birthDate, String cpf, String email, String registration) {
         super(nome, birthDate,cpf, email);
-        this.id = id;
         this.registration = registration;
 
     }
@@ -28,7 +27,6 @@ public class Employee extends Person {
 
     public Employee() {
         super();
-        this.id = null;
         this.registration = null;
     }
 }
