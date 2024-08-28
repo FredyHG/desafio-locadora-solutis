@@ -30,8 +30,7 @@ public class CarModel {
     }
 
 
-    public CarModel(UUID id, String description, Category category, Manufacturer manufacturer) {
-        this.id = id;
+    public CarModel(String description, Category category, Manufacturer manufacturer) {
         this.description = description;
         this.category = category;
         this.manufacturer = manufacturer;

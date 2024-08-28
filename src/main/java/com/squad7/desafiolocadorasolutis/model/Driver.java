@@ -18,15 +18,13 @@ public class Driver extends Person {
 
     private String cnhNumber;
 
-    public Driver(String nome, LocalDate birthDate, String cpf, String email, UUID id, String cnhNumber) {
+    public Driver(String nome, LocalDate birthDate, String cpf, String email, String cnhNumber) {
         super();
-        this.id = id;
         this.cnhNumber = cnhNumber;
     }
 
     public Driver() {
         super();
-        this.id = null;
         this.cnhNumber = null;
     }
 }

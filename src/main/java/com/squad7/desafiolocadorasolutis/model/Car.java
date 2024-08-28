@@ -42,8 +42,7 @@ public class Car {
     protected Car() {
     }
 
-    public Car(UUID id, BigDecimal pricePerDay, String chassis, String licensePlate, CarModel carModel, List<Accessory> accessories) {
-        this.id = id;
+    public Car(BigDecimal pricePerDay, String chassis, String licensePlate, CarModel carModel, List<Accessory> accessories) {
         this.pricePerDay = pricePerDay;
         this.chassis = chassis;
         this.licensePlate = licensePlate;

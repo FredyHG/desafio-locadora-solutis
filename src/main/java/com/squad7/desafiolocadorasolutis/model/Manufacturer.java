@@ -21,8 +21,7 @@ public class Manufacturer {
 
     }
 
-    public Manufacturer(UUID id, String name) {
-        this.id = id;
+    public Manufacturer(String name) {
         this.name = name;
     }
 }

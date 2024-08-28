@@ -23,8 +23,7 @@ public class Accessory {
     @ManyToMany(mappedBy = "accessories")
     private List<Car> cars;
 
-    public Accessory(UUID id, String name, String description) {
-        this.id = id;
+    public Accessory(String name, String description) {
         this.name = name;
         this.description = description;
     }
