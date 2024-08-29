@@ -2,16 +2,14 @@ package com.squad7.desafiolocadorasolutis.controller;
 
 import com.squad7.desafiolocadorasolutis.controller.request.ClientPostRequest;
 import com.squad7.desafiolocadorasolutis.controller.response.ResponseMessage;
+import com.squad7.desafiolocadorasolutis.model.Client;
 import com.squad7.desafiolocadorasolutis.service.impl.ClientServiceImpl;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
@@ -33,4 +31,10 @@ public class ClientController {
                 .message("Client registered successfully")
                 .build());
     }
+
+    @GetMapping
+    public ResponseEntity<Client> getByCpf(@RequestParam("cpf") String cpf){
+        return new ResponseEntity(clientServiceImpl.getByCpfAndBlockedFalse(cpf), HttpStatus.OK);
+    }
+
 }
