@@ -25,7 +25,7 @@ public class CarModel {
     @JoinColumn(name = "manufacturer_id")
     private Manufacturer manufacturer;
 
-    public CarModel() {
+    protected CarModel() {
 
     }
 

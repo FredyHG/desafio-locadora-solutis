@@ -12,6 +12,7 @@ public interface CarMapper {
 
     CarMapper INSTANCE = Mappers.getMapper(CarMapper.class);
 
+    @Mapping(target = "imageURL", ignore = true)
     @Mapping(target = "accessories", ignore = true)
     @Mapping(target = "carModel", ignore = true)
     @Mapping(target = "id", ignore = true)

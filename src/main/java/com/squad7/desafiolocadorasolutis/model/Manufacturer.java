@@ -17,7 +17,7 @@ public class Manufacturer {
 
     private String name;
 
-    public Manufacturer() {
+    protected Manufacturer() {
 
     }
 

@@ -100,7 +100,9 @@ public class DataInitializer implements CommandLineRunner {
                             "2JR cTUHG8 15 Bm8502",
                             "HRK7697",
                             compactHatchX,
-                            List.of(gps, blueToothStereo))
+                            List.of(gps, blueToothStereo),
+                            "https://midias.vrum.com.br/_midias/jpg/2024/01/11/honda_fit_1_4_flex_modelo_2007_cinza_de_frente_em_movimento_no_asfalto-34157751.jpg"
+                    )
             );
 
             carRepository.save(
@@ -108,7 +110,9 @@ public class DataInitializer implements CommandLineRunner {
                             "4HS S6HNfw X2 Cy3255",
                             "HDW6272",
                             mediumSedanY,
-                            List.of(letherSeats, sunRoof, blueToothStereo))
+                            List.of(letherSeats, sunRoof, blueToothStereo),
+                            "https://www.kbb.com/wp-content/uploads/2019/12/01-2018-Toyota-Camry-Exterior-KBB.jpg"
+                    )
             );
 
             carRepository.save(
@@ -116,7 +120,9 @@ public class DataInitializer implements CommandLineRunner {
                             "1v8 A8Me9G Xy wg1769",
                             "IZQ1019",
                             sportyZ,
-                            List.of(alloyWheels, sunRoof, blueToothStereo, gps, letherSeats))
+                            List.of(alloyWheels, sunRoof, blueToothStereo, gps, letherSeats),
+                            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnUnWTXtJcoFQ91h5cX3WoFlXiSkvAhG5CSg&s"
+                    )
             );
 
             carRepository.save(
@@ -124,7 +130,9 @@ public class DataInitializer implements CommandLineRunner {
                             "1ns C4CmkM zE Ht5333",
                             "IZQ1018",
                             minivanV,
-                            List.of( blueToothStereo, gps))
+                            List.of( blueToothStereo, gps),
+                            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpX-vS21F5WAWsJBORGBWvbjx-4olaGXIR9Q&s"
+                    )
             );
 
             carRepository.save(
@@ -132,7 +140,9 @@ public class DataInitializer implements CommandLineRunner {
                             "1v8 A8Me9G Xy wg1762",
                             "NEY4708",
                             compactSedanW,
-                            List.of( blueToothStereo, gps, letherSeats))
+                            List.of( blueToothStereo, gps, letherSeats),
+                            "https://image1.mobiauto.com.br/images/api/images/v1.0/52595736/transform/fl_progressive,f_webp,q_80"
+                    )
             );
 
             driverRepository.save(

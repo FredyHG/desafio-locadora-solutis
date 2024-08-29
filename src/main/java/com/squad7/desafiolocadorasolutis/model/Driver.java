@@ -23,7 +23,7 @@ public class Driver extends Person {
         this.cnhNumber = cnhNumber;
     }
 
-    public Driver() {
+    protected Driver() {
         super();
         this.cnhNumber = null;
     }
