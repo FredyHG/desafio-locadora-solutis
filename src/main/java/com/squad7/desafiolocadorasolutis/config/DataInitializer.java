@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -24,11 +25,11 @@ public class DataInitializer implements CommandLineRunner {
     private final AccessoryRepository accessoryRepository;
     private final DriverRepository driverRepository;
     private final EmployeeRepository employeeRepository;
+    private final InsurancePolicyRepository insurancePolicyRepository;
+    private final CarRentalRepository carRentalRepository;
 
     @Override
     public void run(String... args) throws Exception {
-
-        UUID id = UUID.fromString("3f4d52d0-23e1-4f35-bb9d-67f08c8b3652");
 
         if (manufacturerRepository.findAll().isEmpty()){
             Manufacturer manufacturer1 = manufacturerRepository.save(

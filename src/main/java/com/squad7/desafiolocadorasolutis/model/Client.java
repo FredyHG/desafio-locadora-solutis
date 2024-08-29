@@ -4,14 +4,13 @@ import com.squad7.desafiolocadorasolutis.enums.AccountEmailStatusEnum;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 import java.time.LocalDate;
 
 @Getter
 @Setter
+@Table(name = "tb_client")
 @Entity
-@ToString
 public class Client {
 
     @Id

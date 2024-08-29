@@ -6,6 +6,8 @@ import com.squad7.desafiolocadorasolutis.controller.response.CarResponse;
 import com.squad7.desafiolocadorasolutis.controller.response.ResponseMessage;
 import com.squad7.desafiolocadorasolutis.enums.Category;
 import com.squad7.desafiolocadorasolutis.model.Car;
+import com.squad7.desafiolocadorasolutis.model.CarRental;
+import com.squad7.desafiolocadorasolutis.repository.CarRentalRepository;
 import com.squad7.desafiolocadorasolutis.service.CarService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +26,8 @@ import java.util.UUID;
 public class CarControllerImpl implements CarController {
 
     private final CarService carService;
+
+    private final CarRentalRepository carRentalRepository;
 
     @PostMapping
     @Override
@@ -52,5 +56,10 @@ public class CarControllerImpl implements CarController {
 
         CarResponse response = carService.getCarByUuid(carId);
         return ResponseEntity.ok().body(response);
+    }
+
+    @GetMapping("/test")
+    public ResponseEntity<List<CarRental>> test() {
+        return ResponseEntity.status(HttpStatus.OK).body(carRentalRepository.findAll());
     }
 }

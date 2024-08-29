@@ -29,7 +29,6 @@ public class CarModel {
 
     }
 
-
     public CarModel(String description, Category category, Manufacturer manufacturer) {
         this.description = description;
         this.category = category;

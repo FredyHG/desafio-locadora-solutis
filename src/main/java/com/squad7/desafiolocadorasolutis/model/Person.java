@@ -22,10 +22,6 @@ public abstract class Person {
         this.email = email;
     }
 
-    public Person(){
-        this.name = null;
-        this.birthDate = null;
-        this.cpf = null;
-        this.email = null;
+    protected Person() {
     }
 }
