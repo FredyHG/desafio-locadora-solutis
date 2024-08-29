@@ -24,9 +24,7 @@ public class Employee extends Person {
 
     }
 
-
-    public Employee() {
+    protected Employee() {
         super();
-        this.registration = null;
     }
 }
