@@ -1,40 +1,38 @@
 package com.squad7.desafiolocadorasolutis.controller;
 
+import com.squad7.desafiolocadorasolutis.controller.request.ClientCodeEmailValidationRequest;
 import com.squad7.desafiolocadorasolutis.controller.request.ClientPostRequest;
+import com.squad7.desafiolocadorasolutis.controller.request.ClientSendCodeEmailValidationRequest;
 import com.squad7.desafiolocadorasolutis.controller.response.ResponseMessage;
 import com.squad7.desafiolocadorasolutis.model.Client;
-import com.squad7.desafiolocadorasolutis.service.impl.ClientServiceImpl;
-import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpStatus;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
 
-@Slf4j
-@RestController
-@RequestMapping("api/v1/client")
-@RequiredArgsConstructor
-public class ClientController {
+public interface ClientController {
 
-    private final ClientServiceImpl clientServiceImpl;
+    @Operation(summary = "Register a client", description = "Register a new client based on the information provided in the ClientPostRequest object.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Client registered successfully"),
+            @ApiResponse(responseCode = "409", description = "Client already registered")
+    })
+    ResponseEntity<ResponseMessage> registerClient(ClientPostRequest clientRequest);
 
-    @PostMapping
-    public ResponseEntity<ResponseMessage> registerClient(@RequestBody @Valid ClientPostRequest clientRequest) {
+    @Operation(summary = "Send an email code", description = "Send an email code to email for validation.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "Code sent"),
+            @ApiResponse(responseCode = "404", description = "Client not found"),
+            @ApiResponse(responseCode = "409", description = "Client email already confirmed")
+    })
+    ResponseEntity<?> sendCodeToEmailValidation(ClientSendCodeEmailValidationRequest clientCodeValidation);
 
-        log.info("Receive request to register new client with CPF: {}", clientRequest.getCpf());
-
-        clientServiceImpl.registerClient(clientRequest);
-
-        return ResponseEntity.status(HttpStatus.CREATED).body(ResponseMessage.builder()
-                .code(HttpStatus.CREATED.value())
-                .message("Client registered successfully")
-                .build());
-    }
-
-    @GetMapping
-    public ResponseEntity<Client> getByCpf(@RequestParam("cpf") String cpf){
-        return new ResponseEntity(clientServiceImpl.getByCpfAndBlockedFalse(cpf), HttpStatus.OK);
-    }
-
+    @Operation(summary = "Validate an email code", description = "Validates the code sent by email.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "Code validated"),
+            @ApiResponse(responseCode = "404", description = "Client not found"),
+            @ApiResponse(responseCode = "409", description = "Client email already confirmed"),
+            @ApiResponse(responseCode = "400", description = "The code does not match the code sent")
+    })
+    ResponseEntity<?> validateCodeEmail(ClientCodeEmailValidationRequest clientCodeValidation);
 }

@@ -12,5 +12,6 @@ public interface ClientMapper {
     ClientMapper INSTANCE = Mappers.getMapper(ClientMapper.class);
 
     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "accountEmailStatusEnum", ignore = true)
     Client requestToModel(ClientPostRequest clientPostRequest);
 }
