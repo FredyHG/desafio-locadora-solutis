@@ -4,6 +4,7 @@ import com.squad7.desafiolocadorasolutis.controller.request.ClientCodeEmailValid
 import com.squad7.desafiolocadorasolutis.controller.request.ClientPostRequest;
 import com.squad7.desafiolocadorasolutis.controller.request.ClientSendCodeEmailValidationRequest;
 import com.squad7.desafiolocadorasolutis.controller.response.ResponseMessage;
+import com.squad7.desafiolocadorasolutis.model.Client;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;

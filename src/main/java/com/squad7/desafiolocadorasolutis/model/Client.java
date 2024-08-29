@@ -22,6 +22,7 @@ public class Client {
     private String cpf;
     private String email;
     private String cnhNumber;
+    private boolean blocked;
 
     @Enumerated(EnumType.STRING)
     private AccountEmailStatusEnum accountEmailStatusEnum;
