@@ -1,5 +1,6 @@
 package com.squad7.desafiolocadorasolutis.model;
 
+import com.squad7.desafiolocadorasolutis.enums.AccountEmailStatusEnum;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,14 +21,20 @@ public class Client {
     private String cpf;
     private String email;
     private String cnhNumber;
+    private boolean blocked;
+
+    @Enumerated(EnumType.STRING)
+    private AccountEmailStatusEnum accountEmailStatusEnum;
 
     protected Client() {}
 
-    public Client(String cnhNumber, String email, String cpf, LocalDate birthDate, String name) {
-        this.cnhNumber = cnhNumber;
-        this.email = email;
-        this.cpf = cpf;
-        this.birthDate = birthDate;
+    public Client(Long id, String name, LocalDate birthDate, String cpf, String email, String cnhNumber, AccountEmailStatusEnum accountEmailStatusEnum) {
+        this.id = id;
         this.name = name;
+        this.birthDate = birthDate;
+        this.cpf = cpf;
+        this.email = email;
+        this.cnhNumber = cnhNumber;
+        this.accountEmailStatusEnum = accountEmailStatusEnum;
     }
 }

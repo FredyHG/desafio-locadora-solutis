@@ -27,6 +27,9 @@ public class Car {
     @Column(nullable = false)
     private BigDecimal pricePerDay;
 
+    @Column(nullable = false)
+    private String imageURL;
+
     @ManyToOne
     @JoinColumn(name = "car_model_id", nullable = false)
     private CarModel carModel;
@@ -42,11 +45,12 @@ public class Car {
     protected Car() {
     }
 
-    public Car(BigDecimal pricePerDay, String chassis, String licensePlate, CarModel carModel, List<Accessory> accessories) {
+    public Car(BigDecimal pricePerDay, String chassis, String licensePlate, CarModel carModel, List<Accessory> accessories, String imageURL) {
         this.pricePerDay = pricePerDay;
         this.chassis = chassis;
         this.licensePlate = licensePlate;
         this.carModel = carModel;
         this.accessories = accessories;
+        this.imageURL = imageURL;
     }
 }

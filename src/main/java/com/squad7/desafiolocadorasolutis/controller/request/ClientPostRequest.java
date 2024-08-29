@@ -27,4 +27,6 @@ public class ClientPostRequest {
     @NotBlank(message = "CNH number cannot be blank.")
     @Pattern(regexp = "^[0-9]{11}$", message = "CNH number must be 11 digits.")
     private String cnhNumber;
+
+    private boolean blocked = true;
 }

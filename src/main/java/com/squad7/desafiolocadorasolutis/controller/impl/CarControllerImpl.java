@@ -55,7 +55,6 @@ public class CarControllerImpl implements CarController {
     public ResponseEntity<CarResponse> getCarByUuid(@PathVariable(name = "carId", required = true) UUID carId) {
 
         CarResponse response = carService.getCarByUuid(carId);
-
         return ResponseEntity.ok().body(response);
     }
 
