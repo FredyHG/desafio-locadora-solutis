@@ -1,8 +1,7 @@
 package com.squad7.desafiolocadorasolutis.exception.handlers;
 
 import com.squad7.desafiolocadorasolutis.controller.response.ErrorResponse;
-import com.squad7.desafiolocadorasolutis.exception.PersonEmailAlreadyRegistred;
-import com.squad7.desafiolocadorasolutis.exception.PersonException;
+import com.squad7.desafiolocadorasolutis.exception.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,6 +37,10 @@ public class PersonExceptionHandler {
     }
 
     static {
-        statusTable.put(PersonEmailAlreadyRegistred.class.getSimpleName(), HttpStatus.CONFLICT);
+        statusTable.put(PersonEmailAlreadyRegistered.class.getSimpleName(), HttpStatus.CONFLICT);
+        statusTable.put(DriverAlreadyExistsException.class.getSimpleName(), HttpStatus.CONFLICT);
+        statusTable.put(DriverNotFoundException.class.getSimpleName(), HttpStatus.NOT_FOUND);
+        statusTable.put(DriverEmailAlreadyConfirmed.class.getSimpleName(), HttpStatus.CONFLICT);
+        statusTable.put(DriverEmailCodeNotValid.class.getSimpleName(), HttpStatus.BAD_REQUEST);
     }
 }

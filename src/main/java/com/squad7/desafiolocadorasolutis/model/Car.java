@@ -42,8 +42,6 @@ public class Car {
     )
     private List<Accessory> accessories;
 
-
-
     protected Car() {
     }
 

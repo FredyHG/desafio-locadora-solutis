@@ -1,10 +1,10 @@
 package com.squad7.desafiolocadorasolutis.controller.impl;
 
 
+import com.squad7.desafiolocadorasolutis.controller.DriverController;
 import com.squad7.desafiolocadorasolutis.controller.request.DriverCodeEmailValidationRequest;
 import com.squad7.desafiolocadorasolutis.controller.request.DriverPostRequest;
 import com.squad7.desafiolocadorasolutis.controller.request.DriverSendCodeEmailValidationRequest;
-import com.squad7.desafiolocadorasolutis.controller.DriverController;
 import com.squad7.desafiolocadorasolutis.controller.response.ResponseMessage;
 import com.squad7.desafiolocadorasolutis.service.DriverService;
 import jakarta.validation.Valid;
