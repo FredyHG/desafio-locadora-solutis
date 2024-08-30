@@ -14,6 +14,7 @@ import com.squad7.desafiolocadorasolutis.service.AccessoryService;
 import com.squad7.desafiolocadorasolutis.service.CarModelService;
 import com.squad7.desafiolocadorasolutis.service.CarService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -21,11 +22,10 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.UUID;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class CarServiceImpl implements CarService {
-
-    Logger logger = LoggerFactory.getLogger(CarServiceImpl.class);
 
     private final CarRepository carRepository;
     private final CarModelService carModelService;
@@ -33,7 +33,7 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public void registerCar(CarPostRequest car) {
-        logger.info(":: registerCar() - Request {} ::", car);
+        log.info(":: registerCar() - Request {} ::", car);
         ensureCarNotRegisteredByChassis(car.getChassis());
 
         Accessory accessory = accessoryService.findById(UUID.fromString(car.getAccessoriesIds().get(0).getId()));
@@ -44,7 +44,7 @@ public class CarServiceImpl implements CarService {
         carToBeSaved.setCarModel(carModel);
 
         carRepository.save(carToBeSaved);
-        logger.info(":: registerCar() - Response {} ::", carToBeSaved);
+        log.info(":: registerCar() - Response {} ::", carToBeSaved);
     }
 
     @Override
@@ -60,12 +60,12 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public CarResponse getCarByUuid(UUID carId) {
-        logger.info(":: getCarByUuid() - Request {} ::", carId);
+        log.info(":: getCarByUuid() - Request {} ::", carId);
 
         Car car = carRepository.findById(carId).orElseThrow(
                 () -> new CarNotFoundException("No cars found by id: " + carId));
 
-        logger.info(":: getCarByUuid() - Response {} ::", car);
+        log.info(":: getCarByUuid() - Response {} ::", car);
         return CarMapper.INSTANCE.modelToResponse(car);
     }
 }
