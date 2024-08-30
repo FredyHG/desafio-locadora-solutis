@@ -66,7 +66,7 @@ public class ClientServiceImpl implements ClientService {
     }
 
     private void ensureClientNotRegisteredByEmail(String email) {
-        if (clientRepository.existsByEmail(email)) {
+        if(clientRepository.findByEmail(email).isPresent()){
             throw new ClientAlreadyExistsException("Client with email " + email + " already exists.");
         }
     }
@@ -78,30 +78,18 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public boolean existsByCpf(String cpf){
-        return clientRepository.existsByCpf(cpf);
-    }
-
-    @Override
-    public void acceptTermsAndServices(String cpf) {
-        Optional<Client> client = clientRepository.getByCpf(cpf);
-        if (client.isPresent()){
-            Client clientToSave = client.get();
-            clientToSave.setBlocked(false);
-            clientRepository.save(clientToSave);
-        }
-    }
-
-    @Override
-    public Client getByCpf(String cpf) {
-        return clientRepository.getByCpf(cpf).get();
+    public Client findByCpf(String cpf) {
+        return clientRepository
+                .getByCpf(cpf)
+                .orElseThrow(() -> new ClientNotFoundException("No client found by CPF: " + cpf));
     }
 
     @Override
     public Client getByCpfAndBlockedFalse(String cpf) {
-        return clientRepository.getByCpfAndBlockedFalse(cpf).orElse(null);
+        return clientRepository
+                .getByCpfAndBlockedFalse(cpf)
+                .orElseThrow(() -> new RuntimeException("Client not found"));
     }
-
 
     private void ensureClientEmailIsNotAlreadyConfirmed(Client client){
         if (client.getAccountEmailStatusEnum().equals(AccountEmailStatusEnum.CONFIRMED)){
