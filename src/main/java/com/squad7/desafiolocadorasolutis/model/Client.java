@@ -26,6 +26,15 @@ public class Client {
     @Enumerated(EnumType.STRING)
     private AccountEmailStatusEnum accountEmailStatusEnum;
 
+    public Client acceptTerms() {
+        if(!blocked) {
+            throw new RuntimeException("Client already accepted");
+        }
+
+        this.blocked = false;
+        return this;
+    }
+
     protected Client() {}
 
     public Client(Long id, String name, LocalDate birthDate, String cpf, String email, String cnhNumber, AccountEmailStatusEnum accountEmailStatusEnum) {
