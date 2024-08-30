@@ -1,12 +1,11 @@
 package com.squad7.desafiolocadorasolutis.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.squad7.desafiolocadorasolutis.enums.AccountEmailStatusEnum;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
-import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -17,20 +16,24 @@ public class Driver extends Person {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-
     private String cnhNumber;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "driver")
-    private List<CarRental> carRentals;
+    private boolean blocked;
+    @Enumerated(EnumType.STRING)
+    private AccountEmailStatusEnum accountEmailStatusEnum;
 
-    public Driver(String nome, LocalDate birthDate, String cpf, String email, String cnhNumber) {
-        super(nome, birthDate, cpf, email);
+    public Driver() {
+        super();
+    }
+    public Driver(String name, LocalDate birthDate, String cpf, String email, String cnhNumber) {
+        super(name, birthDate, cpf, email);
         this.cnhNumber = cnhNumber;
     }
 
-    protected Driver() {
-        super();
+    public Driver(Long id, String name, LocalDate birthDate, String cpf, String email, String cnhNumber, AccountEmailStatusEnum accountEmailStatusEnum) {
+        super(name, birthDate, cpf, email);
+        this.cnhNumber = cnhNumber;
+        this.accountEmailStatusEnum = accountEmailStatusEnum;
     }
 
 }

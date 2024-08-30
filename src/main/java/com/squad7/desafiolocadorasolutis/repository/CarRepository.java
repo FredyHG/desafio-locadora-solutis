@@ -22,5 +22,4 @@ public interface CarRepository extends JpaRepository<Car, UUID> {
             "AND (:accessoryIds IS NULL OR a.id IN :accessoryIds)")
     List<Car> getAllCarsFiltered(@Param("category") Category category,
                                  @Param("accessoryIds") List<String> idsAccessories);
-
 }
