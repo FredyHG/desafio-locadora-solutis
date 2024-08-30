@@ -7,7 +7,7 @@ import lombok.ToString;
 
 @Getter
 @ToString
-public class ClientCodeEmailValidationRequest {
+public class DriverCodeEmailValidationRequest {
 
     @NotBlank(message = "email cannot be blank")
     @Email(message = "email must be valid")
