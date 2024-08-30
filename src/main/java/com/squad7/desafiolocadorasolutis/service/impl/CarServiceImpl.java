@@ -52,6 +52,11 @@ public class CarServiceImpl implements CarService {
         return carRepository.getAllCarsFiltered(category, idsAccessories);
     }
 
+    private Car ensureCarExistsByChassis(String chassisId) {
+        return carRepository.findByChassis(chassisId)
+                .orElseThrow(() -> new CarNotFoundException("No car found by chassis: "+ chassisId));
+    }
+
     private void ensureCarNotRegisteredByChassis(String chassis) {
         carRepository.findByChassis(chassis).ifPresent(car -> {
             throw new CarAlreadyRegisteredException("Car already registered with chassis: " + chassis);
