@@ -1,6 +1,7 @@
 package com.squad7.desafiolocadorasolutis.exception.handlers;
 
 import com.squad7.desafiolocadorasolutis.controller.response.ErrorResponse;
+import com.squad7.desafiolocadorasolutis.exception.AccessoryNotFoundException;
 import com.squad7.desafiolocadorasolutis.exception.CarAlreadyRegisteredException;
 import com.squad7.desafiolocadorasolutis.exception.CarException;
 import com.squad7.desafiolocadorasolutis.exception.CarNotFoundException;
@@ -41,5 +42,6 @@ public class CarExceptionHandler {
     static {
         statusTable.put(CarAlreadyRegisteredException.class.getSimpleName(), HttpStatus.CONFLICT);
         statusTable.put(CarNotFoundException.class.getSimpleName(), HttpStatus.NOT_FOUND);
+        statusTable.put(AccessoryNotFoundException.class.getSimpleName(), HttpStatus.NOT_FOUND);
     }
 }

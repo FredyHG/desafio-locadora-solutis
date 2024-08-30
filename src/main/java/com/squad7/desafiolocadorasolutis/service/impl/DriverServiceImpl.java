@@ -4,37 +4,38 @@ import com.squad7.desafiolocadorasolutis.controller.request.DriverCodeEmailValid
 import com.squad7.desafiolocadorasolutis.controller.request.DriverPostRequest;
 import com.squad7.desafiolocadorasolutis.controller.request.DriverSendCodeEmailValidationRequest;
 import com.squad7.desafiolocadorasolutis.enums.AccountEmailStatusEnum;
-import com.squad7.desafiolocadorasolutis.exception.*;
+import com.squad7.desafiolocadorasolutis.exception.DriverAlreadyExistsException;
+import com.squad7.desafiolocadorasolutis.exception.DriverEmailCodeNotValid;
+import com.squad7.desafiolocadorasolutis.exception.DriverNotFoundException;
 import com.squad7.desafiolocadorasolutis.mappers.DriverMapper;
 import com.squad7.desafiolocadorasolutis.model.Driver;
 import com.squad7.desafiolocadorasolutis.repository.DriverRepository;
 import com.squad7.desafiolocadorasolutis.service.DriverService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class DriverServiceImpl implements DriverService{
 
-
-    Logger logger = LoggerFactory.getLogger(DriverServiceImpl.class);
     private static final String EMAIL_VALIDATION_CODE = "3321";
     private final DriverRepository driverRepository;
 
     public void registerDriver(DriverPostRequest driverPostRequest) {
-
-        ensureDriverNotRegisteredByCpf(driverPostRequest.getCpf());
+        ensureDriverExistsByCpf(driverPostRequest.getCpf());
         ensureDriverNotRegisteredByEmail(driverPostRequest.getEmail());
 
         Driver driverToBeSaved = DriverMapper.INSTANCE.requestToModel(driverPostRequest);
         driverToBeSaved.setAccountEmailStatusEnum(AccountEmailStatusEnum.TO_CONFIRM);
 
         driverToBeSaved = driverRepository.save(driverToBeSaved);
-        logger.info(":: registerDriver() - Driver Saved: {} ::", driverToBeSaved);
+        log.info(":: registerDriver() - Driver Saved: {} ::", driverToBeSaved);
     }
 
     @Override
@@ -56,34 +57,26 @@ public class DriverServiceImpl implements DriverService{
         driverRepository.save(driver);
     }
 
-    private Driver findByEmail(String email){
-        return driverRepository.findByEmail(email)
-                .orElseThrow(() -> new DriverNotFoundException("No Driver found by email: "+email));
-    }
-
     @Override
     public Driver ensureDriverExistsByCpf(String cpf){
         return findByCpf(cpf)
                 .orElseThrow(() -> new DriverNotFoundException("No Driver found by cpf: "+ cpf));
     }
 
-    private void ensureDriverNotRegisteredByEmail(String email) {
-        if (driverRepository.existsByEmail(email)) {
-            throw new DriverAlreadyExistsException("Driver with email " + email + " already exists.");
-        }
-    }
-
-
     @Override
     public Optional<Driver> findByCpf(String cpf){
         return driverRepository.findByCpf(cpf);
     }
 
+    private Driver findByEmail(String email){
+        return driverRepository.findByEmail(email)
+                .orElseThrow(() -> new DriverNotFoundException("No Driver found by email: "+email));
+    }
 
-    public void ensureDriverNotRegisteredByCpf(String cpf) {
-        findByCpf(cpf).ifPresent(driver -> {
-            throw new DriverAlreadyExistsException("Driver with CPF " + cpf + " already exists.");
-        });
+    private void ensureDriverNotRegisteredByEmail(String email) {
+        if (driverRepository.existsByEmail(email)) {
+            throw new DriverAlreadyExistsException("Driver with email " + email + " already exists.");
+        }
     }
 
     private void ensureDriverEmailIsNotAlreadyConfirmed(Driver driver){

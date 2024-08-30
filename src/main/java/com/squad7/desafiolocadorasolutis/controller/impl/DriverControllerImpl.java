@@ -1,10 +1,10 @@
 package com.squad7.desafiolocadorasolutis.controller.impl;
 
 
+import com.squad7.desafiolocadorasolutis.controller.DriverController;
 import com.squad7.desafiolocadorasolutis.controller.request.DriverCodeEmailValidationRequest;
 import com.squad7.desafiolocadorasolutis.controller.request.DriverPostRequest;
 import com.squad7.desafiolocadorasolutis.controller.request.DriverSendCodeEmailValidationRequest;
-import com.squad7.desafiolocadorasolutis.controller.DriverController;
 import com.squad7.desafiolocadorasolutis.controller.response.ResponseMessage;
 import com.squad7.desafiolocadorasolutis.service.DriverService;
 import jakarta.validation.Valid;
@@ -38,17 +38,23 @@ public class DriverControllerImpl implements DriverController {
 
     @PostMapping("/code/email")
     @Override
-    public ResponseEntity<?> sendCodeToEmailValidation(@RequestBody @Valid DriverSendCodeEmailValidationRequest driverCodeValidation) {
+    public ResponseEntity<ResponseMessage> sendCodeToEmailValidation(@RequestBody @Valid DriverSendCodeEmailValidationRequest driverCodeValidation) {
         log.info(":: sendCodeToEmailValidation() - Request: {}", driverCodeValidation);
         driverService.sendCodeToEmailValidation(driverCodeValidation);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok(ResponseMessage.builder()
+                .code(HttpStatus.OK.value())
+                .message("Email code validation send")
+                .build());
     }
 
     @PostMapping("/code/email/validate")
     @Override
-    public ResponseEntity<?> validateCodeEmail(@RequestBody @Valid DriverCodeEmailValidationRequest driverCodeValidation) {
+    public ResponseEntity<ResponseMessage> validateCodeEmail(@RequestBody @Valid DriverCodeEmailValidationRequest driverCodeValidation) {
         log.info(":: validateCodeEmail() - Request: {}", driverCodeValidation);
         driverService.validateCodeEmail(driverCodeValidation);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok(ResponseMessage.builder()
+                .code(HttpStatus.OK.value())
+                .message("Email code validated")
+                .build());
     }
 }

@@ -1,5 +1,6 @@
 package com.squad7.desafiolocadorasolutis.service.impl;
 
+import com.squad7.desafiolocadorasolutis.exception.CarModelNotFoundException;
 import com.squad7.desafiolocadorasolutis.model.CarModel;
 import com.squad7.desafiolocadorasolutis.repository.CarModelRepository;
 import com.squad7.desafiolocadorasolutis.service.CarModelService;
@@ -16,6 +17,6 @@ public class CarModelServiceImpl implements CarModelService {
 
     @Override
     public CarModel findById(UUID id) {
-        return carModelRepository.findById(id).orElseThrow(() -> new RuntimeException("Car Model not found"));
+        return carModelRepository.findById(id).orElseThrow(() -> new CarModelNotFoundException("Car Model not found"));
     }
 }

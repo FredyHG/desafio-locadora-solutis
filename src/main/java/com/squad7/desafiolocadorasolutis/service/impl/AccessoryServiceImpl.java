@@ -1,5 +1,6 @@
 package com.squad7.desafiolocadorasolutis.service.impl;
 
+import com.squad7.desafiolocadorasolutis.exception.AccessoryNotFoundException;
 import com.squad7.desafiolocadorasolutis.model.Accessory;
 import com.squad7.desafiolocadorasolutis.repository.AccessoryRepository;
 import com.squad7.desafiolocadorasolutis.service.AccessoryService;
@@ -16,6 +17,6 @@ public class AccessoryServiceImpl implements AccessoryService {
 
     @Override
     public Accessory findById(UUID id) {
-        return accessoryRepository.findById(id).orElseThrow(() -> new RuntimeException("Accessory not found"));
+        return accessoryRepository.findById(id).orElseThrow(() -> new AccessoryNotFoundException("Accessory not found"));
     }
 }
