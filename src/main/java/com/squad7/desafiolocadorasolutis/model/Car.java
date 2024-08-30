@@ -42,9 +42,6 @@ public class Car {
     )
     private List<Accessory> accessories;
 
-    protected Car() {
-    }
-
     public Car(BigDecimal pricePerDay, String chassis, String licensePlate, CarModel carModel, List<Accessory> accessories, String imageURL) {
         this.pricePerDay = pricePerDay;
         this.chassis = chassis;
@@ -52,5 +49,8 @@ public class Car {
         this.carModel = carModel;
         this.accessories = accessories;
         this.imageURL = imageURL;
+    }
+
+    protected Car() {
     }
 }

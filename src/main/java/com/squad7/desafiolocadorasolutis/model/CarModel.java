@@ -25,13 +25,12 @@ public class CarModel {
     @JoinColumn(name = "manufacturer_id")
     private Manufacturer manufacturer;
 
-    protected CarModel() {
-
-    }
-
     public CarModel(String description, Category category, Manufacturer manufacturer) {
         this.description = description;
         this.category = category;
         this.manufacturer = manufacturer;
+    }
+
+    protected CarModel() {
     }
 }

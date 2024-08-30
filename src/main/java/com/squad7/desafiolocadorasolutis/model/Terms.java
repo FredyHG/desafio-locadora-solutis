@@ -23,9 +23,6 @@ public class Terms {
     @JoinColumn(name = "driver_id")
     private Driver acceptBy;
 
-    public Terms() {
-    }
-
     public Terms(Driver driver) {
         this.acceptBy = driver;
         this.termsStatus = TermsStatus.TO_ACCEPT;
@@ -37,5 +34,8 @@ public class Terms {
         this.acceptAt = LocalDateTime.now();
 
         return this;
+    }
+
+    protected Terms() {
     }
 }
