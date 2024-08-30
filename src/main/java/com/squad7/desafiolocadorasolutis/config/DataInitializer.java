@@ -12,7 +12,6 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.UUID;
 
 @Slf4j
 @Component
@@ -31,7 +30,7 @@ public class DataInitializer implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        if (manufacturerRepository.findAll().isEmpty()){
+        if (manufacturerRepository.findAll().isEmpty()) {
             Manufacturer manufacturer1 = manufacturerRepository.save(
                     new Manufacturer("Manufacturer X")
             );
@@ -56,7 +55,7 @@ public class DataInitializer implements CommandLineRunner {
                             Category.MEDIUM_SEDAN, manufacturer2)
             );
 
-            CarModel sportyZ =carModelRepository.save(
+            CarModel sportyZ = carModelRepository.save(
                     new CarModel("Sporty Z",
                             Category.SPORT, manufacturer3)
             );
@@ -82,7 +81,7 @@ public class DataInitializer implements CommandLineRunner {
             );
 
             Accessory sunRoof = accessoryRepository.save(
-                    new Accessory( "Sunroof",
+                    new Accessory("Sunroof",
                             "Automatic sunroof for a better driving experience")
             );
 
@@ -96,7 +95,7 @@ public class DataInitializer implements CommandLineRunner {
                             "Stylish alloy wheels for enhanced aesthetics")
             );
 
-            carRepository.save(
+            Car c1 = carRepository.save(
                     new Car(new BigDecimal("54.89"),
                             "2JR cTUHG8 15 Bm8502",
                             "HRK7697",
@@ -106,7 +105,7 @@ public class DataInitializer implements CommandLineRunner {
                     )
             );
 
-            carRepository.save(
+            Car c2 = carRepository.save(
                     new Car(new BigDecimal("62.89"),
                             "4HS S6HNfw X2 Cy3255",
                             "HDW6272",
@@ -116,7 +115,7 @@ public class DataInitializer implements CommandLineRunner {
                     )
             );
 
-            carRepository.save(
+            Car c3 = carRepository.save(
                     new Car(new BigDecimal("89.99"),
                             "1v8 A8Me9G Xy wg1769",
                             "IZQ1019",
@@ -126,27 +125,27 @@ public class DataInitializer implements CommandLineRunner {
                     )
             );
 
-            carRepository.save(
+            Car c4 = carRepository.save(
                     new Car(new BigDecimal("49.99"),
                             "1ns C4CmkM zE Ht5333",
                             "IZQ1018",
                             minivanV,
-                            List.of( blueToothStereo, gps),
+                            List.of(blueToothStereo, gps),
                             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpX-vS21F5WAWsJBORGBWvbjx-4olaGXIR9Q&s"
                     )
             );
 
-            carRepository.save(
+            Car c5 = carRepository.save(
                     new Car(new BigDecimal("49.99"),
                             "1v8 A8Me9G Xy wg1762",
                             "NEY4708",
                             compactSedanW,
-                            List.of( blueToothStereo, gps, letherSeats),
+                            List.of(blueToothStereo, gps, letherSeats),
                             "https://image1.mobiauto.com.br/images/api/images/v1.0/52595736/transform/fl_progressive,f_webp,q_80"
                     )
             );
 
-            driverRepository.save(
+            Driver d1 = driverRepository.save(
                     new Driver(
                             "Alice Williams",
                             LocalDate.of(1987, 6, 18),
@@ -156,7 +155,7 @@ public class DataInitializer implements CommandLineRunner {
                     )
             );
 
-            driverRepository.save(
+            Driver d2 = driverRepository.save(
                     new Driver(
                             "David Miller",
                             LocalDate.of(1975, 9, 30),
@@ -166,7 +165,7 @@ public class DataInitializer implements CommandLineRunner {
                     )
             );
 
-            driverRepository.save(
+            Driver d3 = driverRepository.save(
                     new Driver(
                             "Linda Wilson",
                             LocalDate.of(1990, 12, 25),
@@ -176,7 +175,7 @@ public class DataInitializer implements CommandLineRunner {
                     )
             );
 
-            driverRepository.save(
+            Driver d4 = driverRepository.save(
                     new Driver(
                             "James Anderson",
                             LocalDate.of(1982, 4, 14),
@@ -186,7 +185,7 @@ public class DataInitializer implements CommandLineRunner {
                     )
             );
 
-            driverRepository.save(
+            Driver d5 = driverRepository.save(
                     new Driver(
                             "Patricia Thomas",
                             LocalDate.of(1995, 7, 8),
@@ -246,6 +245,18 @@ public class DataInitializer implements CommandLineRunner {
                             "REG345678"
                     )
             );
+
+            InsurancePolicy insurancePolicy = new InsurancePolicy(true, true, BigDecimal.valueOf(2.0), true);
+
+            CarRental cr1 = new CarRental(c1, insurancePolicy, d1, BigDecimal.valueOf(2.0), LocalDateTime.now(), LocalDateTime.now());
+
+            CarRental cr2 = new CarRental(c2, insurancePolicy, d2, BigDecimal.valueOf(2.0), LocalDateTime.now(), LocalDateTime.now());
+
+            CarRental cr3 = new CarRental(c3, insurancePolicy, d3, BigDecimal.valueOf(2.0), LocalDateTime.now(), LocalDateTime.now());
+
+            CarRental cr4 = new CarRental(c4, insurancePolicy, d4, BigDecimal.valueOf(2.0), LocalDateTime.now(), LocalDateTime.now());
+
+            CarRental cr5 = new CarRental(c5, insurancePolicy, d5, BigDecimal.valueOf(2.0), LocalDateTime.now(), LocalDateTime.now());
         }
     }
 }
