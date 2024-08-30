@@ -29,6 +29,5 @@ public class Accessory {
     }
 
     protected Accessory() {
-
     }
 }

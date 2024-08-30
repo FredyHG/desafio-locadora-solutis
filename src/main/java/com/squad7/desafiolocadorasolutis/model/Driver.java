@@ -25,10 +25,6 @@ public class Driver extends Person {
     @Enumerated(EnumType.STRING)
     private AccountEmailStatusEnum accountEmailStatusEnum;
 
-    public Driver() {
-        super();
-    }
-
     public Driver(String name, LocalDate birthDate, String cpf, String email, String cnhNumber, AccountEmailStatusEnum accountEmailStatusEnum) {
         super(name, birthDate, cpf, email);
         this.cnhNumber = cnhNumber;
@@ -41,4 +37,7 @@ public class Driver extends Person {
         return this;
     }
 
+    public Driver() {
+        super();
+    }
 }
