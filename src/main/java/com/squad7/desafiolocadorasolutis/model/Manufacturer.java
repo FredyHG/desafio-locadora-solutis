@@ -17,11 +17,10 @@ public class Manufacturer {
 
     private String name;
 
-    protected Manufacturer() {
-
-    }
-
     public Manufacturer(String name) {
         this.name = name;
+    }
+
+    protected Manufacturer() {
     }
 }
