@@ -15,8 +15,6 @@ import com.squad7.desafiolocadorasolutis.service.CarModelService;
 import com.squad7.desafiolocadorasolutis.service.CarService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -52,9 +50,9 @@ public class CarServiceImpl implements CarService {
         return carRepository.getAllCarsFiltered(category, idsAccessories);
     }
 
-    private Car ensureCarExistsByChassis(String chassisId) {
-        return carRepository.findByChassis(chassisId)
-                .orElseThrow(() -> new CarNotFoundException("No car found by chassis: "+ chassisId));
+    public Car ensureCarExistsById(UUID carId) {
+        return carRepository.findById(carId)
+                .orElseThrow(() -> new CarNotFoundException("No car found by chassis: " + carId));
     }
 
     private void ensureCarNotRegisteredByChassis(String chassis) {
