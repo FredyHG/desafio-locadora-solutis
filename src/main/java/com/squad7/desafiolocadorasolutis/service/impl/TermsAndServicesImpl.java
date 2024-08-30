@@ -1,6 +1,6 @@
 package com.squad7.desafiolocadorasolutis.service.impl;
 
-import com.squad7.desafiolocadorasolutis.service.ClientService;
+import com.squad7.desafiolocadorasolutis.service.DriverService;
 import com.squad7.desafiolocadorasolutis.service.TermsAndServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,12 +9,12 @@ import org.springframework.stereotype.Service;
 public class TermsAndServicesImpl implements TermsAndServices {
 
     @Autowired
-    private ClientService clientService;
+    private DriverService driveService;
 
     @Override
     public boolean accept(String cpf) {
-        if(clientService.existsByCpf(cpf)){
-            clientService.acceptTermsAndServices(cpf);
+        if(driveService.existsByCpf(cpf)){
+            driveService.acceptTermsAndServices(cpf);
             return true;
         } else {
             return false;

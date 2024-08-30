@@ -28,11 +28,8 @@ public class CarControllerImpl implements CarController {
     @PostMapping
     @Override
     public ResponseEntity<ResponseMessage> registerCar(@RequestBody @Valid CarPostRequest car) {
-
         log.info("Receive request to register new car with chassis: {}", car.getChassis());
-
         carService.registerCar(car);
-
         return ResponseEntity.status(HttpStatus.CREATED).body(ResponseMessage
                 .builder()
                 .code(HttpStatus.CREATED.value())
@@ -49,7 +46,6 @@ public class CarControllerImpl implements CarController {
     @GetMapping(value = "/{carId}/details")
     @Override
     public ResponseEntity<CarResponse> getCarByUuid(@PathVariable(name = "carId", required = true) UUID carId) {
-
         CarResponse response = carService.getCarByUuid(carId);
         return ResponseEntity.ok().body(response);
     }
