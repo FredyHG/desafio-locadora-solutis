@@ -16,10 +16,13 @@ public class CarRental {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
+
     @Column(name = "rent_date")
     private LocalDateTime rentDate;
+
     @Column(name = "return_date")
     private LocalDateTime returnDate;
+
     private BigDecimal price;
 
     @OneToOne(cascade = CascadeType.PERSIST)
