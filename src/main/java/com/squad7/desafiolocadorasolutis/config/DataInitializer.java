@@ -24,7 +24,6 @@ public class DataInitializer implements CommandLineRunner {
     private final AccessoryRepository accessoryRepository;
     private final DriverRepository driverRepository;
     private final EmployeeRepository employeeRepository;
-    private final InsurancePolicyRepository insurancePolicyRepository;
     private final CarRentalRepository carRentalRepository;
 
     @Override
@@ -248,15 +247,25 @@ public class DataInitializer implements CommandLineRunner {
 
             InsurancePolicy insurancePolicy = new InsurancePolicy(true, true, BigDecimal.valueOf(2.0), true);
 
+            InsurancePolicy insurancePolicy2 = new InsurancePolicy(true, true, BigDecimal.valueOf(2.0), true);
+
+            InsurancePolicy insurancePolicy3 = new InsurancePolicy(true, true, BigDecimal.valueOf(2.0), true);
+
+            InsurancePolicy insurancePolicy4 = new InsurancePolicy(true, true, BigDecimal.valueOf(2.0), true);
+
+            InsurancePolicy insurancePolicy5 = new InsurancePolicy(true, true, BigDecimal.valueOf(2.0), true);
+
             CarRental cr1 = new CarRental(c1, insurancePolicy, d1, BigDecimal.valueOf(2.0), LocalDateTime.now(), LocalDateTime.now());
 
-            CarRental cr2 = new CarRental(c2, insurancePolicy, d2, BigDecimal.valueOf(2.0), LocalDateTime.now(), LocalDateTime.now());
+            CarRental cr2 = new CarRental(c2, insurancePolicy2, d2, BigDecimal.valueOf(2.0), LocalDateTime.now(), LocalDateTime.now());
 
-            CarRental cr3 = new CarRental(c3, insurancePolicy, d3, BigDecimal.valueOf(2.0), LocalDateTime.now(), LocalDateTime.now());
+            CarRental cr3 = new CarRental(c3, insurancePolicy3, d3, BigDecimal.valueOf(2.0), LocalDateTime.now(), LocalDateTime.now());
 
-            CarRental cr4 = new CarRental(c4, insurancePolicy, d4, BigDecimal.valueOf(2.0), LocalDateTime.now(), LocalDateTime.now());
+            CarRental cr4 = new CarRental(c4, insurancePolicy4, d4, BigDecimal.valueOf(2.0), LocalDateTime.now(), LocalDateTime.now());
 
-            CarRental cr5 = new CarRental(c5, insurancePolicy, d5, BigDecimal.valueOf(2.0), LocalDateTime.now(), LocalDateTime.now());
+            CarRental cr5 = new CarRental(c5, insurancePolicy5, d5, BigDecimal.valueOf(2.0), LocalDateTime.now(), LocalDateTime.now());
+
+            carRentalRepository.saveAll(List.of(cr1, cr2, cr3, cr4, cr5));
         }
     }
 }
