@@ -4,16 +4,10 @@ import com.squad7.desafiolocadorasolutis.controller.request.ClientCodeEmailValid
 import com.squad7.desafiolocadorasolutis.controller.request.ClientPostRequest;
 import com.squad7.desafiolocadorasolutis.model.Client;
 import com.squad7.desafiolocadorasolutis.controller.request.ClientSendCodeEmailValidationRequest;
-import com.squad7.desafiolocadorasolutis.controller.response.ResponseMessage;
 
 public interface ClientService {
     void registerClient(ClientPostRequest clientPostRequest);
-
-    boolean existsByCpf(String cpf);
-
-    void acceptTermsAndServices(String cpf);
-
-    Client getByCpf(String cpf);
+    Client findByCpf(String cpf);
 
     Client getByCpfAndBlockedFalse(String cpf);
 
