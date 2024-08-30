@@ -9,15 +9,7 @@ import java.util.UUID;
 
 @Repository
 public interface DriverRepository extends JpaRepository<Driver, Long> {
-
     Optional<Driver> findByEmail(String email);
-
-    boolean existsByCpf(String cpf);
+    Optional<Driver> findByCpf(String cpf);
     boolean existsByEmail(String email);
-
-    Optional<Driver> getByCpf(String cpf);
-
-    Optional<Driver> getByCpfAndBlockedFalse(String cpf);
-
-
 }

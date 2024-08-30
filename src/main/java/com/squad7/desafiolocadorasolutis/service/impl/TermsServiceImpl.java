@@ -1,23 +1,25 @@
 package com.squad7.desafiolocadorasolutis.service.impl;
 
-import com.squad7.desafiolocadorasolutis.model.Client;
-import com.squad7.desafiolocadorasolutis.repository.ClientRepository;
-import com.squad7.desafiolocadorasolutis.service.ClientService;
+import com.squad7.desafiolocadorasolutis.model.Driver;
+import com.squad7.desafiolocadorasolutis.repository.DriverRepository;
+import com.squad7.desafiolocadorasolutis.service.DriverService;
 import com.squad7.desafiolocadorasolutis.service.TermsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-@Service
 @RequiredArgsConstructor
+@Service
 public class TermsServiceImpl implements TermsService {
 
-    private final ClientService clientService;
-    private final ClientRepository clientRepository;
+    private final DriverService driveService;
+    private final DriverRepository driverRepository;
 
     @Override
     public void acceptTerms(String cpf) {
-        Client client = clientService.findByCpf(cpf);
-        client.acceptTerms();
-        clientRepository.save(client);
+
+        Driver driverToBeAccepted = driveService.ensureDriverExistsByCpf(cpf);
+        Driver driver = driverToBeAccepted.acceptTerms();
+
+        driverRepository.save(driver);
     }
 }

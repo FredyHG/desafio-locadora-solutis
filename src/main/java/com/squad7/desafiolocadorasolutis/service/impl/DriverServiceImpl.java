@@ -39,13 +39,13 @@ public class DriverServiceImpl implements DriverService{
 
     @Override
     public void sendCodeToEmailValidation(DriverSendCodeEmailValidationRequest request) {
-        Driver driver = getByEmail(request.getEmail());
+        Driver driver = findByEmail(request.getEmail());
         ensureDriverEmailIsNotAlreadyConfirmed(driver);
     }
 
     @Override
     public void validateCodeEmail(DriverCodeEmailValidationRequest request) {
-        Driver driver = getByEmail(request.getEmail());
+        Driver driver = findByEmail(request.getEmail());
         ensureDriverEmailIsNotAlreadyConfirmed(driver);
 
         if (!request.getCode().equals(EMAIL_VALIDATION_CODE)){
@@ -56,9 +56,15 @@ public class DriverServiceImpl implements DriverService{
         driverRepository.save(driver);
     }
 
-    private Driver getByEmail(String email){
+    private Driver findByEmail(String email){
         return driverRepository.findByEmail(email)
                 .orElseThrow(() -> new DriverNotFoundException("No Driver found by email: "+email));
+    }
+
+    @Override
+    public Driver ensureDriverExistsByCpf(String cpf){
+        return findByCpf(cpf)
+                .orElseThrow(() -> new DriverNotFoundException("No Driver found by cpf: "+ cpf));
     }
 
     private void ensureDriverNotRegisteredByEmail(String email) {
@@ -67,46 +73,22 @@ public class DriverServiceImpl implements DriverService{
         }
     }
 
-    private void ensureClientNotRegisteredByCpf(String cpf) {
-        if (driverRepository.existsByCpf(cpf)) {
+
+    @Override
+    public Optional<Driver> findByCpf(String cpf){
+        return driverRepository.findByCpf(cpf);
+    }
+
+
+    public void ensureDriverNotRegisteredByCpf(String cpf) {
+        findByCpf(cpf).ifPresent(driver -> {
             throw new DriverAlreadyExistsException("Driver with CPF " + cpf + " already exists.");
-        }
+        });
     }
-
-    @Override
-    public boolean existsByCpf(String cpf){
-        return driverRepository.existsByCpf(cpf);
-    }
-
-    @Override
-    public void acceptTermsAndServices(String cpf) {
-        Optional<Driver> driver = driverRepository.getByCpf(cpf);
-        if (driver.isPresent()){
-            Driver driverToSave = driver.get();
-            driverToSave.setBlocked(false);
-            driverRepository.save(driverToSave);
-        }
-    }
-
-    @Override
-    public Driver getByCpf(String cpf) {
-        return driverRepository.getByCpf(cpf).get();
-    }
-
-    @Override
-    public Driver getByCpfAndBlockedFalse(String cpf) {
-        return driverRepository.getByCpfAndBlockedFalse(cpf).orElse(null);
-    }
-
 
     private void ensureDriverEmailIsNotAlreadyConfirmed(Driver driver){
         if (driver.getAccountEmailStatusEnum().equals(AccountEmailStatusEnum.CONFIRMED)){
-            throw new DriverAlreadyExistsException("Driver email already confirmed: "+driver.getEmail());
-        }
-    }
-    private void ensureDriverNotRegisteredByCpf(String cpf) {
-        if (driverRepository.existsByCpf(cpf)) {
-            throw new DriverAlreadyExistsException("Client with CPF " + cpf + " already exists.");
+            throw new DriverAlreadyExistsException("Driver email already confirmed: "+ driver.getEmail());
         }
     }
 }

@@ -30,6 +30,10 @@ public class CarRental {
     @JoinColumn(name = "driver_id")
     private Driver driver;
 
+    @OneToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "rental_terms_id")
+    private Terms rentalTerms;
+
     @OneToOne
     @JoinColumn(name = "car_id")
     private Car car;
@@ -41,6 +45,7 @@ public class CarRental {
         this.returnDate = returnDate;
         this.rentDate = rentDate;
         this.driver = driver;
+        this.rentalTerms = new Terms(driver);
     }
 
     protected CarRental() {

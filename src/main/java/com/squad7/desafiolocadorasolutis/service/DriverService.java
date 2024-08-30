@@ -5,19 +5,13 @@ import com.squad7.desafiolocadorasolutis.controller.request.DriverPostRequest;
 import com.squad7.desafiolocadorasolutis.controller.request.DriverSendCodeEmailValidationRequest;
 import com.squad7.desafiolocadorasolutis.model.Driver;
 
+import java.util.Optional;
+
 public interface DriverService{
     void registerDriver(DriverPostRequest driverPostRequest);
-
-    boolean existsByCpf(String cpf);
-
-    void acceptTermsAndServices(String cpf);
-
-    Driver getByCpf(String cpf);
-
-    Driver getByCpfAndBlockedFalse(String cpf);
-
-
     void sendCodeToEmailValidation(DriverSendCodeEmailValidationRequest request);
     void validateCodeEmail(DriverCodeEmailValidationRequest request);
+    Driver ensureDriverExistsByCpf(String cpf);
+    Optional<Driver> findByCpf(String cpf);
 }
 

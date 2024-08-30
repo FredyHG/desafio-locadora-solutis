@@ -18,22 +18,27 @@ public class Driver extends Person {
     private UUID id;
     private String cnhNumber;
 
-    private boolean blocked;
+    @OneToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "account_terms_id")
+    private Terms accountTerms;
+
     @Enumerated(EnumType.STRING)
     private AccountEmailStatusEnum accountEmailStatusEnum;
 
     public Driver() {
         super();
     }
-    public Driver(String name, LocalDate birthDate, String cpf, String email, String cnhNumber) {
-        super(name, birthDate, cpf, email);
-        this.cnhNumber = cnhNumber;
-    }
 
-    public Driver(Long id, String name, LocalDate birthDate, String cpf, String email, String cnhNumber, AccountEmailStatusEnum accountEmailStatusEnum) {
+    public Driver(String name, LocalDate birthDate, String cpf, String email, String cnhNumber, AccountEmailStatusEnum accountEmailStatusEnum) {
         super(name, birthDate, cpf, email);
         this.cnhNumber = cnhNumber;
         this.accountEmailStatusEnum = accountEmailStatusEnum;
+        this.accountTerms = new Terms(this);
+    }
+
+    public Driver acceptTerms() {
+        this.getAccountTerms().acceptTerms();
+        return this;
     }
 
 }
