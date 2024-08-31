@@ -32,6 +32,7 @@ public class CarRentalServiceImpl implements CarRentalService {
         log.info("Driver found: CPF = {}, Name = {}", driver.getCpf(), driver.getName());
 
         Car car = carService.ensureCarExistsById(carRental.getCarId());
+        carService.ensureCarAvailableByPeriod(car.getId(), carRental.getRentDate(), carRental.getReturnDate());
         log.info("Car found: ID = {}, Chassis = {}", car.getId(), car.getChassis());
 
         CarRental savedCarRental = CarRentalMapper.INSTANCE.requestToModel(carRental);
