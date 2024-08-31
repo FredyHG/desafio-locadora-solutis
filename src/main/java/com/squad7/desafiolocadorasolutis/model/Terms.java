@@ -1,5 +1,7 @@
 package com.squad7.desafiolocadorasolutis.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.squad7.desafiolocadorasolutis.enums.TermsStatus;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -19,6 +21,7 @@ public class Terms {
     private TermsStatus termsStatus;
     private LocalDateTime acceptAt;
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "driver_id")
     private Driver acceptBy;
