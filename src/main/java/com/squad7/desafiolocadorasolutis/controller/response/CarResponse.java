@@ -14,11 +14,18 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CarResponse {
-    
+
     private UUID id;
     private String licensePlate;
     private String chassis;
     private BigDecimal pricePerDay;
     private CarModelDto carModel;
     private List<AccessoryResponseDto> accessories;
+    private String transmissionType;
+    private String fuelType;
+    private int yearOfManufacture;
+    private  String driveType;
+    private int mileage;
+    private String color;
+    private String imageURL;
 }
