@@ -1,5 +1,6 @@
 package com.squad7.desafiolocadorasolutis.model;
 
+import com.squad7.desafiolocadorasolutis.enums.Sex;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,8 +19,8 @@ public class Employee extends Person {
 
     private String registration;
 
-    public Employee(String nome, LocalDate birthDate, String cpf, String email, String registration) {
-        super(nome, birthDate,cpf, email);
+    public Employee(String nome, LocalDate birthDate, String cpf, Sex sex, String email, String registration) {
+        super(nome, birthDate,cpf, sex, email);
         this.registration = registration;
 
     }

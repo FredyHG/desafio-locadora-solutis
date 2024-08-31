@@ -1,5 +1,6 @@
 package com.squad7.desafiolocadorasolutis.controller.request;
 
+import com.squad7.desafiolocadorasolutis.enums.Sex;
 import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,6 +21,9 @@ public class DriverPostRequest {
 
     @CPF(message = "CPF is invalid.")
     private String cpf;
+
+    @NotBlank(message = "Sex cannot be blank.")
+    private Sex sex;
 
     @Email(message = "Email is Invalid.")
     private String email;

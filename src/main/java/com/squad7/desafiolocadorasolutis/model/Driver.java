@@ -1,6 +1,7 @@
 package com.squad7.desafiolocadorasolutis.model;
 
 import com.squad7.desafiolocadorasolutis.enums.AccountEmailStatusEnum;
+import com.squad7.desafiolocadorasolutis.enums.Sex;
 import com.squad7.desafiolocadorasolutis.exception.DriverMinorException;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -27,8 +28,8 @@ public class Driver extends Person {
     @Enumerated(EnumType.STRING)
     private AccountEmailStatusEnum accountEmailStatusEnum;
 
-    public Driver(String name, LocalDate birthDate, String cpf, String email, String cnhNumber, AccountEmailStatusEnum accountEmailStatusEnum) {
-        super(name, birthDate, cpf, email);
+    public Driver(String name, LocalDate birthDate, String cpf, String email, String cnhNumber, Sex sex, AccountEmailStatusEnum accountEmailStatusEnum) {
+        super(name, birthDate, cpf, sex, email);
         this.cnhNumber = cnhNumber;
         this.accountEmailStatusEnum = accountEmailStatusEnum;
         this.accountTerms = new Terms(this);
