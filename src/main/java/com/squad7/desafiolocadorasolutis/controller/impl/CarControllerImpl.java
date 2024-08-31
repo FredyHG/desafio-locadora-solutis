@@ -9,6 +9,8 @@ import com.squad7.desafiolocadorasolutis.model.Car;
 import com.squad7.desafiolocadorasolutis.model.CarRental;
 import com.squad7.desafiolocadorasolutis.repository.CarRentalRepository;
 import com.squad7.desafiolocadorasolutis.service.CarService;
+import com.squad7.desafiolocadorasolutis.service.facade.PaymentFacade;
+import com.squad7.desafiolocadorasolutis.service.impl.PaymentFacadeImpl;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,6 +18,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 
@@ -26,6 +29,7 @@ import java.util.UUID;
 public class CarControllerImpl implements CarController {
 
     private final CarService carService;
+    private final PaymentFacade paymentFacade;
 
     private final CarRentalRepository carRentalRepository;
 
@@ -56,6 +60,9 @@ public class CarControllerImpl implements CarController {
 
     @GetMapping("/test")
     public ResponseEntity<List<CarRental>> test() {
+
+        paymentFacade.makePayment("pix", BigDecimal.valueOf(2.0));
+
         return ResponseEntity.status(HttpStatus.OK).body(carRentalRepository.findAll());
     }
 }
