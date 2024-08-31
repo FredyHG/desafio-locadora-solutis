@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -19,10 +20,10 @@ public class CarRentalPostRequest {
     private UUID carId;
 
     @NotNull(message = "Rent date cannot be null.")
-    private LocalDateTime rentDate;
+    private LocalDate rentDate;
 
     @NotNull(message = "Return date cannot be null.")
-    private LocalDateTime returnDate;
+    private LocalDate returnDate;
 
     private InsurancePolicyDto insurancePolicy;
 }

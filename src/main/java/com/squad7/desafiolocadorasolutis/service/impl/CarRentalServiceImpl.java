@@ -31,6 +31,7 @@ public class CarRentalServiceImpl implements CarRentalService {
 
         CarRental savedCarRental = CarRentalMapper.INSTANCE.requestToModel(carRental);
         savedCarRental.setDriver(driver);
+        savedCarRental.getPayment().setDriver(driver);
         savedCarRental.setCar(car);
         savedCarRental.getRentalTerms().setAcceptBy(driver);
         savedCarRental.calculateTotalPrice();
