@@ -30,4 +30,7 @@ public class CarPostRequest {
 
     @NotBlank(message = "Car model ID cannot be blank.")
     private String carModelId;
+
+    @NotBlank(message = "URL of Car image cannot be blank.")
+    private String imageURL;
 }

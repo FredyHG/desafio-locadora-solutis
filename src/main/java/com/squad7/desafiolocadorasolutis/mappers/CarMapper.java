@@ -12,9 +12,8 @@ public interface CarMapper {
 
     CarMapper INSTANCE = Mappers.getMapper(CarMapper.class);
 
-    @Mapping(target = "imageURL", ignore = true)
-    @Mapping(target = "accessories", ignore = true)
-    @Mapping(target = "carModel", ignore = true)
+    @Mapping(source = "accessoriesIds", target = "accessories")
+    @Mapping(source = "carModelId", target = "carModel.id")
     @Mapping(target = "id", ignore = true)
     Car requestToModel(CarPostRequest car);
 
