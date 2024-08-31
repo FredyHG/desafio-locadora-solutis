@@ -1,9 +1,11 @@
 package com.squad7.desafiolocadorasolutis.controller.request;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.squad7.desafiolocadorasolutis.dto.InsurancePolicyDto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.util.UUID;
@@ -14,9 +16,12 @@ public class CarRentalPostRequest {
     @NotBlank(message = "Driver CPF cannot be blank.")
     private String driverCpf;
 
+    private String employeeRegistration;
+
     @NotNull(message = "Car ID cannot be null.")
     private UUID carId;
 
+    @JsonFormat(pattern="yyyy-MM-dd")
     @NotNull(message = "Rent date cannot be null.")
     private LocalDate rentDate;
 

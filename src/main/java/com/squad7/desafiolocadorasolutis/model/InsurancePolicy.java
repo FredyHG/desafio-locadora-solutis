@@ -38,22 +38,21 @@ public class InsurancePolicy {
 
     }
 
-    public void calculatePolicyValue(BigDecimal periodValue){
-
-        if (this.naturalCausesCoverage.equals(true)){
-            this.totalValue = totalValue.add(periodValue.multiply(BigDecimal.valueOf(0.03)));
-        }
-        if (this.theftCoverage.equals(true)){
-            this.totalValue = totalValue.add(periodValue.multiply(BigDecimal.valueOf(0.1)));
-        }
-        if (this.thirdPartyCoverage.equals(true)){
-            this.totalValue = totalValue.add(periodValue.multiply(BigDecimal.valueOf(0.05)));
-        }
+    public void calculatePolicyValue(BigDecimal periodValue) {
+        addCoverageValue(naturalCausesCoverage, periodValue, BigDecimal.valueOf(0.03));
+        addCoverageValue(theftCoverage, periodValue, BigDecimal.valueOf(0.1));
+        addCoverageValue(thirdPartyCoverage, periodValue, BigDecimal.valueOf(0.05));
 
         calculateDeductibleAmount();
     }
 
-    private void calculateDeductibleAmount(){
-        this.deductibleAmount =  this.deductibleAmount.add(this.totalValue.multiply(BigDecimal.valueOf(0.2)));
+    private void addCoverageValue(Boolean coverage, BigDecimal periodValue, BigDecimal multiplier) {
+        if (Boolean.TRUE.equals(coverage)) {
+            this.totalValue = this.totalValue.add(periodValue.multiply(multiplier));
+        }
+    }
+
+    private void calculateDeductibleAmount() {
+        this.deductibleAmount = this.deductibleAmount.add(this.totalValue.multiply(BigDecimal.valueOf(0.2)));
     }
 }
