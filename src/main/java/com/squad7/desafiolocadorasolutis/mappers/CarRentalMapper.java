@@ -15,6 +15,7 @@ public interface CarRentalMapper {
     @Mapping(source = "driverCpf", target = "driver.cpf")
     @Mapping(target = "rentalTerms", ignore = true)
     @Mapping(source = "carId", target = "car.id")
+    @Mapping(target = "price", ignore = true)
     CarRental requestToModel(CarRentalPostRequest carRentalPostRequest);
 
 

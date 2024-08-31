@@ -9,6 +9,7 @@ import com.squad7.desafiolocadorasolutis.exception.DriverEmailCodeNotValid;
 import com.squad7.desafiolocadorasolutis.exception.DriverNotFoundException;
 import com.squad7.desafiolocadorasolutis.mappers.DriverMapper;
 import com.squad7.desafiolocadorasolutis.model.Driver;
+import com.squad7.desafiolocadorasolutis.model.Terms;
 import com.squad7.desafiolocadorasolutis.repository.DriverRepository;
 import com.squad7.desafiolocadorasolutis.service.DriverService;
 import lombok.RequiredArgsConstructor;
@@ -27,14 +28,15 @@ public class DriverServiceImpl implements DriverService{
 
     public void registerDriver(DriverPostRequest driverPostRequest) {
         log.info(":: registerDriver() - Attempting to register driver with CPF: {} ::", driverPostRequest);
-        ensureDriverExistsByCpf(driverPostRequest.getCpf());
-        ensureDriverNotRegisteredByEmail(driverPostRequest.getEmail());
-
         Driver driverToBeSaved = DriverMapper.INSTANCE.requestToModel(driverPostRequest);
-        driverToBeSaved.setAccountEmailStatusEnum(AccountEmailStatusEnum.TO_CONFIRM);
 
-        driverToBeSaved = driverRepository.save(driverToBeSaved);
-        log.info(":: registerDriver() - Driver registered successfully: {} ::", driverToBeSaved);
+        driverToBeSaved.checkIfMinor();
+        ensureDriverNotExistsByCpf(driverToBeSaved.getCpf());
+        ensureDriverNotRegisteredByEmail(driverToBeSaved.getEmail());
+
+        driverToBeSaved.setAccountEmailStatusEnum(AccountEmailStatusEnum.TO_CONFIRM);
+        Driver saved = driverRepository.save(driverToBeSaved);
+        log.info(":: registerDriver() - Driver registered successfully: {} ::", saved);
     }
 
     @Override
@@ -91,6 +93,14 @@ public class DriverServiceImpl implements DriverService{
         log.info(":: ensureDriverEmailIsNotAlreadyConfirmed() - Checking if email {} is already confirmed: ::", driver.getEmail());
         if (driver.getAccountEmailStatusEnum().equals(AccountEmailStatusEnum.CONFIRMED)){
             throw new DriverAlreadyExistsException("Driver email already confirmed: "+ driver.getEmail());
+        }
+    }
+
+    private void ensureDriverNotExistsByCpf(String cpf){
+        log.info(":: ensureDriverNotExistsByCpf() - Checking if driver exists for the cpf: {} ::", cpf);
+        if (driverRepository.existsByCpf(cpf)){
+            log.warn(":: ensureDriverNotExistsByCpf() - The driver already exists with an cpf informed: {} ::", cpf);
+            throw new DriverAlreadyExistsException("Driver with cpf " + cpf + " already exists.");
         }
     }
 }

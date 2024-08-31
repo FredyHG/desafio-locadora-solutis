@@ -1,7 +1,6 @@
 package com.squad7.desafiolocadorasolutis.exception.handlers;
 
 import com.squad7.desafiolocadorasolutis.controller.response.ErrorResponse;
-import com.squad7.desafiolocadorasolutis.exception.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,12 +13,12 @@ import java.util.Map;
 
 @Slf4j
 @ControllerAdvice
-public class PersonExceptionHandler {
+public class IllegalArgumentExceptionHandler {
 
     private static final Map<String, HttpStatus> statusTable = new HashMap<>();
 
-    @ExceptionHandler(PersonException.class)
-    public ResponseEntity<ErrorResponse> handleCarException(PersonException ex) {
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<ErrorResponse> handleGenericException(IllegalArgumentException ex) {
         log.error("Exception handled: {}", ex.getMessage());
 
         HttpStatus status = mapStatus(ex);
@@ -32,16 +31,7 @@ public class PersonExceptionHandler {
         return new ResponseEntity<>(responseMessage, status);
     }
 
-    private HttpStatus mapStatus(PersonException ex) {
-        return statusTable.getOrDefault(ex.getClass().getSimpleName(), HttpStatus.INTERNAL_SERVER_ERROR);
-    }
-
-    static {
-        statusTable.put(PersonEmailAlreadyRegistered.class.getSimpleName(), HttpStatus.CONFLICT);
-        statusTable.put(DriverAlreadyExistsException.class.getSimpleName(), HttpStatus.CONFLICT);
-        statusTable.put(DriverNotFoundException.class.getSimpleName(), HttpStatus.NOT_FOUND);
-        statusTable.put(DriverEmailAlreadyConfirmed.class.getSimpleName(), HttpStatus.CONFLICT);
-        statusTable.put(DriverEmailCodeNotValid.class.getSimpleName(), HttpStatus.BAD_REQUEST);
-        statusTable.put(DriverMinorException.class.getSimpleName(), HttpStatus.BAD_REQUEST);
+    private HttpStatus mapStatus(IllegalArgumentException ex) {
+        return statusTable.getOrDefault(ex.getClass().getSimpleName(), HttpStatus.BAD_REQUEST);
     }
 }

@@ -14,6 +14,9 @@ public interface CarRepository extends JpaRepository<Car, UUID> {
 
     Optional<Car> findByChassis(String chassis);
 
+    Optional<Car> findByLicensePlate(String chassis);
+
+
     @Query("SELECT DISTINCT c FROM Car c " +
             "JOIN c.carModel cm " +
             "JOIN cm.manufacturer m " +
