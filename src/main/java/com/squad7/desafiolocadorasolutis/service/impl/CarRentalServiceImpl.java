@@ -1,6 +1,7 @@
 package com.squad7.desafiolocadorasolutis.service.impl;
 
 import com.squad7.desafiolocadorasolutis.controller.request.CarRentalPostRequest;
+import com.squad7.desafiolocadorasolutis.enums.CarRentalStatus;
 import com.squad7.desafiolocadorasolutis.mappers.CarRentalMapper;
 import com.squad7.desafiolocadorasolutis.model.Car;
 import com.squad7.desafiolocadorasolutis.model.CarRental;

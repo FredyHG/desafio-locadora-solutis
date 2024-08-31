@@ -1,6 +1,6 @@
 package com.squad7.desafiolocadorasolutis.model;
 
-import com.squad7.desafiolocadorasolutis.exception.DriverMinorException;
+import com.squad7.desafiolocadorasolutis.enums.CarRentalStatus;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -25,6 +25,9 @@ public class CarRental {
 
     @Column(name = "return_date")
     private LocalDate returnDate;
+
+    @Column(name = "rental_status")
+    private CarRentalStatus rentalStatus;
 
     private BigDecimal price;
 
@@ -52,7 +55,7 @@ public class CarRental {
     @JoinColumn(name = "payment_id")
     private Payment payment;
 
-    public CarRental(Car car, InsurancePolicy insurancePolicy, Driver driver, BigDecimal price, LocalDate returnDate, LocalDate rentDate, Employee employee, String paymentType) {
+    public CarRental(Car car, InsurancePolicy insurancePolicy, Driver driver, BigDecimal price, LocalDate returnDate, LocalDate rentDate, Employee employee, String paymentType, CarRentalStatus rentalStatus) {
         this.car = car;
         this.insurancePolicy = insurancePolicy;
         this.price = price;
@@ -62,6 +65,7 @@ public class CarRental {
         this.employee = employee;
         this.rentalTerms = new Terms(driver);
         this.payment = new Payment(LocalDateTime.now(), driver, paymentType);
+        this.rentalStatus = rentalStatus;
     }
 
     protected CarRental() {
