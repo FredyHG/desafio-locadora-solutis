@@ -32,5 +32,23 @@ public class CarPostRequest {
     private String carModelId;
 
     @NotBlank(message = "URL of Car image cannot be blank.")
+    private String transmissionType;
+
+    @NotBlank(message = "Transmission type cannot be null.")
+    private String fuelType;
+
+    @NotNull(message = "Year of manufacture cannot be null.")
+    private int yearOfManufacture;
+
+    @NotBlank(message = "drive type cannot be null.")
+    private  String driveType;
+
+    @NotNull(message = "Mileage cannot be null.")
+    private int mileage;
+
+    @NotBlank(message = "Color cannot be null.")
+    private String color;
+
+    @NotBlank(message = "image url cannot be null.")
     private String imageURL;
 }
