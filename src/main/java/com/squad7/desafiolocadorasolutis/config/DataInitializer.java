@@ -2,6 +2,7 @@ package com.squad7.desafiolocadorasolutis.config;
 
 import com.squad7.desafiolocadorasolutis.enums.AccountEmailStatusEnum;
 import com.squad7.desafiolocadorasolutis.enums.Category;
+import com.squad7.desafiolocadorasolutis.enums.Sex;
 import com.squad7.desafiolocadorasolutis.model.*;
 import com.squad7.desafiolocadorasolutis.repository.*;
 import lombok.RequiredArgsConstructor;
@@ -75,21 +76,21 @@ public class DataInitializer implements CommandLineRunner {
     }
 
     private List<Driver> createAndSaveDrivers() {
-        Driver d1 = driverRepository.save(new Driver("Alice Williams", LocalDate.of(1987, 6, 18), "321.654.987-00", "alice.williams@example.com", "CNH123456789", AccountEmailStatusEnum.TO_CONFIRM));
-        Driver d2 = driverRepository.save(new Driver("David Miller", LocalDate.of(1975, 9, 30), "654.321.987-00", "david.miller@example.com", "CNH987654321", AccountEmailStatusEnum.TO_CONFIRM));
-        Driver d3 = driverRepository.save(new Driver("Linda Wilson", LocalDate.of(1990, 12, 25), "123.789.456-00", "linda.wilson@example.com", "CNH192837465", AccountEmailStatusEnum.TO_CONFIRM));
-        Driver d4 = driverRepository.save(new Driver("James Anderson", LocalDate.of(1982, 4, 14), "789.123.456-00", "james.anderson@example.com", "CNH564738291", AccountEmailStatusEnum.TO_CONFIRM));
-        Driver d5 = driverRepository.save(new Driver("Patricia Thomas", LocalDate.of(1995, 7, 8), "456.987.123-00", "patricia.thomas@example.com", "CNH102938475", AccountEmailStatusEnum.TO_CONFIRM));
+        Driver d1 = driverRepository.save(new Driver("Alice Williams", LocalDate.of(1987, 6, 18), "321.654.987-00", "alice.williams@example.com", "CNH123456789",Sex.FEMININE, AccountEmailStatusEnum.TO_CONFIRM));
+        Driver d2 = driverRepository.save(new Driver("David Miller", LocalDate.of(1975, 9, 30), "654.321.987-00", "david.miller@example.com", "CNH987654321",Sex.MASCULINE, AccountEmailStatusEnum.TO_CONFIRM));
+        Driver d3 = driverRepository.save(new Driver("Linda Wilson", LocalDate.of(1990, 12, 25), "123.789.456-00", "linda.wilson@example.com", "CNH192837465",Sex.FEMININE, AccountEmailStatusEnum.TO_CONFIRM));
+        Driver d4 = driverRepository.save(new Driver("James Anderson", LocalDate.of(1982, 4, 14), "789.123.456-00", "james.anderson@example.com", "CNH564738291",Sex.MASCULINE, AccountEmailStatusEnum.TO_CONFIRM));
+        Driver d5 = driverRepository.save(new Driver("Patricia Thomas", LocalDate.of(1995, 7, 8), "456.987.123-00", "patricia.thomas@example.com", "CNH102938475",Sex.FEMININE, AccountEmailStatusEnum.TO_CONFIRM));
         return List.of(d1, d2, d3, d4, d5);
     }
 
-    private List<Employee> createAndSaveEmployees() {
+    private void createAndSaveEmployees() {
         return employeeRepository.saveAll(List.of(
-                new Employee("John Doe", LocalDate.of(1985, 5, 20), "123.456.789-00", "john.doe@example.com", "REG123456"),
-                new Employee("Jane Smith", LocalDate.of(1990, 8, 15), "987.654.321-00", "jane.smith@example.com", "REG654321"),
-                new Employee("Robert Johnson", LocalDate.of(1978, 3, 10), "192.837.465-00", "robert.johnson@example.com", "REG789012"),
-                new Employee("Emily Davis", LocalDate.of(1983, 11, 22), "564.738.291-00", "emily.davis@example.com", "REG210987"),
-                new Employee("Michael Brown", LocalDate.of(1992, 1, 5), "102.938.475-00", "michael.brown@example.com", "REG345678")
+                new Employee("John Doe", LocalDate.of(1985, 5, 20), "123.456.789-00", Sex.MASCULINE, "john.doe@example.com", "REG123456"),
+                new Employee("Jane Smith", LocalDate.of(1990, 8, 15), "987.654.321-00", Sex.FEMININE, "jane.smith@example.com", "REG654321"),
+                new Employee("Robert Johnson", LocalDate.of(1978, 3, 10), "192.837.465-00",Sex.MASCULINE, "robert.johnson@example.com", "REG789012"),
+                new Employee("Emily Davis", LocalDate.of(1983, 11, 22), "564.738.291-00",Sex.FEMININE, "emily.davis@example.com", "REG210987"),
+                new Employee("Michael Brown", LocalDate.of(1992, 1, 5), "102.938.475-00", Sex.MASCULINE, "michael.brown@example.com", "REG345678")
         ));
     }
 
