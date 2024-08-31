@@ -13,5 +13,6 @@ public interface DriverMapper {
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "accountEmailStatusEnum", ignore = true)
+    @Mapping(target = "accountTerms", ignore = true)
     Driver requestToModel(DriverPostRequest driverPostRequest);
 }
