@@ -11,4 +11,5 @@ public interface DriverRepository extends JpaRepository<Driver, Long> {
     Optional<Driver> findByEmail(String email);
     Optional<Driver> findByCpf(String cpf);
     boolean existsByEmail(String email);
+    boolean existsByCpf(String cpf);
 }
