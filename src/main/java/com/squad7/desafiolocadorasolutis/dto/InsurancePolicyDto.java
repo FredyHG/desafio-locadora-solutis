@@ -6,7 +6,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class InsurancePolicyDto {
-
     private Boolean thirdPartyCoverage;
     private Boolean naturalCausesCoverage;
     private Boolean theftCoverage;
