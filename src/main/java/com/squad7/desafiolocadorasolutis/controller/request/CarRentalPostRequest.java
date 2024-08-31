@@ -25,6 +25,10 @@ public class CarRentalPostRequest {
     @NotNull(message = "Return date cannot be null.")
     private LocalDate returnDate;
 
+    @NotNull(message = "Insurance policy cannot be null")
     private InsurancePolicyDto insurancePolicy;
+
+    @NotBlank(message = "Payment type cannot be null")
+    private String paymentType;
 }
 

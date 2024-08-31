@@ -52,7 +52,7 @@ public class CarRental {
     @JoinColumn(name = "payment_id")
     private Payment payment;
 
-    public CarRental(Car car, InsurancePolicy insurancePolicy, Driver driver, BigDecimal price, LocalDate returnDate, LocalDate rentDate, Employee employee) {
+    public CarRental(Car car, InsurancePolicy insurancePolicy, Driver driver, BigDecimal price, LocalDate returnDate, LocalDate rentDate, Employee employee, String paymentType) {
         this.car = car;
         this.insurancePolicy = insurancePolicy;
         this.price = price;
@@ -61,7 +61,7 @@ public class CarRental {
         this.driver = driver;
         this.employee = employee;
         this.rentalTerms = new Terms(driver);
-        this.payment = new Payment(LocalDateTime.now(), driver, null);
+        this.payment = new Payment(LocalDateTime.now(), driver, paymentType);
     }
 
     protected CarRental() {

@@ -7,9 +7,12 @@ import com.squad7.desafiolocadorasolutis.model.CarRental;
 import com.squad7.desafiolocadorasolutis.model.Driver;
 import com.squad7.desafiolocadorasolutis.repository.CarRentalRepository;
 import com.squad7.desafiolocadorasolutis.service.CarRentalService;
+import com.squad7.desafiolocadorasolutis.service.facade.PaymentFacade;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.math.BigDecimal;
 
 @Slf4j
 @Service
@@ -19,6 +22,7 @@ public class CarRentalServiceImpl implements CarRentalService {
     private final CarRentalRepository carRentalRepository;
     private final DriverServiceImpl driverService;
     private final CarServiceImpl carService;
+    private final PaymentFacade paymentFacade;
 
     public void rentCar(CarRentalPostRequest carRental) {
         log.info("Starting car rental process for driver with CPF: {}", carRental.getDriverCpf());
@@ -35,6 +39,13 @@ public class CarRentalServiceImpl implements CarRentalService {
         savedCarRental.setCar(car);
         savedCarRental.getRentalTerms().setAcceptBy(driver);
         savedCarRental.calculateTotalPrice();
+
+        BigDecimal amount = paymentFacade.makePayment(
+                savedCarRental.getPayment().getPaymentMethod(),
+                savedCarRental.getPrice());
+
+        savedCarRental.setPrice(amount);
+
         carRentalRepository.save(savedCarRental);
 
         log.info("Car rental process finished for driver with CPF: {}", carRental.getDriverCpf());
