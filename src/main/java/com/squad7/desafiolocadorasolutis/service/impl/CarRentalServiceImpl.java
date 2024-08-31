@@ -9,6 +9,7 @@ import com.squad7.desafiolocadorasolutis.model.CarRental;
 import com.squad7.desafiolocadorasolutis.model.Driver;
 import com.squad7.desafiolocadorasolutis.model.Employee;
 import com.squad7.desafiolocadorasolutis.repository.CarRentalRepository;
+import com.squad7.desafiolocadorasolutis.repository.EmployeeRepository;
 import com.squad7.desafiolocadorasolutis.service.CarRentalService;
 import com.squad7.desafiolocadorasolutis.service.EmployeeService;
 import com.squad7.desafiolocadorasolutis.service.facade.PaymentFacade;
@@ -39,6 +40,10 @@ public class CarRentalServiceImpl implements CarRentalService {
         Driver driver = driverService.ensureDriverExistsByCpf(carRental.getDriverCpf());
         log.info("Driver found: CPF = {}, Name = {}", driver.getCpf(), driver.getName());
 
+        driverService.ensureDriverAcceptAccountTermsByEmail(driver.getEmail());
+
+        driverService.ensureDriverConfirmEmailTermsByEmail(driver.getEmail());
+
         Employee employee = employeeService.ensureEmployeeExistsByRegistration(carRental.getEmployeeRegistration());
         log.info("Employee found: Registration = {}, Name = {}", employee.getRegistration(), employee.getName());
 
@@ -67,8 +72,61 @@ public class CarRentalServiceImpl implements CarRentalService {
         return responseList;
     }
 
-    public void confirmRent(String rentId) {
-        log.info("Starting rent confirmation process for driver with CPF: {}", rentId);
+
+    public void confirmRent(UUID carRentalId) {
+        log.info("Starting rent confirmation process for driver with CPF: {}", carRentalId);
+
+        CarRental carRental = ensureCarRentalExistsById(carRentalId);
+
+        if(carRental.getRentalStatus() != CarRentalStatus.BOOKED) {
+            throw new RuntimeException("Cannot confirm car rental: expected status 'BOOKED', but found '" + carRental.getRentalStatus() + "'.");
+        }
+
+        carRental.makePayment();
+
+        paymentFacade.makePayment(carRental.getPayment().getPaymentMethod(), carRental.getPrice());
+        carRental.setRentalStatus(CarRentalStatus.PAYMENT_SUCCESSFULLY);
+
+        carRentalRepository.save(carRental);
+
+        log.info("Starting rent confirmation process for driver with CPF: {}", carRentalId);
+    }
+
+    public void startRent(UUID rentId) {
+        CarRental carRental = ensureCarRentalExistsById(rentId);
+
+        if(carRental.getRentalStatus() != CarRentalStatus.PAYMENT_SUCCESSFULLY) {
+            throw new RuntimeException("Cannot start car rental: expected status 'PAYMENT_SUCCESSFULLY', but found '" + carRental.getRentalStatus() + "'.");
+        }
+
+        carRental.setRentalStatus(CarRentalStatus.IN_PROGRESS);
+
+        carRentalRepository.save(carRental);
+    }
+
+    public void finishRent(UUID rentId) {
+
+        CarRental carRental = ensureCarRentalExistsById(rentId);
+
+        if(carRental.getRentalStatus() != CarRentalStatus.IN_PROGRESS) {
+            throw new RuntimeException("Cannot finish car rental: expected status 'IN_PROGRESS', but found '" + carRental.getRentalStatus() + "'.");
+        }
+
+        carRental.setRentalStatus(CarRentalStatus.FINISHED);
+
+        carRentalRepository.save(carRental);
+    }
+
+    public void cancelRent(UUID rentId) {
+        CarRental carRental = ensureCarRentalExistsById(rentId);
+
+        if(carRental.getRentalStatus() != CarRentalStatus.BOOKED) {
+            throw new RuntimeException("Cannot cancel car rental: expected status 'BOOKED', but found '" + carRental.getRentalStatus() + "'.");
+        }
+
+        carRental.setRentalStatus(CarRentalStatus.CANCELLED);
+
+        carRentalRepository.save(carRental);
     }
 
     public CarRental ensureCarRentalExistsById(UUID carRentalId) {

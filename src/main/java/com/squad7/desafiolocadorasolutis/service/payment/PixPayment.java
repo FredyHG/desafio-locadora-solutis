@@ -8,8 +8,10 @@ import java.math.BigDecimal;
 @Slf4j
 public class PixPayment implements PaymentMethod {
     @Override
-    public BigDecimal processPayment(BigDecimal amount) {
+    public void processPayment(BigDecimal amount) {
         BigDecimal pixAmount = amount.multiply(BigDecimal.valueOf(0.1));
-        return amount.subtract(pixAmount);
+        BigDecimal total = amount.subtract(pixAmount);
+
+        log.info("PixPayment processing amount {}", total);
     }
 }

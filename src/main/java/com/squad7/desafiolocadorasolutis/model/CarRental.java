@@ -29,6 +29,7 @@ public class CarRental {
     @Column(name = "rental_status")
     private CarRentalStatus rentalStatus;
 
+    @Column(nullable = false, precision = 12, scale = 2)
     private BigDecimal price;
 
     @OneToOne(cascade = CascadeType.PERSIST)
@@ -69,6 +70,10 @@ public class CarRental {
     }
 
     protected CarRental() {
+    }
+
+    public void makePayment(){
+        payment.setPaymentDate(LocalDateTime.now());
     }
 
     public void calculateTotalPrice() {

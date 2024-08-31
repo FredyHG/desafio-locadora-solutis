@@ -3,15 +3,16 @@ package com.squad7.desafiolocadorasolutis.controller.impl;
 
 import com.squad7.desafiolocadorasolutis.controller.CarRentalController;
 import com.squad7.desafiolocadorasolutis.controller.request.CarRentalPostRequest;
-import com.squad7.desafiolocadorasolutis.controller.response.CarRentalResponse;
 import com.squad7.desafiolocadorasolutis.controller.response.ResponseMessage;
-import com.squad7.desafiolocadorasolutis.enums.CarRentalStatus;
 import com.squad7.desafiolocadorasolutis.service.impl.CarRentalServiceImpl;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.UUID;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -43,6 +44,52 @@ public class CarRentalControllerImpl implements CarRentalController {
                                                                       @RequestParam(name = "status") List<CarRentalStatus> statusList) {
         List<CarRentalResponse> response = carRentalService.getAllCarsFiltered(cpf, statusList);
         return ResponseEntity.ok(response);
+    }
+
+    @PostMapping("/confirm")
+    public ResponseEntity<ResponseMessage> confirmRent(@RequestParam(name = "rentId") String rentId) {
+
+        carRentalService.confirmRent(UUID.fromString(rentId));
+
+        return ResponseEntity.status(HttpStatus.OK).body(ResponseMessage
+                        .builder()
+                        .code(HttpStatus.OK.value())
+                        .message("Confirm Rental successfully")
+                        .build());
+    }
+
+    @PostMapping("/start")
+    public ResponseEntity<ResponseMessage> startRent(@RequestParam(name = "rentId") String rentId) {
+
+        carRentalService.startRent(UUID.fromString(rentId));
+
+        return ResponseEntity.status(HttpStatus.OK).body(ResponseMessage
+                .builder()
+                .message("Start rent successfully")
+                .code(HttpStatus.OK.value())
+                .build());
+    }
+
+    @PostMapping("/finish")
+    public ResponseEntity<ResponseMessage> finishRent(@RequestParam(name = "rentId") String rentId) {
+        carRentalService.finishRent(UUID.fromString(rentId));
+
+        return ResponseEntity.status(HttpStatus.OK).body(ResponseMessage
+                .builder()
+                .message("Rent finished successfully")
+                .code(HttpStatus.OK.value())
+                .build());
+    }
+
+    @PostMapping("/cancel")
+    public ResponseEntity<ResponseMessage> cancelRent(@RequestParam(name = "rentId") String rentId) {
+        carRentalService.cancelRent(UUID.fromString(rentId));
+
+        return ResponseEntity.status(HttpStatus.OK).body(ResponseMessage
+                .builder()
+                .message("Rent canceled successfully")
+                .code(HttpStatus.OK.value())
+                .build());
     }
 }
 

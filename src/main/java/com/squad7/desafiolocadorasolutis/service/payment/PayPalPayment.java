@@ -9,8 +9,10 @@ import java.math.BigDecimal;
 public class PayPalPayment implements PaymentMethod {
 
     @Override
-    public BigDecimal processPayment(BigDecimal amount) {
+    public void processPayment(BigDecimal amount) {
         BigDecimal paypalAmount = amount.multiply(BigDecimal.valueOf(0.05));
-        return amount.add(paypalAmount);
+        BigDecimal total = amount.add(paypalAmount);
+
+        log.info("Paypal processing amount {}", total);
     }
 }

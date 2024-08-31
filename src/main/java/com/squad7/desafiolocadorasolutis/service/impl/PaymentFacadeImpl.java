@@ -25,13 +25,13 @@ public class PaymentFacadeImpl implements PaymentFacade {
     }
 
     @Override
-    public BigDecimal makePayment(String paymentMethod, BigDecimal amount) {
+    public void makePayment(String paymentMethod, BigDecimal amount) {
         PaymentMethod method = paymentMethods.get(paymentMethod.toLowerCase());
 
         if (method == null) {
             throw new InvalidPaymentMethodException("Invalid payment method: " + paymentMethod);
         }
 
-        return method.processPayment(amount);
+        method.processPayment(amount);
     }
 }

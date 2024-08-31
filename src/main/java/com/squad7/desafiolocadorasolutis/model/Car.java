@@ -24,7 +24,7 @@ public class Car {
     @Column(unique = true, nullable = false)
     private String chassis;
 
-    @Column(nullable = false)
+    @Column(nullable = false, precision = 12, scale = 2)
     private BigDecimal pricePerDay;
 
     @Column(nullable = false)
