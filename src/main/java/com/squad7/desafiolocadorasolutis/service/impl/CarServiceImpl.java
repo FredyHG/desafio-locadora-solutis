@@ -15,8 +15,6 @@ import com.squad7.desafiolocadorasolutis.service.CarModelService;
 import com.squad7.desafiolocadorasolutis.service.CarService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -44,12 +42,17 @@ public class CarServiceImpl implements CarService {
         carToBeSaved.setCarModel(carModel);
 
         carRepository.save(carToBeSaved);
-        log.info(":: registerCar() - Response {} ::", carToBeSaved);
+        log.info(":: registerCar() - Car successfully registered with id: {}  ::", carToBeSaved);
     }
 
     @Override
     public List<Car> getAllCarsFiltered(Category category, List<String> idsAccessories) {
         return carRepository.getAllCarsFiltered(category, idsAccessories);
+    }
+
+    public Car ensureCarExistsById(UUID carId) {
+        return carRepository.findById(carId)
+                .orElseThrow(() -> new CarNotFoundException("No car found by chassis: " + carId));
     }
 
     private void ensureCarNotRegisteredByChassis(String chassis) {
@@ -60,12 +63,12 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public CarResponse getCarByUuid(UUID carId) {
-        log.info(":: getCarByUuid() - Request {} ::", carId);
+        log.info(":: getCarByUuid() - Request received for car id: {} ::", carId);
 
         Car car = carRepository.findById(carId).orElseThrow(
                 () -> new CarNotFoundException("No cars found by id: " + carId));
 
-        log.info(":: getCarByUuid() - Response {} ::", car);
+        log.info(":: getCarByUuid() - Car found: {} ::", car);
         return CarMapper.INSTANCE.modelToResponse(car);
     }
 }

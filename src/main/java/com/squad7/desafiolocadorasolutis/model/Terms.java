@@ -30,7 +30,7 @@ public class Terms {
     }
 
     public Terms acceptTerms() {
-        this.termsStatus = TermsStatus.ACCEPT;
+        this.termsStatus = TermsStatus.ACCEPTED;
         this.acceptAt = LocalDateTime.now();
 
         return this;
