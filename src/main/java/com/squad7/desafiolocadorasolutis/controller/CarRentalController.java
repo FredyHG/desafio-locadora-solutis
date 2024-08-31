@@ -1,11 +1,15 @@
 package com.squad7.desafiolocadorasolutis.controller;
 
 import com.squad7.desafiolocadorasolutis.controller.request.CarRentalPostRequest;
+import com.squad7.desafiolocadorasolutis.controller.response.CarRentalResponse;
 import com.squad7.desafiolocadorasolutis.controller.response.ResponseMessage;
+import com.squad7.desafiolocadorasolutis.enums.CarRentalStatus;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.http.ResponseEntity;
+
+import java.util.List;
 
 
 public interface CarRentalController {
@@ -17,4 +21,5 @@ public interface CarRentalController {
     })
     ResponseEntity<ResponseMessage> rentCar(CarRentalPostRequest rentalRequest);
 
+    ResponseEntity<List<CarRentalResponse>> getAllCarsFiltered(String cpf, List<CarRentalStatus> statusList);
 }
