@@ -1,6 +1,8 @@
 package com.squad7.desafiolocadorasolutis.model;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -8,6 +10,8 @@ import java.util.UUID;
 
 @Table(name = "tb_payment")
 @Entity
+@Getter
+@Setter
 public class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

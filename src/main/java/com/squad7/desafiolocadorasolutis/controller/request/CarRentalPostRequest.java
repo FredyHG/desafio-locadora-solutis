@@ -1,11 +1,11 @@
 package com.squad7.desafiolocadorasolutis.controller.request;
 
-import com.squad7.desafiolocadorasolutis.model.InsurancePolicy;
+import com.squad7.desafiolocadorasolutis.dto.InsurancePolicyDto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Getter
@@ -18,11 +18,15 @@ public class CarRentalPostRequest {
     private UUID carId;
 
     @NotNull(message = "Rent date cannot be null.")
-    private LocalDateTime rentDate;
+    private LocalDate rentDate;
 
     @NotNull(message = "Return date cannot be null.")
-    private LocalDateTime returnDate;
+    private LocalDate returnDate;
 
-    private InsurancePolicy insurancePolicy;
+    @NotNull(message = "Insurance policy cannot be null")
+    private InsurancePolicyDto insurancePolicy;
+
+    @NotBlank(message = "Payment type cannot be null")
+    private String paymentType;
 }
 

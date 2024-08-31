@@ -8,7 +8,8 @@ import java.math.BigDecimal;
 @Slf4j
 public class CreditCardPayment implements PaymentMethod {
     @Override
-    public void processPayment(BigDecimal amount) {
-        log.info("Payment with credit card processed successfully");
+    public BigDecimal processPayment(BigDecimal amount) {
+        BigDecimal amountCreditCard = amount.multiply(BigDecimal.valueOf(0.1));
+        return amount.add(amountCreditCard);
     }
 }

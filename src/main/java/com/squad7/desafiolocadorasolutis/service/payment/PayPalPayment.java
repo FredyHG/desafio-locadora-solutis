@@ -7,8 +7,10 @@ import java.math.BigDecimal;
 
 @Slf4j
 public class PayPalPayment implements PaymentMethod {
+
     @Override
-    public void processPayment(BigDecimal amount) {
-        log.info("Payment with paypal processed successfully");
+    public BigDecimal processPayment(BigDecimal amount) {
+        BigDecimal paypalAmount = amount.multiply(BigDecimal.valueOf(0.05));
+        return amount.add(paypalAmount);
     }
 }

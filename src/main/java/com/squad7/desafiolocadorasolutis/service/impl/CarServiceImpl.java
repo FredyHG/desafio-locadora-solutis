@@ -52,7 +52,7 @@ public class CarServiceImpl implements CarService {
 
     public Car ensureCarExistsById(UUID carId) {
         return carRepository.findById(carId)
-                .orElseThrow(() -> new CarNotFoundException("No car found by chassis: " + carId));
+                .orElseThrow(() -> new CarNotFoundException("No car found by id: " + carId));
     }
 
     private void ensureCarNotRegisteredByChassis(String chassis) {

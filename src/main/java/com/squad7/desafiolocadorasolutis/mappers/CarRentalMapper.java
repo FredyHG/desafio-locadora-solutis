@@ -16,7 +16,6 @@ public interface CarRentalMapper {
     @Mapping(target = "rentalTerms", ignore = true)
     @Mapping(source = "carId", target = "car.id")
     @Mapping(target = "price", ignore = true)
+    @Mapping(source = "paymentType", target = "payment.paymentMethod")
     CarRental requestToModel(CarRentalPostRequest carRentalPostRequest);
-
-
 }
