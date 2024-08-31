@@ -63,59 +63,10 @@ Este projeto é um sistema para gerenciar o aluguel de automóveis. Ele permite 
 
 ## Uso
 
-### Exemplo: Cadastro de Cliente
+### Todos os endpoint podem ser acessados no link abaixo após a aplicação ser rodada
 
 ```bash
-POST /"api/v1/driver"
-```
-
-Corpo da requisição:
-```json
-{
-  "name": "João Silva",
-  "birthDate": "1980-05-20",
-  "cpf": "123.456.789-10",
-  "cnh": "XYZ123456789",
-  "email": "joao.silva@example.com"
-}
-```
-
-### Exemplo: Escolha de Veículo para Aluguel
-
-```bash
-POST /api/v1/location/car
-```
-
-Corpo da requisição:
-```json
-{
-  "chassis": "XYZ1234567890",
-  "model": "Modelo X",
-  "category": "SUV",
-  "pricePerDay": 100.00
-}
-```
-
-### Exemplo: Efetivação do Aluguel
-
-```bash
-POST /api/v1/location/rental
-```
-
-Corpo da requisição:
-```json
-{
-  "carId": "UUID-do-carro",
-  "driverId": "UUID-do-motorista",
-  "startDate": "2024-09-01",
-  "endDate": "2024-09-10",
-  "paymentMethod": "CREDIT_CARD",
-  "cardDetails": {
-    "cardNumber": "4111111111111111",
-    "expiryDate": "12/26",
-    "cvv": "123"
-  }
-}
+http://localhost:8080/swagger-ui/index.html
 ```
 
 ## Contribuidores
