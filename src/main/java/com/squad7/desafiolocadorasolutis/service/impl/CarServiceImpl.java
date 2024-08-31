@@ -4,6 +4,7 @@ import com.squad7.desafiolocadorasolutis.controller.request.CarPostRequest;
 import com.squad7.desafiolocadorasolutis.controller.response.CarResponse;
 import com.squad7.desafiolocadorasolutis.enums.Category;
 import com.squad7.desafiolocadorasolutis.exception.CarAlreadyRegisteredException;
+import com.squad7.desafiolocadorasolutis.exception.CarNotAvailableException;
 import com.squad7.desafiolocadorasolutis.exception.CarNotFoundException;
 import com.squad7.desafiolocadorasolutis.mappers.CarMapper;
 import com.squad7.desafiolocadorasolutis.model.Accessory;
@@ -17,7 +18,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Slf4j
@@ -53,6 +56,12 @@ public class CarServiceImpl implements CarService {
     public Car ensureCarExistsById(UUID carId) {
         return carRepository.findById(carId)
                 .orElseThrow(() -> new CarNotFoundException("No car found by id: " + carId));
+    }
+
+    public void ensureCarAvailableByPeriod(UUID id, LocalDate startRental, LocalDate endRental){
+        carRepository.findByCarUuidAndRentalPeriod(id, startRental, endRental).ifPresent(car -> {
+            throw new CarNotAvailableException("Car not available from " + startRental + " to " + endRental);
+        });
     }
 
     private void ensureCarNotRegisteredByChassis(String chassis) {
