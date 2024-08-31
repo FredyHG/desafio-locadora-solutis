@@ -35,8 +35,8 @@ public class DataInitializer implements CommandLineRunner {
             List<Accessory> accessories = createAndSaveAccessories();
             List<Car> cars = createAndSaveCars(carModels, accessories);
             List<Driver> drivers = createAndSaveDrivers();
-            createAndSaveEmployees();
-            createAndSaveCarRentals(cars, drivers);
+            List<Employee> employees = createAndSaveEmployees();
+            createAndSaveCarRentals(cars, drivers, employees);
         }
     }
 
@@ -83,8 +83,8 @@ public class DataInitializer implements CommandLineRunner {
         return List.of(d1, d2, d3, d4, d5);
     }
 
-    private void createAndSaveEmployees() {
-        employeeRepository.saveAll(List.of(
+    private List<Employee> createAndSaveEmployees() {
+        return employeeRepository.saveAll(List.of(
                 new Employee("John Doe", LocalDate.of(1985, 5, 20), "123.456.789-00", "john.doe@example.com", "REG123456"),
                 new Employee("Jane Smith", LocalDate.of(1990, 8, 15), "987.654.321-00", "jane.smith@example.com", "REG654321"),
                 new Employee("Robert Johnson", LocalDate.of(1978, 3, 10), "192.837.465-00", "robert.johnson@example.com", "REG789012"),
@@ -93,13 +93,13 @@ public class DataInitializer implements CommandLineRunner {
         ));
     }
 
-    private void createAndSaveCarRentals(List<Car> cars, List<Driver> drivers) {
+    private void createAndSaveCarRentals(List<Car> cars, List<Driver> drivers, List<Employee> employees) {
         carRentalRepository.saveAll(List.of(
 //                new CarRental(cars.get(0), new InsurancePolicy(true, true, BigDecimal.valueOf(2.0), true), drivers.get(0), BigDecimal.valueOf(2.0), LocalDateTime.now(), LocalDateTime.now()),
-                new CarRental(cars.get(1), new InsurancePolicy(true, true, BigDecimal.valueOf(2.0), true), drivers.get(1), BigDecimal.valueOf(2.0), LocalDateTime.now(), LocalDateTime.now()),
-                new CarRental(cars.get(2), new InsurancePolicy(true, true, BigDecimal.valueOf(2.0), true), drivers.get(2), BigDecimal.valueOf(2.0), LocalDateTime.now(), LocalDateTime.now()),
-                new CarRental(cars.get(3), new InsurancePolicy(true, true, BigDecimal.valueOf(2.0), true), drivers.get(3), BigDecimal.valueOf(2.0), LocalDateTime.now(), LocalDateTime.now()),
-                new CarRental(cars.get(4), new InsurancePolicy(true, true, BigDecimal.valueOf(2.0), true), drivers.get(4), BigDecimal.valueOf(2.0), LocalDateTime.now(), LocalDateTime.now())
+                new CarRental(cars.get(1), new InsurancePolicy(true, true, BigDecimal.valueOf(2.0), true), drivers.get(1), BigDecimal.valueOf(2.0), LocalDateTime.now(), LocalDateTime.now(), employees.get(1)),
+                new CarRental(cars.get(2), new InsurancePolicy(true, true, BigDecimal.valueOf(2.0), true), drivers.get(2), BigDecimal.valueOf(2.0), LocalDateTime.now(), LocalDateTime.now(), employees.get(2)),
+                new CarRental(cars.get(3), new InsurancePolicy(true, true, BigDecimal.valueOf(2.0), true), drivers.get(3), BigDecimal.valueOf(2.0), LocalDateTime.now(), LocalDateTime.now(), employees.get(3)),
+                new CarRental(cars.get(4), new InsurancePolicy(true, true, BigDecimal.valueOf(2.0), true), drivers.get(4), BigDecimal.valueOf(2.0), LocalDateTime.now(), LocalDateTime.now(), employees.get(4))
         ));
 
     }

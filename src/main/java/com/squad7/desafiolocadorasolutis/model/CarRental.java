@@ -33,6 +33,10 @@ public class CarRental {
     @JoinColumn(name = "driver_id")
     private Driver driver;
 
+    @ManyToOne
+    @JoinColumn(name = "employee_id")
+    private Employee employee;
+
     @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "rental_terms_id")
     private Terms rentalTerms;
@@ -41,14 +45,20 @@ public class CarRental {
     @JoinColumn(name = "car_id")
     private Car car;
 
-    public CarRental(Car car, InsurancePolicy insurancePolicy, Driver driver, BigDecimal price, LocalDateTime returnDate, LocalDateTime rentDate) {
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "payment_id")
+    private Payment payment;
+
+    public CarRental(Car car, InsurancePolicy insurancePolicy, Driver driver, BigDecimal price, LocalDateTime returnDate, LocalDateTime rentDate, Employee employee) {
         this.car = car;
         this.insurancePolicy = insurancePolicy;
         this.price = price;
         this.returnDate = returnDate;
         this.rentDate = rentDate;
         this.driver = driver;
+        this.employee = employee;
         this.rentalTerms = new Terms(driver);
+        this.payment = new Payment(LocalDateTime.now(), driver, null);
     }
 
     protected CarRental() {
