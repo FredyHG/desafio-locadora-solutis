@@ -118,9 +118,7 @@ Corpo da requisição:
 }
 ```
 
-## Contribuição
-
-Seja bem-vindo a contribuir com este projeto! Para contribuir:
+## Contribuidores
 
 - Fredy Gomes
 - Syllas Braga
