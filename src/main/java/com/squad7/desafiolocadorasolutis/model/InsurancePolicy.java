@@ -23,7 +23,7 @@ public class InsurancePolicy {
     private Boolean naturalCausesCoverage;
     @Column(name = "theft_coverage")
     private Boolean theftCoverage;
-    @Column(name = "total_value")
+    @Column(name = "total_value", precision = 12, scale = 2)
     private BigDecimal totalValue;
 
     public InsurancePolicy(Boolean naturalCausesCoverage, Boolean thirdPartyCoverage, Boolean theftCoverage) {

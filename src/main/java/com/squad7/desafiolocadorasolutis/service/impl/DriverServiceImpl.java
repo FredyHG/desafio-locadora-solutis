@@ -42,7 +42,7 @@ public class DriverServiceImpl implements DriverService{
     @Override
     public void sendCodeToEmailValidation(DriverSendCodeEmailValidationRequest request) {
         log.info(":: sendCodeToEmailValidation() - Sending validation code to email: {} ::", request.getEmail());
-        Driver driver = findByEmail(request.getEmail());
+        Driver driver = ensureDriverExistsByEmail(request.getEmail());
         ensureDriverEmailIsNotAlreadyConfirmed(driver);
         log.info(":: sendCodeToEmailValidation() - Validation code sent successfully to email: {} ::", request.getEmail());
     }
@@ -50,7 +50,7 @@ public class DriverServiceImpl implements DriverService{
     @Override
     public void validateCodeEmail(DriverCodeEmailValidationRequest request) {
         log.info(":: validateCodeEmail() - Validating code for email: {} ::", request.getEmail());
-        Driver driver = findByEmail(request.getEmail());
+        Driver driver = ensureDriverExistsByEmail(request.getEmail());
         ensureDriverEmailIsNotAlreadyConfirmed(driver);
 
         if (!request.getCode().equals(EMAIL_VALIDATION_CODE)){
@@ -63,6 +63,24 @@ public class DriverServiceImpl implements DriverService{
         log.info(":: validateCodeEmail() - Code validated successfully for email: {} ::", request.getEmail());
     }
 
+    public void ensureDriverConfirmEmailTermsByEmail(String email) {
+        log.info("Checking if driver has confirmed email");
+        Driver driver = ensureDriverExistsByEmail(email);
+
+        if(driver.getAccountEmailStatusEnum() != AccountEmailStatusEnum.CONFIRMED) {
+            throw new RuntimeException("Driver not has confirmed email");
+        }
+    }
+
+    public void ensureDriverAcceptAccountTermsByEmail(String email) {
+        log.info("Checking if driver has accepted account terms");
+        Driver driver = ensureDriverExistsByEmail(email);
+
+        if(driver.getAccountTerms().getAcceptAt() == null) {
+            throw new RuntimeException("Driver not accept terms");
+        }
+    }
+
     @Override
     public Driver ensureDriverExistsByCpf(String cpf){
         log.info(":: ensureDriverExistsByCpf() - Checking if driver exists for the cpf: {} ::", cpf);
@@ -70,15 +88,19 @@ public class DriverServiceImpl implements DriverService{
                 .orElseThrow(() -> new DriverNotFoundException("No Driver found by cpf: "+ cpf));
     }
 
+    public Driver ensureDriverExistsByEmail(String email){
+        log.info(":: findByEmail() - Checking if driver exists for the email: {} ::", email);
+        return findByEmail(email)
+                .orElseThrow(() -> new DriverNotFoundException("No Driver found by email: "+email));
+    }
+
     @Override
     public Optional<Driver> findByCpf(String cpf){
         return driverRepository.findByCpf(cpf);
     }
 
-    private Driver findByEmail(String email){
-        log.info(":: findByEmail() - Checking if driver exists for the email: {} ::", email);
-        return driverRepository.findByEmail(email)
-                .orElseThrow(() -> new DriverNotFoundException("No Driver found by email: "+email));
+    private Optional<Driver> findByEmail(String email){
+        return driverRepository.findByEmail(email);
     }
 
     private void ensureDriverNotRegisteredByEmail(String email) {
