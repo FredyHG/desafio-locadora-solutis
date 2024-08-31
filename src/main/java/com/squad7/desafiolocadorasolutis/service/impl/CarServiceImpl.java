@@ -34,7 +34,7 @@ public class CarServiceImpl implements CarService {
         log.info(":: registerCar() - Request {} ::", car);
         ensureCarNotRegisteredByChassis(car.getChassis());
 
-        Accessory accessory = accessoryService.findById(UUID.fromString(car.getAccessoriesIds().getFirst().getId()));
+        Accessory accessory = accessoryService.findById(UUID.fromString(car.getAccessoriesIds().get(0).getId()));
         CarModel carModel = carModelService.findById(UUID.fromString(car.getCarModelId()));
 
         Car carToBeSaved = CarMapper.INSTANCE.requestToModel(car);
@@ -42,7 +42,7 @@ public class CarServiceImpl implements CarService {
         carToBeSaved.setCarModel(carModel);
 
         carRepository.save(carToBeSaved);
-        log.info(":: registerCar() - Car successfully registered with id: {}  ::", carToBeSaved);
+        log.info(":: registerCar() - Response {} ::", carToBeSaved);
     }
 
     @Override
@@ -63,12 +63,12 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public CarResponse getCarByUuid(UUID carId) {
-        log.info(":: getCarByUuid() - Request received for car id: {} ::", carId);
+        log.info(":: getCarByUuid() - Request {} ::", carId);
 
         Car car = carRepository.findById(carId).orElseThrow(
                 () -> new CarNotFoundException("No cars found by id: " + carId));
 
-        log.info(":: getCarByUuid() - Car found: {} ::", car);
+        log.info(":: getCarByUuid() - Response {} ::", car);
         return CarMapper.INSTANCE.modelToResponse(car);
     }
 }
