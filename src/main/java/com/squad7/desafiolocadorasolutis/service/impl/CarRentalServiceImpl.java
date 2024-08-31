@@ -33,11 +33,11 @@ public class CarRentalServiceImpl implements CarRentalService {
         savedCarRental.setDriver(driver);
         savedCarRental.setCar(car);
         savedCarRental.getRentalTerms().setAcceptBy(driver);
+        savedCarRental.calculateTotalPrice();
         carRentalRepository.save(savedCarRental);
 
         log.info("Car rental process finished for driver with CPF: {}", carRental.getDriverCpf());
     }
-
 }
 
 

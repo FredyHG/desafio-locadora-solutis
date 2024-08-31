@@ -96,10 +96,10 @@ public class DataInitializer implements CommandLineRunner {
     private void createAndSaveCarRentals(List<Car> cars, List<Driver> drivers, List<Employee> employees) {
         carRentalRepository.saveAll(List.of(
 //                new CarRental(cars.get(0), new InsurancePolicy(true, true, BigDecimal.valueOf(2.0), true), drivers.get(0), BigDecimal.valueOf(2.0), LocalDateTime.now(), LocalDateTime.now()),
-                new CarRental(cars.get(1), new InsurancePolicy(true, true, BigDecimal.valueOf(2.0), true), drivers.get(1), BigDecimal.valueOf(2.0), LocalDateTime.now(), LocalDateTime.now(), employees.get(1)),
-                new CarRental(cars.get(2), new InsurancePolicy(true, true, BigDecimal.valueOf(2.0), true), drivers.get(2), BigDecimal.valueOf(2.0), LocalDateTime.now(), LocalDateTime.now(), employees.get(2)),
-                new CarRental(cars.get(3), new InsurancePolicy(true, true, BigDecimal.valueOf(2.0), true), drivers.get(3), BigDecimal.valueOf(2.0), LocalDateTime.now(), LocalDateTime.now(), employees.get(3)),
-                new CarRental(cars.get(4), new InsurancePolicy(true, true, BigDecimal.valueOf(2.0), true), drivers.get(4), BigDecimal.valueOf(2.0), LocalDateTime.now(), LocalDateTime.now(), employees.get(4))
+                new CarRental(cars.get(1), new InsurancePolicy(true, true, true), drivers.get(1), BigDecimal.valueOf(2.0), LocalDate.now(), LocalDate.now(), employees.get(1)),
+                new CarRental(cars.get(2), new InsurancePolicy(true, true, true), drivers.get(2), BigDecimal.valueOf(2.0), LocalDate.now(), LocalDate.now(), employees.get(2)),
+                new CarRental(cars.get(3), new InsurancePolicy(true, true, true), drivers.get(3), BigDecimal.valueOf(2.0), LocalDate.now(), LocalDate.now(), employees.get(3)),
+                new CarRental(cars.get(4), new InsurancePolicy(true, true, true), drivers.get(4), BigDecimal.valueOf(2.0), LocalDate.now(), LocalDate.now(), employees.get(4))
         ));
 
     }

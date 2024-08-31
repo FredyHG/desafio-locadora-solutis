@@ -1,11 +1,14 @@
 package com.squad7.desafiolocadorasolutis.model;
 
+import com.squad7.desafiolocadorasolutis.exception.DriverMinorException;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.Period;
 import java.util.UUID;
 
 @Getter
@@ -18,10 +21,10 @@ public class CarRental {
     private UUID id;
 
     @Column(name = "rent_date")
-    private LocalDateTime rentDate;
+    private LocalDate rentDate;
 
     @Column(name = "return_date")
-    private LocalDateTime returnDate;
+    private LocalDate returnDate;
 
     private BigDecimal price;
 
@@ -49,7 +52,7 @@ public class CarRental {
     @JoinColumn(name = "payment_id")
     private Payment payment;
 
-    public CarRental(Car car, InsurancePolicy insurancePolicy, Driver driver, BigDecimal price, LocalDateTime returnDate, LocalDateTime rentDate, Employee employee) {
+    public CarRental(Car car, InsurancePolicy insurancePolicy, Driver driver, BigDecimal price, LocalDate returnDate, LocalDate rentDate, Employee employee) {
         this.car = car;
         this.insurancePolicy = insurancePolicy;
         this.price = price;
@@ -62,5 +65,15 @@ public class CarRental {
     }
 
     protected CarRental() {
+    }
+
+    public void calculateTotalPrice() {
+        long period = Period.between(this.rentDate, this.returnDate).getDays();
+
+        BigDecimal periodValue = this.car.getPricePerDay().multiply(BigDecimal.valueOf(period));
+
+        this.insurancePolicy.calculatePolicyValue(periodValue);
+
+        this.price = this.insurancePolicy.getTotalValue().add(periodValue);
     }
 }
