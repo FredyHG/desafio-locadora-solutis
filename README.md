@@ -122,9 +122,9 @@ Corpo da requisição:
 
 Seja bem-vindo a contribuir com este projeto! Para contribuir:
 
-1. Fredy Gomes
-2. Syllas Braga
-3. Pietra Costa
-4. Luiz Casais
-5. Maria Eduarda Ramalho
-6. Renato Gonçalves
+- Fredy Gomes
+- Syllas Braga
+- Pietra Costa
+- Luiz Casais
+- Maria Eduarda Ramalho
+- Renato Gonçalves
