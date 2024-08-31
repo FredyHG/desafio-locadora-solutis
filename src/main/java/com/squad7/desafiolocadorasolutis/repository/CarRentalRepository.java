@@ -9,5 +9,5 @@ import java.util.List;
 import java.util.UUID;
 
 public interface CarRentalRepository extends JpaRepository<CarRental, UUID> {
-    List<CarRental> findByDriverAndRentalStatusNotIn(Driver driver, List<CarRentalStatus> carRentalStatuses);
+    List<CarRental> findByDriverAndRentalStatusIn(Driver driver, List<CarRentalStatus> carRentalStatuses);
 }

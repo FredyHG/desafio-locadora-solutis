@@ -3,17 +3,18 @@ package com.squad7.desafiolocadorasolutis.controller.impl;
 
 import com.squad7.desafiolocadorasolutis.controller.CarRentalController;
 import com.squad7.desafiolocadorasolutis.controller.request.CarRentalPostRequest;
+import com.squad7.desafiolocadorasolutis.controller.response.CarRentalResponse;
 import com.squad7.desafiolocadorasolutis.controller.response.ResponseMessage;
+import com.squad7.desafiolocadorasolutis.enums.CarRentalStatus;
 import com.squad7.desafiolocadorasolutis.service.impl.CarRentalServiceImpl;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -34,6 +35,14 @@ public class CarRentalControllerImpl implements CarRentalController {
                 .code(HttpStatus.CREATED.value())
                 .message("Rental created successfully")
                 .build());
+    }
+
+    @GetMapping
+    @Override
+    public ResponseEntity<List<CarRentalResponse>> getAllCarsFiltered(@RequestHeader(name = "cpf") String cpf,
+                                                                      @RequestParam(name = "status") List<CarRentalStatus> statusList) {
+        List<CarRentalResponse> response = carRentalService.getAllCarsFiltered(cpf, statusList);
+        return ResponseEntity.ok(response);
     }
 }
 
