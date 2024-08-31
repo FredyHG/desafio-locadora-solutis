@@ -1,6 +1,7 @@
 package com.squad7.desafiolocadorasolutis.config;
 
 import com.squad7.desafiolocadorasolutis.enums.AccountEmailStatusEnum;
+import com.squad7.desafiolocadorasolutis.enums.CarRentalStatus;
 import com.squad7.desafiolocadorasolutis.enums.Category;
 import com.squad7.desafiolocadorasolutis.enums.Sex;
 import com.squad7.desafiolocadorasolutis.model.*;
@@ -84,7 +85,7 @@ public class DataInitializer implements CommandLineRunner {
         return List.of(d1, d2, d3, d4, d5);
     }
 
-    private void createAndSaveEmployees() {
+    private List<Employee> createAndSaveEmployees() {
         return employeeRepository.saveAll(List.of(
                 new Employee("John Doe", LocalDate.of(1985, 5, 20), "123.456.789-00", Sex.MASCULINE, "john.doe@example.com", "REG123456"),
                 new Employee("Jane Smith", LocalDate.of(1990, 8, 15), "987.654.321-00", Sex.FEMININE, "jane.smith@example.com", "REG654321"),
@@ -97,10 +98,10 @@ public class DataInitializer implements CommandLineRunner {
     private void createAndSaveCarRentals(List<Car> cars, List<Driver> drivers, List<Employee> employees) {
         carRentalRepository.saveAll(List.of(
 //                new CarRental(cars.get(0), new InsurancePolicy(true, true, BigDecimal.valueOf(2.0), true), drivers.get(0), BigDecimal.valueOf(2.0), LocalDateTime.now(), LocalDateTime.now()),
-                new CarRental(cars.get(1), new InsurancePolicy(true, true, BigDecimal.valueOf(2.0), true), drivers.get(1), BigDecimal.valueOf(2.0), LocalDateTime.now(), LocalDateTime.now(), employees.get(1)),
-                new CarRental(cars.get(2), new InsurancePolicy(true, true, BigDecimal.valueOf(2.0), true), drivers.get(2), BigDecimal.valueOf(2.0), LocalDateTime.now(), LocalDateTime.now(), employees.get(2)),
-                new CarRental(cars.get(3), new InsurancePolicy(true, true, BigDecimal.valueOf(2.0), true), drivers.get(3), BigDecimal.valueOf(2.0), LocalDateTime.now(), LocalDateTime.now(), employees.get(3)),
-                new CarRental(cars.get(4), new InsurancePolicy(true, true, BigDecimal.valueOf(2.0), true), drivers.get(4), BigDecimal.valueOf(2.0), LocalDateTime.now(), LocalDateTime.now(), employees.get(4))
+                new CarRental(cars.get(1), new InsurancePolicy(true, true, BigDecimal.valueOf(2.0), true), drivers.get(1), BigDecimal.valueOf(2.0), LocalDateTime.now(), LocalDateTime.now(), employees.get(1), CarRentalStatus.BOOKED),
+                new CarRental(cars.get(2), new InsurancePolicy(true, true, BigDecimal.valueOf(2.0), true), drivers.get(2), BigDecimal.valueOf(2.0), LocalDateTime.now(), LocalDateTime.now(), employees.get(2), CarRentalStatus.IN_PROGRESS),
+                new CarRental(cars.get(3), new InsurancePolicy(true, true, BigDecimal.valueOf(2.0), true), drivers.get(3), BigDecimal.valueOf(2.0), LocalDateTime.now(), LocalDateTime.now(), employees.get(3), CarRentalStatus.CANCELLED),
+                new CarRental(cars.get(4), new InsurancePolicy(true, true, BigDecimal.valueOf(2.0), true), drivers.get(4), BigDecimal.valueOf(2.0), LocalDateTime.now(), LocalDateTime.now(), employees.get(4), CarRentalStatus.BOOKED)
         ));
 
     }
