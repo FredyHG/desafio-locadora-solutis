@@ -52,18 +52,21 @@ public class CarServiceImpl implements CarService {
         return carRepository.getAllCarsFiltered(categoryEnum, idsAccessories);
     }
 
+    @Override
     public Car ensureCarExistsById(UUID carId) {
         return carRepository.findById(carId)
                 .orElseThrow(() -> new CarNotFoundException("No car found by id: " + carId));
     }
 
+    @Override
     public void ensureCarAvailableByPeriod(UUID id, LocalDate startRental, LocalDate endRental){
         carRepository.findByCarUuidAndRentalPeriod(id, startRental, endRental).ifPresent(car -> {
             throw new CarNotAvailableException("Car not available from " + startRental + " to " + endRental);
         });
     }
 
-    private void ensureCarNotRegisteredByChassis(String chassis) {
+    @Override
+    public void ensureCarNotRegisteredByChassis(String chassis) {
         carRepository.findByChassis(chassis).ifPresent(car -> {
             throw new CarAlreadyRegisteredException("Car already registered with chassis: " + chassis);
         });
