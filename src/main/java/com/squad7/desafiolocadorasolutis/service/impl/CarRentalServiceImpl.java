@@ -18,6 +18,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -63,8 +64,8 @@ public class CarRentalServiceImpl implements CarRentalService {
     @Override
     public List<CarRentalResponse> getAllCarsFiltered(String employeeRegister, String cpf, List<CarRentalStatusEnum> statusList){
         List<CarRentalResponse> responseList = new ArrayList<>();
-        Driver driver = driverService.ensureDriverExistsByCpf(cpf);
-        Employee employee = employeeService.ensureEmployeeExistsByRegistration(employeeRegister);
+        Driver driver = cpf != null ?  driverService.ensureDriverExistsByCpf(cpf) : null;
+        Employee employee = employeeRegister != null ? employeeService.ensureEmployeeExistsByRegistration(employeeRegister) : null;
         List<CarRental> modelList = carRentalRepository.findByFilters(employee, driver, statusList);
 
         modelList.forEach( carRental -> {
@@ -152,6 +153,7 @@ public class CarRentalServiceImpl implements CarRentalService {
         savedCarRental.setCar(car);
         savedCarRental.getRentalTerms().setAcceptBy(driver);
         savedCarRental.calculateTotalPrice();
+        savedCarRental.getPayment().setOrderDate(LocalDateTime.now());
     }
 }
 

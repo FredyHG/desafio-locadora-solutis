@@ -26,7 +26,7 @@ public class CarRentalControllerImpl implements CarRentalController {
 
     private final CarRentalService carRentalService;
 
-    @PostMapping("/rent")
+    @PostMapping
     @Override
     public ResponseEntity<ResponseMessage> rentCar(@RequestBody @Valid CarRentalPostRequest carRentalRequest) {
         log.info("Receive request to rent car with ID: {} for driver with CPF: {}", carRentalRequest.getCarId(), carRentalRequest.getDriverCpf());
@@ -42,9 +42,9 @@ public class CarRentalControllerImpl implements CarRentalController {
 
     @GetMapping("/filter")
     @Override
-    public ResponseEntity<List<CarRentalResponse>> getAllCarsFiltered(@RequestParam(name = "employeeRegister") String employeeRegister,
-                                                                      @RequestParam(name = "driverCpf") String driverCpf,
-                                                                      @RequestParam(name = "status") List<CarRentalStatusEnum> statusList) {
+    public ResponseEntity<List<CarRentalResponse>> getAllCarsFiltered(@RequestParam(name = "employeeRegister", required = false) String employeeRegister,
+                                                                      @RequestParam(name = "driverCpf", required = false) String driverCpf,
+                                                                      @RequestParam(name = "status", required = false) List<CarRentalStatusEnum> statusList) {
         List<CarRentalResponse> response = carRentalService.getAllCarsFiltered(employeeRegister, driverCpf, statusList);
         return ResponseEntity.ok(response);
     }
