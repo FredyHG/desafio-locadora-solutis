@@ -3,6 +3,7 @@ package com.squad7.desafiolocadorasolutis.controller;
 import com.squad7.desafiolocadorasolutis.controller.request.CarPostRequest;
 import com.squad7.desafiolocadorasolutis.controller.response.CarResponse;
 import com.squad7.desafiolocadorasolutis.controller.response.ResponseMessage;
+import com.squad7.desafiolocadorasolutis.enums.CarRentalStatusEnum;
 import com.squad7.desafiolocadorasolutis.enums.CategoryEnum;
 import com.squad7.desafiolocadorasolutis.model.Car;
 import io.swagger.v3.oas.annotations.Operation;
@@ -28,5 +29,5 @@ public interface CarController {
             @ApiResponse(responseCode = "404", description = "Car not found")
     })
     ResponseEntity<CarResponse> getCarByUuid(UUID carId);
-    ResponseEntity<List<Car>> getAllCars(CategoryEnum categoryEnum, List<String> accessoryIds);
+    ResponseEntity<List<Car>> getAllCars(CategoryEnum categoryEnum, List<String> accessoryIds, CarRentalStatusEnum carRentalStatus);
 }

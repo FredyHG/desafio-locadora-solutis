@@ -2,6 +2,7 @@ package com.squad7.desafiolocadorasolutis.service.impl;
 
 import com.squad7.desafiolocadorasolutis.controller.request.CarPostRequest;
 import com.squad7.desafiolocadorasolutis.controller.response.CarResponse;
+import com.squad7.desafiolocadorasolutis.enums.CarRentalStatusEnum;
 import com.squad7.desafiolocadorasolutis.enums.CategoryEnum;
 import com.squad7.desafiolocadorasolutis.exception.CarAlreadyRegisteredException;
 import com.squad7.desafiolocadorasolutis.exception.CarNotAvailableException;
@@ -48,8 +49,8 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public List<Car> getAllCarsFiltered(CategoryEnum categoryEnum, List<String> idsAccessories) {
-        return carRepository.getAllCarsFiltered(categoryEnum, idsAccessories);
+    public List<Car> getAllCarsFiltered(CategoryEnum categoryEnum, List<String> idsAccessories, CarRentalStatusEnum carRentalStatus) {
+        return carRepository.getAllCarsFiltered(categoryEnum, idsAccessories, carRentalStatus);
     }
 
     @Override

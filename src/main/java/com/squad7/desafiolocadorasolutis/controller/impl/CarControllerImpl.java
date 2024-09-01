@@ -4,6 +4,7 @@ import com.squad7.desafiolocadorasolutis.controller.CarController;
 import com.squad7.desafiolocadorasolutis.controller.request.CarPostRequest;
 import com.squad7.desafiolocadorasolutis.controller.response.CarResponse;
 import com.squad7.desafiolocadorasolutis.controller.response.ResponseMessage;
+import com.squad7.desafiolocadorasolutis.enums.CarRentalStatusEnum;
 import com.squad7.desafiolocadorasolutis.enums.CategoryEnum;
 import com.squad7.desafiolocadorasolutis.model.Car;
 import com.squad7.desafiolocadorasolutis.service.CarService;
@@ -40,8 +41,9 @@ public class CarControllerImpl implements CarController {
     @GetMapping("/filter")
     @Override
     public ResponseEntity<List<Car>> getAllCars(@RequestParam(required = false) CategoryEnum categoryEnum,
-            @RequestParam(required = false) List<String> accessoryIds) {
-        return ResponseEntity.status(HttpStatus.OK).body(carService.getAllCarsFiltered(categoryEnum, accessoryIds));
+                                                @RequestParam(required = false) List<String> accessoryIds,
+                                                @RequestParam(name = "carRentalStatus", required = false) CarRentalStatusEnum carRentalStatusEnum) {
+        return ResponseEntity.status(HttpStatus.OK).body(carService.getAllCarsFiltered(categoryEnum, accessoryIds, carRentalStatusEnum));
     }
 
     @GetMapping(value = "/{carId}/detail")

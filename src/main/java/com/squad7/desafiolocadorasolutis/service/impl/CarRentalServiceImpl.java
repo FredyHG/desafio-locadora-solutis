@@ -75,7 +75,6 @@ public class CarRentalServiceImpl implements CarRentalService {
         return responseList;
     }
 
-
     @Override
     public void confirmRent(UUID carRentalId) {
         log.info("Starting rent confirmation process for driver with CPF: {}", carRentalId);

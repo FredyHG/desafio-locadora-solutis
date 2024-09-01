@@ -5,8 +5,6 @@ import com.squad7.desafiolocadorasolutis.controller.request.DriverPostRequest;
 import com.squad7.desafiolocadorasolutis.controller.request.DriverSendCodeEmailValidationRequest;
 import com.squad7.desafiolocadorasolutis.model.Driver;
 
-import java.util.Optional;
-
 public interface DriverService{
     void registerDriver(DriverPostRequest driverPostRequest);
     void sendCodeToEmailValidation(DriverSendCodeEmailValidationRequest request);
