@@ -56,7 +56,7 @@ public class CarRental {
     @JoinColumn(name = "payment_id")
     private Payment payment;
 
-    public CarRental(Car car, InsurancePolicy insurancePolicy, Driver driver, BigDecimal price, LocalDate returnDate, LocalDate rentDate, Employee employee, String paymentType, CarRentalStatusEnum rentalStatus) {
+    public CarRental(Car car, InsurancePolicy insurancePolicy, Driver driver, BigDecimal price, LocalDate rentDate,LocalDate returnDate, Employee employee, String paymentType, CarRentalStatusEnum rentalStatus) {
         this.car = car;
         this.insurancePolicy = insurancePolicy;
         this.price = price;
