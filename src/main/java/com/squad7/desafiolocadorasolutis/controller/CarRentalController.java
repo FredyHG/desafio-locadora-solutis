@@ -3,7 +3,7 @@ package com.squad7.desafiolocadorasolutis.controller;
 import com.squad7.desafiolocadorasolutis.controller.request.CarRentalPostRequest;
 import com.squad7.desafiolocadorasolutis.controller.response.CarRentalResponse;
 import com.squad7.desafiolocadorasolutis.controller.response.ResponseMessage;
-import com.squad7.desafiolocadorasolutis.enums.CarRentalStatus;
+import com.squad7.desafiolocadorasolutis.enums.CarRentalStatusEnum;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -21,5 +21,5 @@ public interface CarRentalController {
     })
     ResponseEntity<ResponseMessage> rentCar(CarRentalPostRequest rentalRequest);
 
-    ResponseEntity<List<CarRentalResponse>> getAllCarsFiltered(String cpf, List<CarRentalStatus> statusList);
+    ResponseEntity<List<CarRentalResponse>> getAllCarsFiltered(String cpf, List<CarRentalStatusEnum> statusList);
 }

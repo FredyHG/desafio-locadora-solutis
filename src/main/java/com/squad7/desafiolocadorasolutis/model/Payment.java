@@ -16,11 +16,14 @@ public class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
+    @Column(nullable = false, name = "payment_method")
     private String paymentMethod;
     @ManyToOne
     @JoinColumn(name = "driver_id")
     private Driver driver;
+    @Column(nullable = false, name = "order_date")
     private LocalDateTime orderDate;
+    @Column(name = "payment_date")
     private LocalDateTime paymentDate;
 
     public Payment(LocalDateTime orderDate,

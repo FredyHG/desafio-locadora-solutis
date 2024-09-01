@@ -1,5 +1,5 @@
 package com.squad7.desafiolocadorasolutis.enums;
 
-public enum Sex {
+public enum SexEnum {
     FEMININE, MASCULINE, OTHER
 }

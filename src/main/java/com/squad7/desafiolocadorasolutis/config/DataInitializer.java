@@ -1,9 +1,9 @@
 package com.squad7.desafiolocadorasolutis.config;
 
 import com.squad7.desafiolocadorasolutis.enums.AccountEmailStatusEnum;
-import com.squad7.desafiolocadorasolutis.enums.CarRentalStatus;
-import com.squad7.desafiolocadorasolutis.enums.Category;
-import com.squad7.desafiolocadorasolutis.enums.Sex;
+import com.squad7.desafiolocadorasolutis.enums.CarRentalStatusEnum;
+import com.squad7.desafiolocadorasolutis.enums.CategoryEnum;
+import com.squad7.desafiolocadorasolutis.enums.SexEnum;
 import com.squad7.desafiolocadorasolutis.model.*;
 import com.squad7.desafiolocadorasolutis.repository.*;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +13,6 @@ import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Slf4j
@@ -50,11 +49,11 @@ public class DataInitializer implements CommandLineRunner {
     }
 
     private List<CarModel> createAndSaveCarModels(List<Manufacturer> manufacturers) {
-        CarModel compactHatchX = carModelRepository.save(new CarModel("Compact Hatchback X", Category.COMPACT_HATCH, manufacturers.get(0)));
-        CarModel mediumSedanY = carModelRepository.save(new CarModel("Medium Sedan Y", Category.MEDIUM_SEDAN, manufacturers.get(1)));
-        CarModel sportyZ = carModelRepository.save(new CarModel("Sporty Z", Category.SPORT, manufacturers.get(2)));
-        CarModel minivanV = carModelRepository.save(new CarModel("Minivan V", Category.MINIVAN, manufacturers.get(1)));
-        CarModel compactSedanW = carModelRepository.save(new CarModel("Compact Sedan W", Category.COMPACT_SEDAN, manufacturers.get(0)));
+        CarModel compactHatchX = carModelRepository.save(new CarModel("Compact Hatchback X", CategoryEnum.COMPACT_HATCH, manufacturers.get(0)));
+        CarModel mediumSedanY = carModelRepository.save(new CarModel("Medium Sedan Y", CategoryEnum.MEDIUM_SEDAN, manufacturers.get(1)));
+        CarModel sportyZ = carModelRepository.save(new CarModel("Sporty Z", CategoryEnum.SPORT, manufacturers.get(2)));
+        CarModel minivanV = carModelRepository.save(new CarModel("Minivan V", CategoryEnum.MINIVAN, manufacturers.get(1)));
+        CarModel compactSedanW = carModelRepository.save(new CarModel("Compact Sedan W", CategoryEnum.COMPACT_SEDAN, manufacturers.get(0)));
         return List.of(compactHatchX, mediumSedanY, sportyZ, minivanV, compactSedanW);
     }
 
@@ -77,30 +76,30 @@ public class DataInitializer implements CommandLineRunner {
     }
 
     private List<Driver> createAndSaveDrivers() {
-        Driver d1 = driverRepository.save(new Driver("Alice Williams", LocalDate.of(1987, 6, 18), "321.654.987-00", "alice.williams@example.com", "CNH123456789",Sex.FEMININE, AccountEmailStatusEnum.TO_CONFIRM));
-        Driver d2 = driverRepository.save(new Driver("David Miller", LocalDate.of(1975, 9, 30), "654.321.987-00", "david.miller@example.com", "CNH987654321",Sex.MASCULINE, AccountEmailStatusEnum.TO_CONFIRM));
-        Driver d3 = driverRepository.save(new Driver("Linda Wilson", LocalDate.of(1990, 12, 25), "123.789.456-00", "linda.wilson@example.com", "CNH192837465",Sex.FEMININE, AccountEmailStatusEnum.TO_CONFIRM));
-        Driver d4 = driverRepository.save(new Driver("James Anderson", LocalDate.of(1982, 4, 14), "789.123.456-00", "james.anderson@example.com", "CNH564738291",Sex.MASCULINE, AccountEmailStatusEnum.TO_CONFIRM));
-        Driver d5 = driverRepository.save(new Driver("Patricia Thomas", LocalDate.of(1995, 7, 8), "456.987.123-00", "patricia.thomas@example.com", "CNH102938475",Sex.FEMININE, AccountEmailStatusEnum.TO_CONFIRM));
+        Driver d1 = driverRepository.save(new Driver("Alice Williams", LocalDate.of(1987, 6, 18), "321.654.987-00", "alice.williams@example.com", "CNH123456789", SexEnum.FEMININE, AccountEmailStatusEnum.TO_CONFIRM));
+        Driver d2 = driverRepository.save(new Driver("David Miller", LocalDate.of(1975, 9, 30), "654.321.987-00", "david.miller@example.com", "CNH987654321", SexEnum.MASCULINE, AccountEmailStatusEnum.TO_CONFIRM));
+        Driver d3 = driverRepository.save(new Driver("Linda Wilson", LocalDate.of(1990, 12, 25), "123.789.456-00", "linda.wilson@example.com", "CNH192837465", SexEnum.FEMININE, AccountEmailStatusEnum.TO_CONFIRM));
+        Driver d4 = driverRepository.save(new Driver("James Anderson", LocalDate.of(1982, 4, 14), "789.123.456-00", "james.anderson@example.com", "CNH564738291", SexEnum.MASCULINE, AccountEmailStatusEnum.TO_CONFIRM));
+        Driver d5 = driverRepository.save(new Driver("Patricia Thomas", LocalDate.of(1995, 7, 8), "456.987.123-00", "patricia.thomas@example.com", "CNH102938475", SexEnum.FEMININE, AccountEmailStatusEnum.TO_CONFIRM));
         return List.of(d1, d2, d3, d4, d5);
     }
 
     private List<Employee> createAndSaveEmployees() {
         return employeeRepository.saveAll(List.of(
-                new Employee("John Doe", LocalDate.of(1985, 5, 20), "123.456.789-00", Sex.MASCULINE, "john.doe@example.com", "REG123456"),
-                new Employee("Jane Smith", LocalDate.of(1990, 8, 15), "987.654.321-00", Sex.FEMININE, "jane.smith@example.com", "REG654321"),
-                new Employee("Robert Johnson", LocalDate.of(1978, 3, 10), "192.837.465-00",Sex.MASCULINE, "robert.johnson@example.com", "REG789012"),
-                new Employee("Emily Davis", LocalDate.of(1983, 11, 22), "564.738.291-00",Sex.FEMININE, "emily.davis@example.com", "REG210987"),
-                new Employee("Michael Brown", LocalDate.of(1992, 1, 5), "102.938.475-00", Sex.MASCULINE, "michael.brown@example.com", "REG345678")
+                new Employee("John Doe", LocalDate.of(1985, 5, 20), "123.456.789-00", SexEnum.MASCULINE, "john.doe@example.com", "REG123456"),
+                new Employee("Jane Smith", LocalDate.of(1990, 8, 15), "987.654.321-00", SexEnum.FEMININE, "jane.smith@example.com", "REG654321"),
+                new Employee("Robert Johnson", LocalDate.of(1978, 3, 10), "192.837.465-00", SexEnum.MASCULINE, "robert.johnson@example.com", "REG789012"),
+                new Employee("Emily Davis", LocalDate.of(1983, 11, 22), "564.738.291-00", SexEnum.FEMININE, "emily.davis@example.com", "REG210987"),
+                new Employee("Michael Brown", LocalDate.of(1992, 1, 5), "102.938.475-00", SexEnum.MASCULINE, "michael.brown@example.com", "REG345678")
         ));
     }
 
     private void createAndSaveCarRentals(List<Car> cars, List<Driver> drivers, List<Employee> employees) {
         carRentalRepository.saveAll(List.of(
-                new CarRental(cars.get(1), new InsurancePolicy(true, true, true), drivers.get(1), BigDecimal.valueOf(2.0), LocalDate.now(), LocalDate.now(), employees.get(1), "pix", CarRentalStatus.BOOKED),
-                new CarRental(cars.get(2), new InsurancePolicy(true, true, true), drivers.get(2), BigDecimal.valueOf(2.0), LocalDate.now(), LocalDate.now(), employees.get(2), "pix", CarRentalStatus.IN_PROGRESS),
-                new CarRental(cars.get(3), new InsurancePolicy(true, true, true), drivers.get(3), BigDecimal.valueOf(2.0), LocalDate.now(), LocalDate.now(), employees.get(3), "pix", CarRentalStatus.CANCELLED),
-                new CarRental(cars.get(4), new InsurancePolicy(true, true, true), drivers.get(4), BigDecimal.valueOf(2.0), LocalDate.now(), LocalDate.now(), employees.get(4), "pix", CarRentalStatus.BOOKED)
+                new CarRental(cars.get(1), new InsurancePolicy(true, true, true), drivers.get(1), BigDecimal.valueOf(2.0), LocalDate.now(), LocalDate.now(), employees.get(1), "pix", CarRentalStatusEnum.BOOKED),
+                new CarRental(cars.get(2), new InsurancePolicy(true, true, true), drivers.get(2), BigDecimal.valueOf(2.0), LocalDate.now(), LocalDate.now(), employees.get(2), "pix", CarRentalStatusEnum.IN_PROGRESS),
+                new CarRental(cars.get(3), new InsurancePolicy(true, true, true), drivers.get(3), BigDecimal.valueOf(2.0), LocalDate.now(), LocalDate.now(), employees.get(3), "pix", CarRentalStatusEnum.CANCELLED),
+                new CarRental(cars.get(4), new InsurancePolicy(true, true, true), drivers.get(4), BigDecimal.valueOf(2.0), LocalDate.now(), LocalDate.now(), employees.get(4), "pix", CarRentalStatusEnum.BOOKED)
         ));
     }
 }

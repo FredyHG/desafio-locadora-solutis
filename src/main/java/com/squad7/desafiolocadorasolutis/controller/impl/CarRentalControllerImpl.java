@@ -5,7 +5,7 @@ import com.squad7.desafiolocadorasolutis.controller.CarRentalController;
 import com.squad7.desafiolocadorasolutis.controller.request.CarRentalPostRequest;
 import com.squad7.desafiolocadorasolutis.controller.response.CarRentalResponse;
 import com.squad7.desafiolocadorasolutis.controller.response.ResponseMessage;
-import com.squad7.desafiolocadorasolutis.enums.CarRentalStatus;
+import com.squad7.desafiolocadorasolutis.enums.CarRentalStatusEnum;
 import com.squad7.desafiolocadorasolutis.service.impl.CarRentalServiceImpl;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -15,13 +15,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
-import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @Slf4j
 @RestController
-@RequestMapping("api/v1/rentals")
+@RequestMapping("api/v1/car/rent")
 @RequiredArgsConstructor
 public class CarRentalControllerImpl implements CarRentalController {
 
@@ -42,8 +41,8 @@ public class CarRentalControllerImpl implements CarRentalController {
 
     @GetMapping
     @Override
-    public ResponseEntity<List<CarRentalResponse>> getAllCarsFiltered(@RequestHeader(name = "cpf") String cpf,
-                                                                      @RequestParam(name = "status") List<CarRentalStatus> statusList) {
+    public ResponseEntity<List<CarRentalResponse>> getAllCarsFiltered(@RequestParam(name = "cpf") String cpf,
+                                                                      @RequestParam(name = "status") List<CarRentalStatusEnum> statusList) {
         List<CarRentalResponse> response = carRentalService.getAllCarsFiltered(cpf, statusList);
         return ResponseEntity.ok(response);
     }

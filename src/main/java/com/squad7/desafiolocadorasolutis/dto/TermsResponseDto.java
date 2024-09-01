@@ -1,6 +1,6 @@
 package com.squad7.desafiolocadorasolutis.dto;
 
-import com.squad7.desafiolocadorasolutis.enums.TermsStatus;
+import com.squad7.desafiolocadorasolutis.enums.TermsStatusEnum;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,6 +13,6 @@ import java.util.UUID;
 @Setter
 public class TermsResponseDto {
     private UUID id;
-    private TermsStatus termsStatus;
+    private TermsStatusEnum termsStatusEnum;
     private LocalDateTime acceptAt;
 }

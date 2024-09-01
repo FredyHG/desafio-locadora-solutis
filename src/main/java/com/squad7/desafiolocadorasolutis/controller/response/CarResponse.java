@@ -24,7 +24,7 @@ public class CarResponse {
     private String transmissionType;
     private String fuelType;
     private int yearOfManufacture;
-    private  String driveType;
+    private String driveType;
     private int mileage;
     private String color;
     private String imageURL;

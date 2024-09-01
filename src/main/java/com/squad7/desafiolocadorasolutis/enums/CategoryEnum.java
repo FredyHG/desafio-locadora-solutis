@@ -1,6 +1,6 @@
 package com.squad7.desafiolocadorasolutis.enums;
 
-public enum Category {
+public enum CategoryEnum {
     COMPACT_HATCH,
     MEDIUM_HATCH,
     COMPACT_SEDAN,

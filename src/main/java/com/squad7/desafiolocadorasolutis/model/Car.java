@@ -21,31 +21,31 @@ public class Car {
     @Column(unique = true, nullable = false, name = "license_plate")
     private String licensePlate;
 
-    @Column(unique = true, nullable = false)
+    @Column(unique = true, nullable = false, name = "chassis")
     private String chassis;
 
-    @Column(nullable = false, precision = 12, scale = 2)
+    @Column(nullable = false, precision = 12, scale = 2, name = "price_per_day")
     private BigDecimal pricePerDay;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name = "image_url")
     private String imageURL;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name = "transmission_type")
     private String transmissionType;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name = "fuel_type")
     private String fuelType;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name = "year_of_manufacture")
     private int yearOfManufacture;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name = "drive_type")
     private String driveType;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name = "mileage")
     private int mileage;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name = "color")
     private String color;
 
     @ManyToOne

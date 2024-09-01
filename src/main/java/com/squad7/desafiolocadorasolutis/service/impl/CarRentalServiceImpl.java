@@ -2,14 +2,13 @@ package com.squad7.desafiolocadorasolutis.service.impl;
 
 import com.squad7.desafiolocadorasolutis.controller.request.CarRentalPostRequest;
 import com.squad7.desafiolocadorasolutis.controller.response.CarRentalResponse;
-import com.squad7.desafiolocadorasolutis.enums.CarRentalStatus;
+import com.squad7.desafiolocadorasolutis.enums.CarRentalStatusEnum;
 import com.squad7.desafiolocadorasolutis.mappers.CarRentalMapper;
 import com.squad7.desafiolocadorasolutis.model.Car;
 import com.squad7.desafiolocadorasolutis.model.CarRental;
 import com.squad7.desafiolocadorasolutis.model.Driver;
 import com.squad7.desafiolocadorasolutis.model.Employee;
 import com.squad7.desafiolocadorasolutis.repository.CarRentalRepository;
-import com.squad7.desafiolocadorasolutis.repository.EmployeeRepository;
 import com.squad7.desafiolocadorasolutis.service.CarRentalService;
 import com.squad7.desafiolocadorasolutis.service.EmployeeService;
 import com.squad7.desafiolocadorasolutis.service.facade.PaymentFacade;
@@ -60,7 +59,7 @@ public class CarRentalServiceImpl implements CarRentalService {
     }
 
     @Override
-    public List<CarRentalResponse> getAllCarsFiltered(String cpf, List<CarRentalStatus> statusList){
+    public List<CarRentalResponse> getAllCarsFiltered(String cpf, List<CarRentalStatusEnum> statusList){
         List<CarRentalResponse> responseList = new ArrayList<>();
         Driver driver = driverService.ensureDriverExistsByCpf(cpf);
         List<CarRental> modelList = carRentalRepository.findByDriverAndRentalStatusIn(driver, statusList);
@@ -78,14 +77,14 @@ public class CarRentalServiceImpl implements CarRentalService {
 
         CarRental carRental = ensureCarRentalExistsById(carRentalId);
 
-        if(carRental.getRentalStatus() != CarRentalStatus.BOOKED) {
+        if(carRental.getRentalStatus() != CarRentalStatusEnum.BOOKED) {
             throw new RuntimeException("Cannot confirm car rental: expected status 'BOOKED', but found '" + carRental.getRentalStatus() + "'.");
         }
 
         carRental.makePayment();
 
         paymentFacade.makePayment(carRental.getPayment().getPaymentMethod(), carRental.getPrice());
-        carRental.setRentalStatus(CarRentalStatus.PAYMENT_SUCCESSFULLY);
+        carRental.setRentalStatus(CarRentalStatusEnum.PAYMENT_SUCCESSFULLY);
 
         carRentalRepository.save(carRental);
 
@@ -95,11 +94,11 @@ public class CarRentalServiceImpl implements CarRentalService {
     public void startRent(UUID rentId) {
         CarRental carRental = ensureCarRentalExistsById(rentId);
 
-        if(carRental.getRentalStatus() != CarRentalStatus.PAYMENT_SUCCESSFULLY) {
+        if(carRental.getRentalStatus() != CarRentalStatusEnum.PAYMENT_SUCCESSFULLY) {
             throw new RuntimeException("Cannot start car rental: expected status 'PAYMENT_SUCCESSFULLY', but found '" + carRental.getRentalStatus() + "'.");
         }
 
-        carRental.setRentalStatus(CarRentalStatus.IN_PROGRESS);
+        carRental.setRentalStatus(CarRentalStatusEnum.IN_PROGRESS);
 
         carRentalRepository.save(carRental);
     }
@@ -108,11 +107,11 @@ public class CarRentalServiceImpl implements CarRentalService {
 
         CarRental carRental = ensureCarRentalExistsById(rentId);
 
-        if(carRental.getRentalStatus() != CarRentalStatus.IN_PROGRESS) {
+        if(carRental.getRentalStatus() != CarRentalStatusEnum.IN_PROGRESS) {
             throw new RuntimeException("Cannot finish car rental: expected status 'IN_PROGRESS', but found '" + carRental.getRentalStatus() + "'.");
         }
 
-        carRental.setRentalStatus(CarRentalStatus.FINISHED);
+        carRental.setRentalStatus(CarRentalStatusEnum.FINISHED);
 
         carRentalRepository.save(carRental);
     }
@@ -120,11 +119,11 @@ public class CarRentalServiceImpl implements CarRentalService {
     public void cancelRent(UUID rentId) {
         CarRental carRental = ensureCarRentalExistsById(rentId);
 
-        if(carRental.getRentalStatus() != CarRentalStatus.BOOKED) {
+        if(carRental.getRentalStatus() != CarRentalStatusEnum.BOOKED) {
             throw new RuntimeException("Cannot cancel car rental: expected status 'BOOKED', but found '" + carRental.getRentalStatus() + "'.");
         }
 
-        carRental.setRentalStatus(CarRentalStatus.CANCELLED);
+        carRental.setRentalStatus(CarRentalStatusEnum.CANCELLED);
 
         carRentalRepository.save(carRental);
     }
@@ -138,7 +137,7 @@ public class CarRentalServiceImpl implements CarRentalService {
     }
 
     private void applyCarRentalSettings(CarRental savedCarRental, Driver driver, Employee employee, Car car) {
-        savedCarRental.setRentalStatus(CarRentalStatus.BOOKED);
+        savedCarRental.setRentalStatus(CarRentalStatusEnum.BOOKED);
         savedCarRental.setEmployee(employee);
         savedCarRental.setDriver(driver);
         savedCarRental.getPayment().setDriver(driver);
