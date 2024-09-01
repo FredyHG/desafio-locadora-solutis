@@ -28,5 +28,10 @@ public interface CarController {
             @ApiResponse(responseCode = "404", description = "Car not found")
     })
     ResponseEntity<CarResponse> getCarByUuid(UUID carId);
+
+    @Operation(summary = "Get all cars", description = "Retrieve all cars with optional filters by category and accessory IDs.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Cars retrieved successfully")
+    })
     ResponseEntity<List<Car>> getAllCars(CategoryEnum categoryEnum, List<String> accessoryIds);
 }
