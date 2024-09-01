@@ -88,7 +88,7 @@ public class CarRentalServiceImpl implements CarRentalService {
 
         carRental.makePayment();
 
-        paymentFacade.makePayment(carRental.getPayment().getPaymentMethod(), carRental.getPrice());
+        paymentFacade.makePayment(carRental.getPayment().getPaymentMethod(), carRental.getTotalValue());
         carRental.setRentalStatus(CarRentalStatusEnum.PAYMENT_SUCCESSFULLY);
 
         carRentalRepository.save(carRental);
