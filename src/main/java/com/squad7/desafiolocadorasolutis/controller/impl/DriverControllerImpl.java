@@ -5,6 +5,7 @@ import com.squad7.desafiolocadorasolutis.controller.DriverController;
 import com.squad7.desafiolocadorasolutis.controller.request.DriverCodeEmailValidationRequest;
 import com.squad7.desafiolocadorasolutis.controller.request.DriverPostRequest;
 import com.squad7.desafiolocadorasolutis.controller.request.DriverSendCodeEmailValidationRequest;
+import com.squad7.desafiolocadorasolutis.controller.response.DriverResponse;
 import com.squad7.desafiolocadorasolutis.controller.response.ResponseMessage;
 import com.squad7.desafiolocadorasolutis.service.DriverService;
 import jakarta.validation.Valid;
@@ -12,10 +13,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -57,5 +57,12 @@ public class DriverControllerImpl implements DriverController {
                 .code(HttpStatus.OK.value())
                 .message("Email code validated")
                 .build());
+    }
+
+    @GetMapping
+    @Override
+    public ResponseEntity<List<DriverResponse>> getAllDrivers() {
+        List<DriverResponse> responseList = driverService.getAllDrivers();
+        return ResponseEntity.ok(responseList);
     }
 }
