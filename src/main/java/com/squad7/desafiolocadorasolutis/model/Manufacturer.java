@@ -15,6 +15,7 @@ public class Manufacturer {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
+    @Column(nullable = false, name = "name")
     private String name;
 
     public Manufacturer(String name) {

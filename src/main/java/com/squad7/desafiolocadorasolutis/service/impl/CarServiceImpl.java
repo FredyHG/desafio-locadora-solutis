@@ -2,7 +2,7 @@ package com.squad7.desafiolocadorasolutis.service.impl;
 
 import com.squad7.desafiolocadorasolutis.controller.request.CarPostRequest;
 import com.squad7.desafiolocadorasolutis.controller.response.CarResponse;
-import com.squad7.desafiolocadorasolutis.enums.Category;
+import com.squad7.desafiolocadorasolutis.enums.CategoryEnum;
 import com.squad7.desafiolocadorasolutis.exception.CarAlreadyRegisteredException;
 import com.squad7.desafiolocadorasolutis.exception.CarNotAvailableException;
 import com.squad7.desafiolocadorasolutis.exception.CarNotFoundException;
@@ -20,7 +20,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @Slf4j
@@ -49,8 +48,8 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public List<Car> getAllCarsFiltered(Category category, List<String> idsAccessories) {
-        return carRepository.getAllCarsFiltered(category, idsAccessories);
+    public List<Car> getAllCarsFiltered(CategoryEnum categoryEnum, List<String> idsAccessories) {
+        return carRepository.getAllCarsFiltered(categoryEnum, idsAccessories);
     }
 
     public Car ensureCarExistsById(UUID carId) {

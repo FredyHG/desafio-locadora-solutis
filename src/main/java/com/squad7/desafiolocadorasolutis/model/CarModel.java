@@ -1,6 +1,6 @@
 package com.squad7.desafiolocadorasolutis.model;
 
-import com.squad7.desafiolocadorasolutis.enums.Category;
+import com.squad7.desafiolocadorasolutis.enums.CategoryEnum;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,18 +16,19 @@ public class CarModel {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
+    @Column(nullable = false, name = "description")
     private String description;
 
     @Enumerated(EnumType.ORDINAL)
-    private Category category;
+    private CategoryEnum categoryEnum;
 
     @ManyToOne
     @JoinColumn(name = "manufacturer_id")
     private Manufacturer manufacturer;
 
-    public CarModel(String description, Category category, Manufacturer manufacturer) {
+    public CarModel(String description, CategoryEnum categoryEnum, Manufacturer manufacturer) {
         this.description = description;
-        this.category = category;
+        this.categoryEnum = categoryEnum;
         this.manufacturer = manufacturer;
     }
 

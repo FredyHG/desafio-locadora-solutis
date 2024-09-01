@@ -1,8 +1,7 @@
 package com.squad7.desafiolocadorasolutis.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.squad7.desafiolocadorasolutis.enums.TermsStatus;
+import com.squad7.desafiolocadorasolutis.enums.TermsStatusEnum;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,7 +17,9 @@ public class Terms {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-    private TermsStatus termsStatus;
+    @Column(nullable = false, name = "terms_status_enum")
+    private TermsStatusEnum termsStatusEnum;
+    @Column(name = "accept_at")
     private LocalDateTime acceptAt;
 
     @JsonBackReference
@@ -28,12 +29,12 @@ public class Terms {
 
     public Terms(Driver driver) {
         this.acceptBy = driver;
-        this.termsStatus = TermsStatus.TO_ACCEPT;
+        this.termsStatusEnum = TermsStatusEnum.TO_ACCEPT;
         this.acceptAt = null;
     }
 
     public Terms acceptTerms() {
-        this.termsStatus = TermsStatus.ACCEPTED;
+        this.termsStatusEnum = TermsStatusEnum.ACCEPTED;
         this.acceptAt = LocalDateTime.now();
 
         return this;
