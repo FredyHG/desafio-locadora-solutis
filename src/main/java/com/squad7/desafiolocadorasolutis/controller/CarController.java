@@ -3,11 +3,15 @@ package com.squad7.desafiolocadorasolutis.controller;
 import com.squad7.desafiolocadorasolutis.controller.request.CarPostRequest;
 import com.squad7.desafiolocadorasolutis.controller.response.CarResponse;
 import com.squad7.desafiolocadorasolutis.controller.response.ResponseMessage;
+import com.squad7.desafiolocadorasolutis.enums.CategoryEnum;
+import com.squad7.desafiolocadorasolutis.model.Car;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
 import java.util.UUID;
 
 public interface CarController {
@@ -25,4 +29,5 @@ public interface CarController {
             @ApiResponse(responseCode = "404", description = "Car not found")
     })
     ResponseEntity<CarResponse> getCarByUuid(UUID carId);
+    ResponseEntity<List<Car>> getAllCars(CategoryEnum categoryEnum, List<String> accessoryIds);
 }

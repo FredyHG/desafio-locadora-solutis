@@ -26,11 +26,8 @@ import java.util.UUID;
 public class CarControllerImpl implements CarController {
 
     private final CarService carService;
-    private final PaymentFacade paymentFacade;
 
-    private final CarRentalRepository carRentalRepository;
-
-    @PostMapping
+    @PostMapping("/create")
     @Override
     public ResponseEntity<ResponseMessage> registerCar(@RequestBody @Valid CarPostRequest car) {
         log.info("Receive request to register new car with chassis: {}", car.getChassis());
@@ -42,13 +39,14 @@ public class CarControllerImpl implements CarController {
                 .build());
     }
 
-    @GetMapping
+    @GetMapping("/filter")
+    @Override
     public ResponseEntity<List<Car>> getAllCars(@RequestParam(required = false) CategoryEnum categoryEnum,
             @RequestParam(required = false) List<String> accessoryIds) {
         return ResponseEntity.status(HttpStatus.OK).body(carService.getAllCarsFiltered(categoryEnum, accessoryIds));
     }
 
-    @GetMapping(value = "/{carId}/details")
+    @GetMapping(value = "/{carId}/detail")
     @Override
     public ResponseEntity<CarResponse> getCarByUuid(@PathVariable(name = "carId", required = true) UUID carId) {
         CarResponse response = carService.getCarByUuid(carId);
