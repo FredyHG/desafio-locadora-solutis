@@ -135,11 +135,12 @@ public class CarRentalServiceImpl implements CarRentalService {
         carRentalRepository.save(carRental);
     }
 
+    @Override
     public CarRental ensureCarRentalExistsById(UUID carRentalId) {
         return findById(carRentalId).orElseThrow(() -> new CarRentalNotFoundException("CarRental not found"));
     }
 
-    public Optional<CarRental> findById(UUID carRentalId) {
+    private Optional<CarRental> findById(UUID carRentalId) {
         return carRentalRepository.findById(carRentalId);
     }
 

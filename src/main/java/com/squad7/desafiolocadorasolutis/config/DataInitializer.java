@@ -67,11 +67,11 @@ public class DataInitializer implements CommandLineRunner {
     }
 
     private List<Car> createAndSaveCars(List<CarModel> carModels, List<Accessory> accessories) {
-        Car c1 = carRepository.save(new Car(new BigDecimal("54.89"), "2JR cTUHG8 15 Bm8502", "HRK7697", carModels.get(0), List.of(accessories.get(3), accessories.get(0)),"Manual","Gasoline",2019,"rear-wheel", 49578,"black", "https://midias.vrum.com.br/_midias/jpg/2024/01/11/honda_fit_1_4_flex_modelo_2007_cinza_de_frente_em_movimento_no_asfalto-34157751.jpg"));
-        Car c2 = carRepository.save(new Car(new BigDecimal("62.89"), "4HS S6HNfw X2 Cy3255", "HDW6272", carModels.get(1), List.of(accessories.get(1), accessories.get(2), accessories.get(0)),"Automatic","Diesel",2021,"rear-wheel", 32678,"white", "https://www.kbb.com/wp-content/uploads/2019/12/01-2018-Toyota-Camry-Exterior-KBB.jpg"));
-        Car c3 = carRepository.save(new Car(new BigDecimal("89.99"), "1v8 A8Me9G Xy wg1769", "IZQ1019", carModels.get(2), List.of(accessories.get(4), accessories.get(2), accessories.get(0), accessories.get(3), accessories.get(1)),"Automatic","hybrid",2023,"all-wheel", 23982,"blue", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnUnWTXtJcoFQ91h5cX3WoFlXiSkvAhG5CSg&s"));
-        Car c4 = carRepository.save(new Car(new BigDecimal("49.99"), "1ns C4CmkM zE Ht5333", "IZQ1018", carModels.get(3), List.of(accessories.get(0), accessories.get(3)),"Manual","alcohol",2017,"rear-wheel", 54768,"grey", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpX-vS21F5WAWsJBORGBWvbjx-4olaGXIR9Q&s"));
-        Car c5 = carRepository.save(new Car(new BigDecimal("49.99"), "1v8 A8Me9G Xy wg1762", "NEY4708", carModels.get(4), List.of(accessories.get(0), accessories.get(3), accessories.get(1)), "Manual","electric",2022,"rear-wheel", 33802,"red","https://image1.mobiauto.com.br/images/api/images/v1.0/52595736/transform/fl_progressive,f_webp,q_80"));
+        Car c1 = carRepository.save(new Car(new BigDecimal("94.99"), "2JR cTUHG8 15 Bm8502", "HRK7697", carModels.get(0), List.of(accessories.get(3), accessories.get(0)),"Manual","Gasoline",2019,"rear-wheel", 49578,"black", "https://midias.vrum.com.br/_midias/jpg/2024/01/11/honda_fit_1_4_flex_modelo_2007_cinza_de_frente_em_movimento_no_asfalto-34157751.jpg"));
+        Car c2 = carRepository.save(new Car(new BigDecimal("119.99"), "4HS S6HNfw X2 Cy3255", "HDW6272", carModels.get(1), List.of(accessories.get(1), accessories.get(2), accessories.get(0)),"Automatic","Diesel",2021,"rear-wheel", 32678,"white", "https://www.kbb.com/wp-content/uploads/2019/12/01-2018-Toyota-Camry-Exterior-KBB.jpg"));
+        Car c3 = carRepository.save(new Car(new BigDecimal("199.99"), "1v8 A8Me9G Xy wg1769", "IZQ1019", carModels.get(2), List.of(accessories.get(4), accessories.get(2), accessories.get(0), accessories.get(3), accessories.get(1)),"Automatic","hybrid",2023,"all-wheel", 23982,"blue", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnUnWTXtJcoFQ91h5cX3WoFlXiSkvAhG5CSg&s"));
+        Car c4 = carRepository.save(new Car(new BigDecimal("184.99"), "1ns C4CmkM zE Ht5333", "IZQ1018", carModels.get(3), List.of(accessories.get(0), accessories.get(3)),"Manual","alcohol",2017,"rear-wheel", 54768,"grey", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpX-vS21F5WAWsJBORGBWvbjx-4olaGXIR9Q&s"));
+        Car c5 = carRepository.save(new Car(new BigDecimal("109.99"), "1v8 A8Me9G Xy wg1762", "NEY4708", carModels.get(4), List.of(accessories.get(0), accessories.get(3), accessories.get(1)), "Manual","electric",2022,"rear-wheel", 33802,"red","https://image1.mobiauto.com.br/images/api/images/v1.0/52595736/transform/fl_progressive,f_webp,q_80"));
         return List.of(c1, c2, c3, c4, c5);
     }
 
@@ -96,10 +96,10 @@ public class DataInitializer implements CommandLineRunner {
 
     private void createAndSaveCarRentals(List<Car> cars, List<Driver> drivers, List<Employee> employees) {
         carRentalRepository.saveAll(List.of(
-                new CarRental(cars.get(1), new InsurancePolicy(true, true, true), drivers.get(1), BigDecimal.valueOf(2.0), LocalDate.now(), LocalDate.now(), employees.get(1), "pix", CarRentalStatusEnum.BOOKED),
-                new CarRental(cars.get(2), new InsurancePolicy(true, true, true), drivers.get(2), BigDecimal.valueOf(2.0), LocalDate.now(), LocalDate.now(), employees.get(2), "pix", CarRentalStatusEnum.IN_PROGRESS),
-                new CarRental(cars.get(3), new InsurancePolicy(true, true, true), drivers.get(3), BigDecimal.valueOf(2.0), LocalDate.now(), LocalDate.now(), employees.get(3), "pix", CarRentalStatusEnum.CANCELLED),
-                new CarRental(cars.get(4), new InsurancePolicy(true, true, true), drivers.get(4), BigDecimal.valueOf(2.0), LocalDate.now(), LocalDate.now(), employees.get(4), "pix", CarRentalStatusEnum.BOOKED)
+                new CarRental(cars.get(1), new InsurancePolicy(true, true, true), drivers.get(1), BigDecimal.valueOf(335.07), LocalDate.of(2024, 9, 15), LocalDate.of(2024, 9, 18), employees.get(1), "pix", CarRentalStatusEnum.BOOKED),
+                new CarRental(cars.get(2), new InsurancePolicy(true, false, true), drivers.get(2), BigDecimal.valueOf(649.95), LocalDate.of(2024, 9, 15), LocalDate.of(2024, 9, 20), employees.get(2), "credit", CarRentalStatusEnum.IN_PROGRESS),
+                new CarRental(cars.get(3), new InsurancePolicy(false, true, true), drivers.get(3), BigDecimal.valueOf(1609.91), LocalDate.of(2024, 9, 25),  LocalDate.of(2024, 10, 2), employees.get(3), "credit", CarRentalStatusEnum.CANCELLED),
+                new CarRental(cars.get(4), new InsurancePolicy(false, true, false), drivers.get(4), BigDecimal.valueOf(813.96), LocalDate.of(2024, 10, 3), LocalDate.of(2024, 10, 7), employees.get(4), "debit", CarRentalStatusEnum.BOOKED)
         ));
     }
 }
