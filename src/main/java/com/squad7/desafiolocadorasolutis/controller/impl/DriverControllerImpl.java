@@ -22,9 +22,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("api/v1/driver")
 @RequiredArgsConstructor
 public class DriverControllerImpl implements DriverController {
+
     private final DriverService driverService;
 
-    @PostMapping
+    @PostMapping("/register")
     @Override
     public ResponseEntity<ResponseMessage> registerDriver(@RequestBody @Valid DriverPostRequest driverRequest) {
 

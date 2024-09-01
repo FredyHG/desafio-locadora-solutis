@@ -19,7 +19,7 @@ public interface CarRepository extends JpaRepository<Car, UUID> {
             "JOIN c.carModel cm " +
             "JOIN cm.manufacturer m " +
             "LEFT JOIN c.accessories a " +
-            "WHERE (:category IS NULL OR cm.category = :category) " +
+            "WHERE (:category IS NULL OR cm.categoryEnum = :category) " +
             "AND (:accessoryIds IS NULL OR a.id IN :accessoryIds)")
     List<Car> getAllCarsFiltered(@Param("category") CategoryEnum categoryEnum,
                                  @Param("accessoryIds") List<String> idsAccessories);
@@ -27,8 +27,8 @@ public interface CarRepository extends JpaRepository<Car, UUID> {
     @Query(value = "SELECT c.* FROM tb_car c " +
             "JOIN tb_car_rental cr ON c.id = cr.car_id " +
             "WHERE c.id = :id " +
-            "AND (:startRent BETWEEN cr.rent_date AND cr.return_date " +
-            "OR :endRent BETWEEN cr.rent_date AND cr.return_date " +
+            "AND (:start_rent BETWEEN cr.rent_date AND cr.return_date " +
+            "OR :end_rent BETWEEN cr.rent_date AND cr.return_date " +
             "OR cr.rent_date BETWEEN :startRent AND :endRent " +
             "OR cr.return_date BETWEEN :startRent AND :endRent)",
             nativeQuery = true)

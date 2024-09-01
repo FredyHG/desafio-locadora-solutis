@@ -26,7 +26,8 @@ public class CarRentalControllerImpl implements CarRentalController {
 
     private final CarRentalServiceImpl carRentalService;
 
-    @PostMapping
+    @PostMapping("/rent")
+    @Override
     public ResponseEntity<ResponseMessage> rentCar(@RequestBody @Valid CarRentalPostRequest carRentalRequest) {
         log.info("Receive request to rent car with ID: {} for driver with CPF: {}", carRentalRequest.getCarId(), carRentalRequest.getDriverCpf());
 
@@ -39,7 +40,7 @@ public class CarRentalControllerImpl implements CarRentalController {
                 .build());
     }
 
-    @GetMapping
+    @GetMapping("/filter")
     @Override
     public ResponseEntity<List<CarRentalResponse>> getAllCarsFiltered(@RequestParam(name = "cpf") String cpf,
                                                                       @RequestParam(name = "status") List<CarRentalStatusEnum> statusList) {
@@ -48,6 +49,7 @@ public class CarRentalControllerImpl implements CarRentalController {
     }
 
     @PostMapping("/confirm")
+    @Override
     public ResponseEntity<ResponseMessage> confirmRent(@RequestParam(name = "rentId") String rentId) {
 
         carRentalService.confirmRent(UUID.fromString(rentId));
@@ -60,6 +62,7 @@ public class CarRentalControllerImpl implements CarRentalController {
     }
 
     @PostMapping("/start")
+    @Override
     public ResponseEntity<ResponseMessage> startRent(@RequestParam(name = "rentId") String rentId) {
 
         carRentalService.startRent(UUID.fromString(rentId));
@@ -72,6 +75,7 @@ public class CarRentalControllerImpl implements CarRentalController {
     }
 
     @PostMapping("/finish")
+    @Override
     public ResponseEntity<ResponseMessage> finishRent(@RequestParam(name = "rentId") String rentId) {
         carRentalService.finishRent(UUID.fromString(rentId));
 
@@ -83,6 +87,7 @@ public class CarRentalControllerImpl implements CarRentalController {
     }
 
     @PostMapping("/cancel")
+    @Override
     public ResponseEntity<ResponseMessage> cancelRent(@RequestParam(name = "rentId") String rentId) {
         carRentalService.cancelRent(UUID.fromString(rentId));
 

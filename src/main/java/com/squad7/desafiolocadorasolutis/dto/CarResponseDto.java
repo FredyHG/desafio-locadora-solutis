@@ -13,7 +13,6 @@ import java.util.UUID;
 @Getter
 @Setter
 public class CarResponseDto {
-
     private UUID id;
     private String licensePlate;
     private BigDecimal pricePerDay;
