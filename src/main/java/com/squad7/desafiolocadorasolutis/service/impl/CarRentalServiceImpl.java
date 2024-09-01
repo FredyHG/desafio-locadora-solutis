@@ -61,10 +61,11 @@ public class CarRentalServiceImpl implements CarRentalService {
     }
 
     @Override
-    public List<CarRentalResponse> getAllCarsFiltered(String cpf, List<CarRentalStatusEnum> statusList){
+    public List<CarRentalResponse> getAllCarsFiltered(String employeeRegister, String cpf, List<CarRentalStatusEnum> statusList){
         List<CarRentalResponse> responseList = new ArrayList<>();
         Driver driver = driverService.ensureDriverExistsByCpf(cpf);
-        List<CarRental> modelList = carRentalRepository.findByDriverAndRentalStatusIn(driver, statusList);
+        Employee employee = employeeService.ensureEmployeeExistsByRegistration(employeeRegister);
+        List<CarRental> modelList = carRentalRepository.findByFilters(employee, driver, statusList);
 
         modelList.forEach( carRental -> {
             responseList.add(CarRentalMapper.INSTANCE.modelToResponse(carRental));
@@ -74,6 +75,7 @@ public class CarRentalServiceImpl implements CarRentalService {
     }
 
 
+    @Override
     public void confirmRent(UUID carRentalId) {
         log.info("Starting rent confirmation process for driver with CPF: {}", carRentalId);
 
@@ -93,6 +95,7 @@ public class CarRentalServiceImpl implements CarRentalService {
         log.info("Starting rent confirmation process for driver with CPF: {}", carRentalId);
     }
 
+    @Override
     public void startRent(UUID rentId) {
         CarRental carRental = ensureCarRentalExistsById(rentId);
 
@@ -105,6 +108,7 @@ public class CarRentalServiceImpl implements CarRentalService {
         carRentalRepository.save(carRental);
     }
 
+    @Override
     public void finishRent(UUID rentId) {
 
         CarRental carRental = ensureCarRentalExistsById(rentId);
@@ -118,6 +122,7 @@ public class CarRentalServiceImpl implements CarRentalService {
         carRentalRepository.save(carRental);
     }
 
+    @Override
     public void cancelRent(UUID rentId) {
         CarRental carRental = ensureCarRentalExistsById(rentId);
 

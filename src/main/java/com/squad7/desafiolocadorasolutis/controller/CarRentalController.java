@@ -21,7 +21,7 @@ public interface CarRentalController {
     })
     ResponseEntity<ResponseMessage> rentCar(CarRentalPostRequest rentalRequest);
 
-    ResponseEntity<List<CarRentalResponse>> getAllCarsFiltered(String cpf, List<CarRentalStatusEnum> statusList);
+    ResponseEntity<List<CarRentalResponse>> getAllCarsFiltered(String employeeRegister, String cpf, List<CarRentalStatusEnum> statusList);
     ResponseEntity<ResponseMessage> confirmRent(String rentId);
     ResponseEntity<ResponseMessage> finishRent(String rentId);
     ResponseEntity<ResponseMessage> startRent(String rentId);
