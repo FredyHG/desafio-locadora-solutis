@@ -50,4 +50,5 @@ public class CarControllerImpl implements CarController {
         CarResponse response = carService.getCarByUuid(carId);
         return ResponseEntity.ok().body(response);
     }
+
 }

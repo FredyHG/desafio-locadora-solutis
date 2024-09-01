@@ -21,11 +21,12 @@ import java.util.Optional;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class DriverServiceImpl implements DriverService{
+public class DriverServiceImpl implements DriverService {
 
     private static final String EMAIL_VALIDATION_CODE = "3321";
     private final DriverRepository driverRepository;
 
+    @Override
     public void registerDriver(DriverPostRequest driverPostRequest) {
         log.info(":: registerDriver() - Attempting to register driver with CPF: {} ::", driverPostRequest);
         Driver driverToBeSaved = DriverMapper.INSTANCE.requestToModel(driverPostRequest);
@@ -63,6 +64,7 @@ public class DriverServiceImpl implements DriverService{
         log.info(":: validateCodeEmail() - Code validated successfully for email: {} ::", request.getEmail());
     }
 
+    @Override
     public void ensureDriverConfirmEmailTermsByEmail(String email) {
         log.info("Checking if driver has confirmed email");
         Driver driver = ensureDriverExistsByEmail(email);
@@ -72,6 +74,7 @@ public class DriverServiceImpl implements DriverService{
         }
     }
 
+    @Override
     public void ensureDriverAcceptAccountTermsByEmail(String email) {
         log.info("Checking if driver has accepted account terms");
         Driver driver = ensureDriverExistsByEmail(email);
@@ -88,14 +91,14 @@ public class DriverServiceImpl implements DriverService{
                 .orElseThrow(() -> new DriverNotFoundException("No Driver found by cpf: "+ cpf));
     }
 
+    @Override
     public Driver ensureDriverExistsByEmail(String email){
         log.info(":: findByEmail() - Checking if driver exists for the email: {} ::", email);
         return findByEmail(email)
                 .orElseThrow(() -> new DriverNotFoundException("No Driver found by email: "+email));
     }
 
-    @Override
-    public Optional<Driver> findByCpf(String cpf){
+    private Optional<Driver> findByCpf(String cpf){
         return driverRepository.findByCpf(cpf);
     }
 
@@ -111,14 +114,16 @@ public class DriverServiceImpl implements DriverService{
         }
     }
 
-    private void ensureDriverEmailIsNotAlreadyConfirmed(Driver driver){
+    @Override
+    public void ensureDriverEmailIsNotAlreadyConfirmed(Driver driver){
         log.info(":: ensureDriverEmailIsNotAlreadyConfirmed() - Checking if email {} is already confirmed: ::", driver.getEmail());
         if (driver.getAccountEmailStatusEnum().equals(AccountEmailStatusEnum.CONFIRMED)){
             throw new DriverAlreadyExistsException("Driver email already confirmed: "+ driver.getEmail());
         }
     }
 
-    private void ensureDriverNotExistsByCpf(String cpf){
+    @Override
+    public void ensureDriverNotExistsByCpf(String cpf){
         log.info(":: ensureDriverNotExistsByCpf() - Checking if driver exists for the cpf: {} ::", cpf);
         if (driverRepository.existsByCpf(cpf)){
             log.warn(":: ensureDriverNotExistsByCpf() - The driver already exists with an cpf informed: {} ::", cpf);

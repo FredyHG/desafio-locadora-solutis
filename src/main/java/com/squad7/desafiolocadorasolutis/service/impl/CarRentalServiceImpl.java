@@ -61,19 +61,6 @@ public class CarRentalServiceImpl implements CarRentalService {
     }
 
     @Override
-    public List<CarRentalResponse> getAllCarsFiltered(String cpf, List<CarRentalStatusEnum> statusList){
-        List<CarRentalResponse> responseList = new ArrayList<>();
-        Driver driver = driverService.ensureDriverExistsByCpf(cpf);
-        List<CarRental> modelList = carRentalRepository.findByDriverAndRentalStatusIn(driver, statusList);
-
-        modelList.forEach( carRental -> {
-            responseList.add(CarRentalMapper.INSTANCE.modelToResponse(carRental));
-        });
-
-        return responseList;
-    }
-
-
     public void confirmRent(UUID carRentalId) {
         log.info("Starting rent confirmation process for driver with CPF: {}", carRentalId);
 
@@ -93,6 +80,7 @@ public class CarRentalServiceImpl implements CarRentalService {
         log.info("Starting rent confirmation process for driver with CPF: {}", carRentalId);
     }
 
+    @Override
     public void startRent(UUID rentId) {
         CarRental carRental = ensureCarRentalExistsById(rentId);
 
@@ -105,6 +93,7 @@ public class CarRentalServiceImpl implements CarRentalService {
         carRentalRepository.save(carRental);
     }
 
+    @Override
     public void finishRent(UUID rentId) {
 
         CarRental carRental = ensureCarRentalExistsById(rentId);
@@ -118,6 +107,7 @@ public class CarRentalServiceImpl implements CarRentalService {
         carRentalRepository.save(carRental);
     }
 
+    @Override
     public void cancelRent(UUID rentId) {
         CarRental carRental = ensureCarRentalExistsById(rentId);
 
@@ -130,11 +120,25 @@ public class CarRentalServiceImpl implements CarRentalService {
         carRentalRepository.save(carRental);
     }
 
+    @Override
     public CarRental ensureCarRentalExistsById(UUID carRentalId) {
         return findById(carRentalId).orElseThrow(() -> new CarRentalNotFoundException("CarRental not found"));
     }
 
-    public Optional<CarRental> findById(UUID carRentalId) {
+    @Override
+    public List<CarRentalResponse> getAllCarsFiltered(String cpf, List<CarRentalStatusEnum> statusList){
+        List<CarRentalResponse> responseList = new ArrayList<>();
+        Driver driver = driverService.ensureDriverExistsByCpf(cpf);
+        List<CarRental> modelList = carRentalRepository.findByDriverAndRentalStatusIn(driver, statusList);
+
+        modelList.forEach( carRental -> {
+            responseList.add(CarRentalMapper.INSTANCE.modelToResponse(carRental));
+        });
+
+        return responseList;
+    }
+
+    private Optional<CarRental> findById(UUID carRentalId) {
         return carRentalRepository.findById(carRentalId);
     }
 
