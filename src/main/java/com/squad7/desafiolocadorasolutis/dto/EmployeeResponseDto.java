@@ -14,4 +14,5 @@ public class EmployeeResponseDto {
     private UUID id;
     private String name;
     private String cpf;
+    private String registration;
 }

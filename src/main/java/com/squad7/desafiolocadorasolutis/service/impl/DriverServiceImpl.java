@@ -3,6 +3,7 @@ package com.squad7.desafiolocadorasolutis.service.impl;
 import com.squad7.desafiolocadorasolutis.controller.request.DriverCodeEmailValidationRequest;
 import com.squad7.desafiolocadorasolutis.controller.request.DriverPostRequest;
 import com.squad7.desafiolocadorasolutis.controller.request.DriverSendCodeEmailValidationRequest;
+import com.squad7.desafiolocadorasolutis.controller.response.DriverResponse;
 import com.squad7.desafiolocadorasolutis.enums.AccountEmailStatusEnum;
 import com.squad7.desafiolocadorasolutis.exception.DriverAlreadyExistsException;
 import com.squad7.desafiolocadorasolutis.exception.DriverNotFoundException;
@@ -16,6 +17,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -89,6 +92,18 @@ public class DriverServiceImpl implements DriverService {
         log.info(":: ensureDriverExistsByCpf() - Checking if driver exists for the cpf: {} ::", cpf);
         return findByCpf(cpf)
                 .orElseThrow(() -> new DriverNotFoundException("No Driver found by cpf: "+ cpf));
+    }
+
+    @Override
+    public List<DriverResponse> getAllDrivers() {
+        List<Driver> modelList = driverRepository.findAll();
+        List<DriverResponse> responseList = new ArrayList<>();
+
+        modelList.forEach(driver -> {
+            responseList.add(DriverMapper.INSTANCE.modelToResponse(driver));
+        });
+
+        return responseList;
     }
 
     @Override

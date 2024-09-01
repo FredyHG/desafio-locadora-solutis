@@ -96,10 +96,10 @@ public class DataInitializer implements CommandLineRunner {
 
     private void createAndSaveCarRentals(List<Car> cars, List<Driver> drivers, List<Employee> employees) {
         carRentalRepository.saveAll(List.of(
-                new CarRental(cars.get(1), new InsurancePolicy(true, true, true), drivers.get(1), BigDecimal.valueOf(335.07), LocalDate.of(2024, 9, 15), LocalDate.of(2024, 9, 18), employees.get(1), "pix", CarRentalStatusEnum.BOOKED),
-                new CarRental(cars.get(2), new InsurancePolicy(true, false, true), drivers.get(2), BigDecimal.valueOf(649.95), LocalDate.of(2024, 9, 15), LocalDate.of(2024, 9, 20), employees.get(2), "credit", CarRentalStatusEnum.IN_PROGRESS),
-                new CarRental(cars.get(3), new InsurancePolicy(false, true, true), drivers.get(3), BigDecimal.valueOf(1609.91), LocalDate.of(2024, 9, 25),  LocalDate.of(2024, 10, 2), employees.get(3), "credit", CarRentalStatusEnum.CANCELLED),
-                new CarRental(cars.get(4), new InsurancePolicy(false, true, false), drivers.get(4), BigDecimal.valueOf(813.96), LocalDate.of(2024, 10, 3), LocalDate.of(2024, 10, 7), employees.get(4), "debit", CarRentalStatusEnum.BOOKED)
+                new CarRental(cars.get(1), new InsurancePolicy(true, true, true), drivers.get(1), BigDecimal.valueOf(335.07), BigDecimal.valueOf(599.99), LocalDate.of(2024, 9, 15), LocalDate.of(2024, 9, 18), employees.get(1), "pix", CarRentalStatusEnum.BOOKED),
+                new CarRental(cars.get(2), new InsurancePolicy(true, false, true), drivers.get(2), BigDecimal.valueOf(649.95), BigDecimal.valueOf(899.10), LocalDate.of(2024, 9, 15), LocalDate.of(2024, 9, 20), employees.get(2), "credit", CarRentalStatusEnum.IN_PROGRESS),
+                new CarRental(cars.get(3), new InsurancePolicy(false, true, true), drivers.get(3), BigDecimal.valueOf(1609.91), BigDecimal.valueOf(2001.99), LocalDate.of(2024, 9, 25),  LocalDate.of(2024, 10, 2), employees.get(3), "credit", CarRentalStatusEnum.CANCELLED),
+                new CarRental(cars.get(4), new InsurancePolicy(false, true, false), drivers.get(4), BigDecimal.valueOf(813.96), BigDecimal.valueOf(1399.87), LocalDate.of(2024, 10, 3), LocalDate.of(2024, 10, 7), employees.get(4), "debit", CarRentalStatusEnum.BOOKED)
         ));
     }
 }

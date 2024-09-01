@@ -29,8 +29,11 @@ public class CarRental {
     @Column(name = "rental_status")
     private CarRentalStatusEnum rentalStatus;
 
-    @Column(nullable = false, precision = 12, scale = 2, name = "price")
-    private BigDecimal price;
+    @Column(nullable = false, precision = 12, scale = 2, name = "totalValue")
+    private BigDecimal totalValue;
+
+    @Column(nullable = false, precision = 12, scale = 2, name = "totalValueWithoutInsurance")
+    private BigDecimal totalValueWithoutInsurance;
 
     @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "insurance_policy_id")
@@ -56,10 +59,11 @@ public class CarRental {
     @JoinColumn(name = "payment_id")
     private Payment payment;
 
-    public CarRental(Car car, InsurancePolicy insurancePolicy, Driver driver, BigDecimal price, LocalDate rentDate,LocalDate returnDate, Employee employee, String paymentType, CarRentalStatusEnum rentalStatus) {
+    public CarRental(Car car, InsurancePolicy insurancePolicy, Driver driver, BigDecimal totalValueWithoutInsurance, BigDecimal totalValue, LocalDate rentDate,LocalDate returnDate, Employee employee, String paymentType, CarRentalStatusEnum rentalStatus) {
         this.car = car;
         this.insurancePolicy = insurancePolicy;
-        this.price = price;
+        this.totalValue = totalValue;
+        this.totalValueWithoutInsurance = totalValueWithoutInsurance;
         this.returnDate = returnDate;
         this.rentDate = rentDate;
         this.driver = driver;
@@ -83,6 +87,7 @@ public class CarRental {
 
         this.insurancePolicy.calculatePolicyValue(periodValue);
 
-        this.price = this.insurancePolicy.getTotalValue().add(periodValue);
+        this.totalValue = this.insurancePolicy.getTotalValue().add(periodValue);
+        this.totalValueWithoutInsurance = periodValue;
     }
 }

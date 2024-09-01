@@ -19,9 +19,12 @@ public class AccessoryServiceImpl implements AccessoryService {
 
     @Override
     public List<Accessory> findById(List<Accessory> list) {
+        log.info("Starting search with ids for acessory list : {}", list);
         List<UUID> ids = list.stream()
                 .map(Accessory::getId)
                 .toList();
+
+        log.info("Finished search with ids for accessory list : {}", ids);
         return accessoryRepository.findAllById(ids);
     }
 }
