@@ -49,6 +49,11 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
+    public List<Car> getAllCars() {
+        return carRepository.findAll();
+    }
+
+    @Override
     public List<Car> getAllCarsFiltered(CategoryEnum categoryEnum, List<String> idsAccessories, CarRentalStatusEnum carRentalStatus) {
         return carRepository.getAllCarsFiltered(categoryEnum, idsAccessories, carRentalStatus);
     }
