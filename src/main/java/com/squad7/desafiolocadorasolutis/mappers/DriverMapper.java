@@ -1,6 +1,7 @@
 package com.squad7.desafiolocadorasolutis.mappers;
 
 import com.squad7.desafiolocadorasolutis.controller.request.DriverPostRequest;
+import com.squad7.desafiolocadorasolutis.controller.response.DriverResponse;
 import com.squad7.desafiolocadorasolutis.model.Driver;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -15,4 +16,6 @@ public interface DriverMapper {
     @Mapping(target = "accountEmailStatusEnum", ignore = true)
     @Mapping(target = "accountTerms", ignore = true)
     Driver requestToModel(DriverPostRequest driverPostRequest);
+
+    DriverResponse modelToResponse(Driver driver);
 }

@@ -1,13 +1,11 @@
 package com.squad7.desafiolocadorasolutis.controller.impl;
 
-
 import com.squad7.desafiolocadorasolutis.controller.CarRentalController;
 import com.squad7.desafiolocadorasolutis.controller.request.CarRentalPostRequest;
 import com.squad7.desafiolocadorasolutis.controller.response.CarRentalResponse;
 import com.squad7.desafiolocadorasolutis.controller.response.ResponseMessage;
 import com.squad7.desafiolocadorasolutis.enums.CarRentalStatusEnum;
 import com.squad7.desafiolocadorasolutis.service.CarRentalService;
-import com.squad7.desafiolocadorasolutis.service.impl.CarRentalServiceImpl;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

@@ -3,9 +3,10 @@ package com.squad7.desafiolocadorasolutis.service;
 import com.squad7.desafiolocadorasolutis.controller.request.DriverCodeEmailValidationRequest;
 import com.squad7.desafiolocadorasolutis.controller.request.DriverPostRequest;
 import com.squad7.desafiolocadorasolutis.controller.request.DriverSendCodeEmailValidationRequest;
+import com.squad7.desafiolocadorasolutis.controller.response.DriverResponse;
 import com.squad7.desafiolocadorasolutis.model.Driver;
 
-import java.util.Optional;
+import java.util.List;
 
 public interface DriverService{
     void registerDriver(DriverPostRequest driverPostRequest);
@@ -17,5 +18,6 @@ public interface DriverService{
     void ensureDriverEmailIsNotAlreadyConfirmed(Driver driver);
     Driver ensureDriverExistsByEmail(String email);
     Driver ensureDriverExistsByCpf(String cpf);
+    List<DriverResponse> getAllDrivers();
 }
 
