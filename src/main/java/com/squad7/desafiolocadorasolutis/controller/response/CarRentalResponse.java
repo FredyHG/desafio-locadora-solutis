@@ -23,8 +23,10 @@ public class CarRentalResponse {
     private LocalDate returnDate;
     @JsonProperty("rental_status")
     private CarRentalStatusEnum rentalStatus;
-    @JsonProperty("price")
-    private BigDecimal price;
+    @JsonProperty("totalValue")
+    private BigDecimal totalValue;
+    @JsonProperty("totalValueWithoutInsurance")
+    private BigDecimal totalValueWithoutInsurance;
     @JsonProperty("payment_details")
     private PaymentResponseDto payment;
     @JsonProperty("car")

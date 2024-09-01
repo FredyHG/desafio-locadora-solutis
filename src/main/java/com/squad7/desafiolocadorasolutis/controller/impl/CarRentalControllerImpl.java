@@ -6,6 +6,7 @@ import com.squad7.desafiolocadorasolutis.controller.request.CarRentalPostRequest
 import com.squad7.desafiolocadorasolutis.controller.response.CarRentalResponse;
 import com.squad7.desafiolocadorasolutis.controller.response.ResponseMessage;
 import com.squad7.desafiolocadorasolutis.enums.CarRentalStatusEnum;
+import com.squad7.desafiolocadorasolutis.service.CarRentalService;
 import com.squad7.desafiolocadorasolutis.service.impl.CarRentalServiceImpl;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -23,9 +24,9 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class CarRentalControllerImpl implements CarRentalController {
 
-    private final CarRentalServiceImpl carRentalService;
+    private final CarRentalService carRentalService;
 
-    @PostMapping("/rent")
+    @PostMapping
     @Override
     public ResponseEntity<ResponseMessage> rentCar(@RequestBody @Valid CarRentalPostRequest carRentalRequest) {
         log.info("Receive request to rent car with ID: {} for driver with CPF: {}", carRentalRequest.getCarId(), carRentalRequest.getDriverCpf());
@@ -41,15 +42,16 @@ public class CarRentalControllerImpl implements CarRentalController {
 
     @GetMapping("/filter")
     @Override
-    public ResponseEntity<List<CarRentalResponse>> getAllCarsFiltered(@RequestParam(name = "cpf") String cpf,
-                                                                      @RequestParam(name = "status") List<CarRentalStatusEnum> statusList) {
-        List<CarRentalResponse> response = carRentalService.getAllCarsFiltered(cpf, statusList);
+    public ResponseEntity<List<CarRentalResponse>> getAllCarsFiltered(@RequestParam(name = "employeeRegister", required = false) String employeeRegister,
+                                                                      @RequestParam(name = "driverCpf", required = false) String driverCpf,
+                                                                      @RequestParam(name = "status", required = false) List<CarRentalStatusEnum> statusList) {
+        List<CarRentalResponse> response = carRentalService.getAllCarsFiltered(employeeRegister, driverCpf, statusList);
         return ResponseEntity.ok(response);
     }
 
-    @PostMapping("/confirm")
+    @PostMapping("/{rentId}/confirm")
     @Override
-    public ResponseEntity<ResponseMessage> confirmRent(@RequestParam(name = "rentId") String rentId) {
+    public ResponseEntity<ResponseMessage> confirmRent(@PathVariable(name = "rentId") String rentId) {
 
         carRentalService.confirmRent(UUID.fromString(rentId));
 
@@ -60,9 +62,9 @@ public class CarRentalControllerImpl implements CarRentalController {
                         .build());
     }
 
-    @PostMapping("/start")
+    @PostMapping("/{rentId}/start")
     @Override
-    public ResponseEntity<ResponseMessage> startRent(@RequestParam(name = "rentId") String rentId) {
+    public ResponseEntity<ResponseMessage> startRent(@PathVariable(name = "rentId") String rentId) {
 
         carRentalService.startRent(UUID.fromString(rentId));
 
@@ -73,9 +75,9 @@ public class CarRentalControllerImpl implements CarRentalController {
                 .build());
     }
 
-    @PostMapping("/finish")
+    @PostMapping("/{rentId}/finish")
     @Override
-    public ResponseEntity<ResponseMessage> finishRent(@RequestParam(name = "rentId") String rentId) {
+    public ResponseEntity<ResponseMessage> finishRent(@PathVariable(name = "rentId") String rentId) {
         carRentalService.finishRent(UUID.fromString(rentId));
 
         return ResponseEntity.status(HttpStatus.OK).body(ResponseMessage
@@ -85,9 +87,9 @@ public class CarRentalControllerImpl implements CarRentalController {
                 .build());
     }
 
-    @PostMapping("/cancel")
+    @PostMapping("/{rentId}/cancel")
     @Override
-    public ResponseEntity<ResponseMessage> cancelRent(@RequestParam(name = "rentId") String rentId) {
+    public ResponseEntity<ResponseMessage> cancelRent(@PathVariable(name = "rentId") String rentId) {
         carRentalService.cancelRent(UUID.fromString(rentId));
 
         return ResponseEntity.status(HttpStatus.OK).body(ResponseMessage

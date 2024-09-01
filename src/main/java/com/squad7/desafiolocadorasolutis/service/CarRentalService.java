@@ -11,10 +11,16 @@ import java.util.UUID;
 public interface CarRentalService {
 
      void rentCar(CarRentalPostRequest carRental);
-     void confirmRent(UUID carRentalId);
-     void startRent(UUID rentId);
-     void finishRent(UUID rentId);
-     void cancelRent(UUID rentId);
+
+     List<CarRentalResponse> getAllCarsFiltered(String employeeRegister, String cpf, List<CarRentalStatusEnum> statusList);
+
+     void confirmRent(UUID uuid);
+
+     void startRent(UUID uuid);
+
+     void finishRent(UUID uuid);
+
+     void cancelRent(UUID uuid);
      CarRental ensureCarRentalExistsById(UUID carRentalId);
-     List<CarRentalResponse> getAllCarsFiltered(String cpf, List<CarRentalStatusEnum> statusList);
+
 }

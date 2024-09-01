@@ -18,6 +18,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -61,6 +62,21 @@ public class CarRentalServiceImpl implements CarRentalService {
     }
 
     @Override
+    public List<CarRentalResponse> getAllCarsFiltered(String employeeRegister, String cpf, List<CarRentalStatusEnum> statusList){
+        List<CarRentalResponse> responseList = new ArrayList<>();
+        Driver driver = cpf != null ?  driverService.ensureDriverExistsByCpf(cpf) : null;
+        Employee employee = employeeRegister != null ? employeeService.ensureEmployeeExistsByRegistration(employeeRegister) : null;
+        List<CarRental> modelList = carRentalRepository.findByFilters(employee, driver, statusList);
+
+        modelList.forEach( carRental -> {
+            responseList.add(CarRentalMapper.INSTANCE.modelToResponse(carRental));
+        });
+
+        return responseList;
+    }
+
+
+    @Override
     public void confirmRent(UUID carRentalId) {
         log.info("Starting rent confirmation process for driver with CPF: {}", carRentalId);
 
@@ -72,7 +88,7 @@ public class CarRentalServiceImpl implements CarRentalService {
 
         carRental.makePayment();
 
-        paymentFacade.makePayment(carRental.getPayment().getPaymentMethod(), carRental.getPrice());
+        paymentFacade.makePayment(carRental.getPayment().getPaymentMethod(), carRental.getTotalValue());
         carRental.setRentalStatus(CarRentalStatusEnum.PAYMENT_SUCCESSFULLY);
 
         carRentalRepository.save(carRental);
@@ -125,19 +141,6 @@ public class CarRentalServiceImpl implements CarRentalService {
         return findById(carRentalId).orElseThrow(() -> new CarRentalNotFoundException("CarRental not found"));
     }
 
-    @Override
-    public List<CarRentalResponse> getAllCarsFiltered(String cpf, List<CarRentalStatusEnum> statusList){
-        List<CarRentalResponse> responseList = new ArrayList<>();
-        Driver driver = driverService.ensureDriverExistsByCpf(cpf);
-        List<CarRental> modelList = carRentalRepository.findByDriverAndRentalStatusIn(driver, statusList);
-
-        modelList.forEach( carRental -> {
-            responseList.add(CarRentalMapper.INSTANCE.modelToResponse(carRental));
-        });
-
-        return responseList;
-    }
-
     private Optional<CarRental> findById(UUID carRentalId) {
         return carRentalRepository.findById(carRentalId);
     }
@@ -150,6 +153,7 @@ public class CarRentalServiceImpl implements CarRentalService {
         savedCarRental.setCar(car);
         savedCarRental.getRentalTerms().setAcceptBy(driver);
         savedCarRental.calculateTotalPrice();
+        savedCarRental.getPayment().setOrderDate(LocalDateTime.now());
     }
 }
 
