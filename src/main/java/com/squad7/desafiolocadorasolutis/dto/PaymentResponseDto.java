@@ -1,6 +1,5 @@
 package com.squad7.desafiolocadorasolutis.dto;
 
-import com.squad7.desafiolocadorasolutis.model.Driver;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;

@@ -1,7 +1,5 @@
 package com.squad7.desafiolocadorasolutis.dto;
 
-import com.squad7.desafiolocadorasolutis.model.Manufacturer;
-import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;

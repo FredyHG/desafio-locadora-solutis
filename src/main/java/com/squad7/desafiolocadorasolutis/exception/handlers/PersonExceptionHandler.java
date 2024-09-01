@@ -41,7 +41,8 @@ public class PersonExceptionHandler {
         statusTable.put(DriverAlreadyExistsException.class.getSimpleName(), HttpStatus.CONFLICT);
         statusTable.put(DriverNotFoundException.class.getSimpleName(), HttpStatus.NOT_FOUND);
         statusTable.put(DriverEmailAlreadyConfirmed.class.getSimpleName(), HttpStatus.CONFLICT);
-        statusTable.put(DriverEmailCodeNotValid.class.getSimpleName(), HttpStatus.BAD_REQUEST);
+        statusTable.put(InvalidEmailCodeException.class.getSimpleName(), HttpStatus.BAD_REQUEST);
         statusTable.put(DriverMinorException.class.getSimpleName(), HttpStatus.BAD_REQUEST);
+        statusTable.put(EmployeeNotFoundException.class.getSimpleName(), HttpStatus.NOT_FOUND);
     }
 }

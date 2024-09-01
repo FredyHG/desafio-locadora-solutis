@@ -1,6 +1,8 @@
 package com.squad7.desafiolocadorasolutis.exception.handlers;
 
 import com.squad7.desafiolocadorasolutis.controller.response.ErrorResponse;
+import com.squad7.desafiolocadorasolutis.exception.CarRentalException;
+import com.squad7.desafiolocadorasolutis.exception.CarRentalNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,12 +15,11 @@ import java.util.Map;
 
 @Slf4j
 @ControllerAdvice
-public class IllegalArgumentExceptionHandler {
-
+public class CarRentalExceptionHandler {
     private static final Map<String, HttpStatus> statusTable = new HashMap<>();
 
-    @ExceptionHandler(IllegalArgumentException.class)
-    public ResponseEntity<ErrorResponse> handleGenericException(IllegalArgumentException ex) {
+    @ExceptionHandler(CarRentalException.class)
+    public ResponseEntity<ErrorResponse> handleCarException(CarRentalException ex) {
         log.error("Exception handled: {}", ex.getMessage());
 
         HttpStatus status = mapStatus(ex);
@@ -31,7 +32,11 @@ public class IllegalArgumentExceptionHandler {
         return new ResponseEntity<>(responseMessage, status);
     }
 
-    private HttpStatus mapStatus(IllegalArgumentException ex) {
-        return statusTable.getOrDefault(ex.getClass().getSimpleName(), HttpStatus.BAD_REQUEST);
+    private HttpStatus mapStatus(CarRentalException ex) {
+        return statusTable.getOrDefault(ex.getClass().getSimpleName(), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    static {
+        statusTable.put(CarRentalNotFoundException.class.getSimpleName(), HttpStatus.CONFLICT);
     }
 }

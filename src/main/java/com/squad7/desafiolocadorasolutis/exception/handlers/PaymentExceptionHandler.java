@@ -1,7 +1,8 @@
 package com.squad7.desafiolocadorasolutis.exception.handlers;
 
 import com.squad7.desafiolocadorasolutis.controller.response.ErrorResponse;
-import com.squad7.desafiolocadorasolutis.exception.*;
+import com.squad7.desafiolocadorasolutis.exception.InvalidPaymentMethodException;
+import com.squad7.desafiolocadorasolutis.exception.PaymentException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
