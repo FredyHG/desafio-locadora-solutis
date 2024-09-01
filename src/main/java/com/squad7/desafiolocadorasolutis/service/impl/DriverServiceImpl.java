@@ -5,10 +5,7 @@ import com.squad7.desafiolocadorasolutis.controller.request.DriverPostRequest;
 import com.squad7.desafiolocadorasolutis.controller.request.DriverSendCodeEmailValidationRequest;
 import com.squad7.desafiolocadorasolutis.controller.response.DriverResponse;
 import com.squad7.desafiolocadorasolutis.enums.AccountEmailStatusEnum;
-import com.squad7.desafiolocadorasolutis.exception.DriverAlreadyExistsException;
-import com.squad7.desafiolocadorasolutis.exception.DriverNotFoundException;
-import com.squad7.desafiolocadorasolutis.exception.EmailNotConfirmedException;
-import com.squad7.desafiolocadorasolutis.exception.InvalidEmailCodeException;
+import com.squad7.desafiolocadorasolutis.exception.*;
 import com.squad7.desafiolocadorasolutis.mappers.DriverMapper;
 import com.squad7.desafiolocadorasolutis.model.Driver;
 import com.squad7.desafiolocadorasolutis.repository.DriverRepository;
@@ -83,7 +80,7 @@ public class DriverServiceImpl implements DriverService {
         Driver driver = ensureDriverExistsByEmail(email);
 
         if(driver.getAccountTerms().getAcceptAt() == null) {
-            throw new RuntimeException("Driver not accept terms");
+            throw new DriverNotAcceptTermsException("Driver not accept terms");
         }
     }
 

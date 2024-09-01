@@ -46,6 +46,13 @@ public class CarControllerImpl implements CarController {
         return ResponseEntity.status(HttpStatus.OK).body(carService.getAllCarsFiltered(categoryEnum, accessoryIds, carRentalStatusEnum));
     }
 
+    @GetMapping
+    @Override
+    public ResponseEntity<List<Car>> getAllCars() {
+        List<Car> response = carService.getAllCars();
+        return ResponseEntity.ok(response);
+    }
+
     @GetMapping(value = "/{carId}/detail")
     @Override
     public ResponseEntity<CarResponse> getCarByUuid(@PathVariable(name = "carId", required = true) UUID carId) {

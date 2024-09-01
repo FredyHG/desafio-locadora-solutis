@@ -13,6 +13,7 @@ import java.util.UUID;
 public interface CarService {
 
     void registerCar(CarPostRequest car);
+    List<Car> getAllCars();
     List<Car> getAllCarsFiltered(CategoryEnum categoryEnum, List<String > idsAccessories, CarRentalStatusEnum carRentalStatus);
     CarResponse getCarByUuid(UUID carId);
     void ensureCarNotRegisteredByChassis(String chassis);
