@@ -5,11 +5,11 @@ import com.squad7.desafiolocadorasolutis.controller.request.DriverPostRequest;
 import com.squad7.desafiolocadorasolutis.controller.request.DriverSendCodeEmailValidationRequest;
 import com.squad7.desafiolocadorasolutis.enums.AccountEmailStatusEnum;
 import com.squad7.desafiolocadorasolutis.exception.DriverAlreadyExistsException;
-import com.squad7.desafiolocadorasolutis.exception.DriverEmailCodeNotValid;
 import com.squad7.desafiolocadorasolutis.exception.DriverNotFoundException;
+import com.squad7.desafiolocadorasolutis.exception.EmailNotConfirmedException;
+import com.squad7.desafiolocadorasolutis.exception.InvalidEmailCodeException;
 import com.squad7.desafiolocadorasolutis.mappers.DriverMapper;
 import com.squad7.desafiolocadorasolutis.model.Driver;
-import com.squad7.desafiolocadorasolutis.model.Terms;
 import com.squad7.desafiolocadorasolutis.repository.DriverRepository;
 import com.squad7.desafiolocadorasolutis.service.DriverService;
 import lombok.RequiredArgsConstructor;
@@ -55,7 +55,7 @@ public class DriverServiceImpl implements DriverService{
 
         if (!request.getCode().equals(EMAIL_VALIDATION_CODE)){
             log.warn(":: validateCodeEmail() - Invalid code for email: {} ::", request.getEmail());
-            throw new DriverEmailCodeNotValid("Invalid email code.");
+            throw new InvalidEmailCodeException("Invalid email code.");
         }
 
         driver.setAccountEmailStatusEnum(AccountEmailStatusEnum.CONFIRMED);
@@ -68,7 +68,7 @@ public class DriverServiceImpl implements DriverService{
         Driver driver = ensureDriverExistsByEmail(email);
 
         if(driver.getAccountEmailStatusEnum() != AccountEmailStatusEnum.CONFIRMED) {
-            throw new RuntimeException("Driver not has confirmed email");
+            throw new EmailNotConfirmedException("Driver not has confirmed email");
         }
     }
 
