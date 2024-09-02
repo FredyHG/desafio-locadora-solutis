@@ -22,7 +22,6 @@ public class DriverPostRequest {
     @CPF(message = "CPF is invalid.")
     private String cpf;
 
-    @NotBlank(message = "Sex cannot be blank.")
     private SexEnum sexEnum;
 
     @Email(message = "Email is Invalid.")

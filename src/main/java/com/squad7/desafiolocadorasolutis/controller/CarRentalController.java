@@ -27,7 +27,8 @@ public interface CarRentalController {
             @ApiResponse(responseCode = "200", description = "List of rentals retrieved successfully"),
             @ApiResponse(responseCode = "404", description = "No rentals found with the provided filters")
     })
-    ResponseEntity<List<CarRentalResponse>> getAllCarsFiltered(String employeeRegister, String cpf, List<CarRentalStatusEnum> statusList);
+    ResponseEntity<List<CarRentalResponse>> getAllCarsFiltered(String employee, String cpf, List<CarRentalStatusEnum> statusList);
+
 
     @Operation(summary = "Confirm a car rental", description = "Confirm a car rental based on the provided rent ID.")
     @ApiResponses(value = {

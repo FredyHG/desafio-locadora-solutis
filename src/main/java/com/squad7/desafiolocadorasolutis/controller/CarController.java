@@ -32,9 +32,16 @@ public interface CarController {
     })
     ResponseEntity<CarResponse> getCarByUuid(UUID carId);
   
-    @Operation(summary = "Get all cars", description = "Retrieve all cars with optional filters by category and accessory IDs and rental status.")
+
+    @Operation(summary = "Get all cars by filter", description = "Retrieve all cars with optional filters by category and accessory IDs  and rental status.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Cars retrieved successfully")
     })
     ResponseEntity<List<Car>> getAllCars(CategoryEnum categoryEnum, List<String> accessoryIds, CarRentalStatusEnum carRentalStatus);
+
+    @Operation(summary = "Get all cars", description = "Retrieve all cars.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Cars retrieved successfully")
+    })
+    ResponseEntity<List<Car>> getAllCars();
 }

@@ -40,5 +40,9 @@ public interface DriverController {
     })
     ResponseEntity<ResponseMessage> validateCodeEmail(DriverCodeEmailValidationRequest driverCodeValidation);
 
+    @Operation(summary = "Get all drivers", description = "Retrieve all drivers.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Drivers retrieved successfully")
+    })
     ResponseEntity<List<DriverResponse>> getAllDrivers();
 }
