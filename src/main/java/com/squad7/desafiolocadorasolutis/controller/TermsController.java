@@ -4,8 +4,10 @@ import com.squad7.desafiolocadorasolutis.controller.response.ResponseMessage;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 
+@Tag(name = "Terms")
 public interface TermsController {
 
     @Operation(summary = "Accept terms of service", description = "Accepts the terms of service for a user identified by CPF.")
