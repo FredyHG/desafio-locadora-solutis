@@ -9,11 +9,13 @@ import com.squad7.desafiolocadorasolutis.model.Car;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 import java.util.UUID;
 
+@Tag(name = "Car")
 public interface CarController {
 
     @Operation(summary = "Register a car", description = "Register a new car based on the information provided in the CarPostRequest object.")
@@ -30,7 +32,8 @@ public interface CarController {
     })
     ResponseEntity<CarResponse> getCarByUuid(UUID carId);
   
-    @Operation(summary = "Get all cars by filter", description = "Retrieve all cars with optional filters by category and accessory IDs.")
+
+    @Operation(summary = "Get all cars by filter", description = "Retrieve all cars with optional filters by category and accessory IDs  and rental status.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Cars retrieved successfully")
     })

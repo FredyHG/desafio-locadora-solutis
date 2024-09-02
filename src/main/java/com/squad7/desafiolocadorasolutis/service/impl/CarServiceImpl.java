@@ -38,7 +38,7 @@ public class CarServiceImpl implements CarService {
         ensureCarNotRegisteredByChassis(car.getChassis());
 
         Car carToBeSaved = CarMapper.INSTANCE.requestToModel(car);
-        List<Accessory> accessories = accessoryService.findById(carToBeSaved.getAccessories());
+        List<Accessory> accessories = accessoryService.findAllById(carToBeSaved.getAccessories());
         CarModel carModel = carModelService.findById(UUID.fromString(car.getCarModelId()));
 
         carToBeSaved.setAccessories(accessories);

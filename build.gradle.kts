@@ -37,6 +37,8 @@ dependencies {
     //Test
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+    testImplementation("com.h2database:h2:2.2.224")
+    testImplementation("org.instancio:instancio-junit:5.0.1")
 
     //Others
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.6.0")

@@ -7,11 +7,12 @@ import com.squad7.desafiolocadorasolutis.enums.CarRentalStatusEnum;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
-
+@Tag(name = "Car Rental")
 public interface CarRentalController {
 
     @Operation(summary = "Register a car rental", description = "Register a new car rental based on the information provided in the RentalRequest object.")
@@ -21,12 +22,13 @@ public interface CarRentalController {
     })
     ResponseEntity<ResponseMessage> rentCar(CarRentalPostRequest rentalRequest);
 
-    @Operation(summary = "Get all car rentals filtered", description = "Retrieve a list of all car rentals filtered by CPF and rental status.")
+    @Operation(summary = "Get all car rentals filtered", description = "Retrieve a list of all car rentals filtered by employer registration and CPF and rental status.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "List of rentals retrieved successfully"),
             @ApiResponse(responseCode = "404", description = "No rentals found with the provided filters")
     })
     ResponseEntity<List<CarRentalResponse>> getAllCarsFiltered(String employee, String cpf, List<CarRentalStatusEnum> statusList);
+
 
     @Operation(summary = "Confirm a car rental", description = "Confirm a car rental based on the provided rent ID.")
     @ApiResponses(value = {

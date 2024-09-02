@@ -90,6 +90,8 @@ public class CarRentalServiceImpl implements CarRentalService {
         paymentFacade.makePayment(carRental.getPayment().getPaymentMethod(), carRental.getTotalValue());
         carRental.setRentalStatus(CarRentalStatusEnum.PAYMENT_SUCCESSFULLY);
 
+        carRental.getRentalTerms().acceptTerms();
+
         carRentalRepository.save(carRental);
 
         log.info("Starting rent confirmation process for driver with CPF: {}", carRentalId);
