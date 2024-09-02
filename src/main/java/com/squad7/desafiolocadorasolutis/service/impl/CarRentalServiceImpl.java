@@ -43,7 +43,6 @@ public class CarRentalServiceImpl implements CarRentalService {
         log.info("Driver found: CPF = {}, Name = {}", driver.getCpf(), driver.getName());
 
         driverService.ensureDriverAcceptAccountTermsByEmail(driver.getEmail());
-
         driverService.ensureDriverConfirmEmailTermsByEmail(driver.getEmail());
 
         Employee employee = employeeService.ensureEmployeeExistsByRegistration(carRental.getEmployeeRegistration());

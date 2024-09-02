@@ -40,6 +40,6 @@ public class CarExceptionHandler {
         statusTable.put(CarAlreadyRegisteredException.class.getSimpleName(), HttpStatus.CONFLICT);
         statusTable.put(CarNotFoundException.class.getSimpleName(), HttpStatus.NOT_FOUND);
         statusTable.put(AccessoryNotFoundException.class.getSimpleName(), HttpStatus.NOT_FOUND);
-        statusTable.put(CarNotAvailableException.class.getSimpleName(), HttpStatus.NOT_ACCEPTABLE);
+        statusTable.put(CarNotAvailableException.class.getSimpleName(), HttpStatus.CONFLICT);
     }
 }

@@ -5,6 +5,7 @@ import com.squad7.desafiolocadorasolutis.controller.request.DriverPostRequest;
 import com.squad7.desafiolocadorasolutis.controller.request.DriverSendCodeEmailValidationRequest;
 import com.squad7.desafiolocadorasolutis.controller.response.DriverResponse;
 import com.squad7.desafiolocadorasolutis.enums.AccountEmailStatusEnum;
+import com.squad7.desafiolocadorasolutis.enums.TermsStatusEnum;
 import com.squad7.desafiolocadorasolutis.exception.*;
 import com.squad7.desafiolocadorasolutis.mappers.DriverMapper;
 import com.squad7.desafiolocadorasolutis.model.Driver;
@@ -79,8 +80,8 @@ public class DriverServiceImpl implements DriverService {
         log.info("Checking if driver has accepted account terms");
         Driver driver = ensureDriverExistsByEmail(email);
 
-        if(driver.getAccountTerms().getAcceptAt() == null) {
-            throw new DriverNotAcceptTermsException("Driver not accept terms");
+        if(driver.getAccountTerms().getTermsStatusEnum().equals(TermsStatusEnum.ACCEPTED)) {
+            throw new TermsNotAcceptedException("Driver not accept account terms");
         }
     }
 

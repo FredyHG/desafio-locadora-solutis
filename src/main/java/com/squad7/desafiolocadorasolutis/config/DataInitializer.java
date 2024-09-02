@@ -72,6 +72,7 @@ public class DataInitializer implements CommandLineRunner {
         Car c3 = carRepository.save(new Car(new BigDecimal("199.99"), "1v8 A8Me9G Xy wg1769", "IZQ1019", carModels.get(2), List.of(accessories.get(4), accessories.get(2), accessories.get(0), accessories.get(3), accessories.get(1)),"Automatic","hybrid",2023,"all-wheel", 23982,"blue", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQnUnWTXtJcoFQ91h5cX3WoFlXiSkvAhG5CSg&s"));
         Car c4 = carRepository.save(new Car(new BigDecimal("184.99"), "1ns C4CmkM zE Ht5333", "IZQ1018", carModels.get(3), List.of(accessories.get(0), accessories.get(3)),"Manual","alcohol",2017,"rear-wheel", 54768,"grey", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpX-vS21F5WAWsJBORGBWvbjx-4olaGXIR9Q&s"));
         Car c5 = carRepository.save(new Car(new BigDecimal("109.99"), "1v8 A8Me9G Xy wg1762", "NEY4708", carModels.get(4), List.of(accessories.get(0), accessories.get(3), accessories.get(1)), "Manual","electric",2022,"rear-wheel", 33802,"red","https://image1.mobiauto.com.br/images/api/images/v1.0/52595736/transform/fl_progressive,f_webp,q_80"));
+        Car c6 = carRepository.save(new Car(new BigDecimal("109.99"), "1v8 A8Me9G Xy wg1762EX", "KEY4708", carModels.get(4), List.of(accessories.get(0), accessories.get(3), accessories.get(1)), "Manual","electric",2022,"rear-wheel", 33802,"red","https://image1.mobiauto.com.br/images/api/images/v1.0/52595736/transform/fl_progressive,f_webp,q_80"));
         return List.of(c1, c2, c3, c4, c5);
     }
 
@@ -81,6 +82,8 @@ public class DataInitializer implements CommandLineRunner {
         Driver d3 = driverRepository.save(new Driver("Linda Wilson", LocalDate.of(1990, 12, 25), "123.789.456-00", "linda.wilson@example.com", "CNH192837465", SexEnum.FEMININE, AccountEmailStatusEnum.TO_CONFIRM));
         Driver d4 = driverRepository.save(new Driver("James Anderson", LocalDate.of(1982, 4, 14), "789.123.456-00", "james.anderson@example.com", "CNH564738291", SexEnum.MASCULINE, AccountEmailStatusEnum.TO_CONFIRM));
         Driver d5 = driverRepository.save(new Driver("Patricia Thomas", LocalDate.of(1995, 7, 8), "456.987.123-00", "patricia.thomas@example.com", "CNH102938475", SexEnum.FEMININE, AccountEmailStatusEnum.TO_CONFIRM));
+        Driver d6 = driverRepository.save(new Driver("Tiago Silva", LocalDate.of(1995, 7, 8), "456.337.123-00", "tiago.silva@example.com", "CNH10293333", SexEnum.MASCULINE, AccountEmailStatusEnum.CONFIRMED));
+
         return List.of(d1, d2, d3, d4, d5);
     }
 
@@ -96,10 +99,10 @@ public class DataInitializer implements CommandLineRunner {
 
     private void createAndSaveCarRentals(List<Car> cars, List<Driver> drivers, List<Employee> employees) {
         carRentalRepository.saveAll(List.of(
-                new CarRental(cars.get(1), new InsurancePolicy(true, true, true), drivers.get(1), BigDecimal.valueOf(335.07), BigDecimal.valueOf(599.99), LocalDate.of(2024, 9, 15), LocalDate.of(2024, 9, 18), employees.get(1), "pix", CarRentalStatusEnum.BOOKED),
+                new CarRental(cars.get(1), new InsurancePolicy(true, true, true), drivers.get(1), BigDecimal.valueOf(335.07), BigDecimal.valueOf(599.99), LocalDate.of(2024, 9, 15), LocalDate.of(2024, 9, 18), employees.get(1), "pix", CarRentalStatusEnum.IN_PROGRESS),
                 new CarRental(cars.get(2), new InsurancePolicy(true, false, true), drivers.get(2), BigDecimal.valueOf(649.95), BigDecimal.valueOf(899.10), LocalDate.of(2024, 9, 15), LocalDate.of(2024, 9, 20), employees.get(2), "credit", CarRentalStatusEnum.IN_PROGRESS),
                 new CarRental(cars.get(3), new InsurancePolicy(false, true, true), drivers.get(3), BigDecimal.valueOf(1609.91), BigDecimal.valueOf(2001.99), LocalDate.of(2024, 9, 25),  LocalDate.of(2024, 10, 2), employees.get(3), "credit", CarRentalStatusEnum.CANCELLED),
-                new CarRental(cars.get(4), new InsurancePolicy(false, true, false), drivers.get(4), BigDecimal.valueOf(813.96), BigDecimal.valueOf(1399.87), LocalDate.of(2024, 10, 3), LocalDate.of(2024, 10, 7), employees.get(4), "debit", CarRentalStatusEnum.BOOKED)
+                new CarRental(cars.get(4), new InsurancePolicy(false, true, false), drivers.get(4), BigDecimal.valueOf(813.96), BigDecimal.valueOf(1399.87), LocalDate.of(2024, 10, 3), LocalDate.of(2024, 10, 7), employees.get(4), "debit", CarRentalStatusEnum.IN_PROGRESS)
         ));
     }
 }
